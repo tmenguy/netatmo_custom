@@ -800,7 +800,7 @@ class NetatmoDataHandler:
                     module.device_type == NetatmoDeviceType.NLE):
                     if module.modules or module.bridge is None:
                         # if we have an ecocounter as bridge, do not add its sensors as it is only its owned modules
-                        # that are sporting the real sensors wiht power and energy .... except that power is not
+                        # that are sporting the real sensors with power and energy .... except that power is not
                         # available in the case of this kind of ecocounter
                         continue
                     elif module.bridge:

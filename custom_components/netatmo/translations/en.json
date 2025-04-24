@@ -105,7 +105,7 @@
                 "name": "Reachability"
             },
             "rf_strength": {
-                "name": "Radio"
+                "name": "RF strength"
             },
             "sum_rain_1": {
                 "name": "Precipitation last hour"
@@ -117,7 +117,7 @@
                 "name": "Temperature trend"
             },
             "wifi_strength": {
-                "name": "Wi-Fi"
+                "name": "Wi-Fi strength"
             },
             "wind_angle": {
                 "name": "Wind angle"
