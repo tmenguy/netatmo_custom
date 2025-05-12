@@ -54,6 +54,7 @@ from .legrand import (
     NLUP,
     NLV,
     Z3L,
+    Z3V,
     NLunknown,
 )
 from .module import Camera, Dimmer, Fan, Module, Shutter, Switch
@@ -64,6 +65,7 @@ from .netatmo import (
     NHC,
     NIS,
     NOC,
+    NPC,
     NRV,
     NSD,
     OTH,
@@ -157,6 +159,7 @@ __all__ = [
     "NLUP",
     "NLV",
     "NOC",
+    "NPC",
     "NRV",
     "NAC",
     "NSD",
@@ -168,4 +171,5 @@ __all__ = [
     "Switch",
     "TPSRS",
     "Z3L",
+    "Z3V",
 ]

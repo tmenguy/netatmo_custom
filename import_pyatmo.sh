@@ -10,7 +10,7 @@ GH_ACCOUNT="tmenguy"
 GH_REPO="pyatmo"
 GH_BRANCH="development"
 gh_path="${GH_RAW_BASE}/${GH_ACCOUNT}/${GH_REPO}/${GH_BRANCH}/src/pyatmo"
-files="__init__.py account.py auth.py const.py event.py exceptions.py helpers.py home.py person.py py.typed room.py schedule.py"
+files="__init__.py account.py auth.py const.py enums.py event.py exceptions.py helpers.py home.py person.py py.typed room.py schedule.py"
 
 for file in ${files}; do
   wget ${gh_path}/${file} -O ${path}/${file}
