@@ -275,8 +275,8 @@ class NetatmoDataHandler:
                 await self.account.async_update_topology(disabled_homes_ids=disabled_homes)
                 self.add_api_call(1)
 
-            except (pyatmo.NoDevice, pyatmo.ApiError) as err:
-                _LOGGER.debug("init account.async_update_topology error NoDevice or ApiError %s", err)
+            except (pyatmo.NoDeviceError, pyatmo.ApiError) as err:
+                _LOGGER.debug("init account.async_update_topology error NoDeviceError or ApiError %s", err)
                 has_error = True
             except (TimeoutError, aiohttp.ClientConnectorError) as err:
                 _LOGGER.debug("init account.async_update_topology error Timeout or ClientConnectorError: %s",  err)
@@ -309,8 +309,8 @@ class NetatmoDataHandler:
                     except pyatmo.ApiHomeReachabilityError as err:
                         _LOGGER.debug("init account.async_update_status error Not Reachable Home: %s", err)
                         has_error = True
-                    except (pyatmo.NoDevice, pyatmo.ApiError) as err:
-                        _LOGGER.debug("init account.async_update_status error NoDevice or ApiError %s", err)
+                    except (pyatmo.NoDeviceError, pyatmo.ApiError) as err:
+                        _LOGGER.debug("init account.async_update_status error NoDeviceError or ApiError %s", err)
                         has_error = True
                     except (TimeoutError, aiohttp.ClientConnectorError) as err:
                         _LOGGER.debug("init account.async_update_status error Timeout or ClientConnectorError: %s", err)
@@ -586,14 +586,14 @@ class NetatmoDataHandler:
                 await getattr(self.publisher[signal_name].target, self.publisher[signal_name].method)(
                     **self.publisher[signal_name].kwargs
                 )
-            except pyatmo.NoDevice as err:
-                _LOGGER.debug("fetch error NoDevice: %s", err)
+            except pyatmo.NoDeviceError as err:
+                _LOGGER.debug("fetch error NoDeviceError: %s", err)
                 has_error = True
             except pyatmo.ApiHomeReachabilityError as err:
                 _LOGGER.debug("fetch error Not Reachable Home: %s", err)
                 has_error = True
-            except pyatmo.ApiErrorThrottling as err:
-                _LOGGER.debug("fetch error Throttling: %s", err)
+            except pyatmo.ApiThrottlingError as err:
+                _LOGGER.debug("fetch error ApiThrottlingError: %s", err)
                 has_throttling_error = True
             except pyatmo.ApiError as err:
                 _LOGGER.debug("fetch error ApiError: %s", err)

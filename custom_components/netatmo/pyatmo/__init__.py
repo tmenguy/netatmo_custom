@@ -5,12 +5,13 @@ from .account import AsyncAccount
 from .auth import AbstractAsyncAuth
 from .exceptions import (
     ApiError,
-    ApiErrorThrottling,
     ApiHomeReachabilityError,
-    InvalidHome,
-    InvalidRoom,
-    NoDevice,
-    NoSchedule,
+    ApiThrottlingError,
+    InvalidHomeError,
+    InvalidRoomError,
+    InvalidScheduleError,
+    NoDeviceError,
+    NoScheduleError,
 )
 from .home import Home
 from .modules import Module
@@ -20,17 +21,18 @@ from .room import Room
 __all__ = [
     "AbstractAsyncAuth",
     "ApiError",
-    "ApiErrorThrottling",
     "ApiHomeReachabilityError",
+    "ApiThrottlingError",
     "AsyncAccount",
-    "InvalidHome",
-    "InvalidRoom",
-    "Home",
-    "Module",
-    "Room",
     "DeviceType",
-    "NoDevice",
-    "NoSchedule",
+    "Home",
+    "InvalidHomeError",
+    "InvalidRoomError",
+    "InvalidScheduleError",
+    "Module",
+    "NoDeviceError",
+    "NoScheduleError",
+    "Room",
     "const",
     "modules",
 ]

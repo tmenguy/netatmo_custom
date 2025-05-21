@@ -21,9 +21,9 @@ from .enums import SCHEDULE_TYPE_MAPPING, TemperatureControlMode
 from .event import Event
 from .exceptions import (
     ApiHomeReachabilityError,
-    InvalidSchedule,
-    InvalidState,
-    NoSchedule,
+    InvalidScheduleError,
+    InvalidStateError,
+    NoScheduleError,
 )
 from .person import Person
 from .room import Room
@@ -148,10 +148,16 @@ class Home:
         for room in self.rooms.keys() - {m["id"] for m in raw_rooms}:
             self.rooms.pop(room)
 
-        self.schedules = {
-            s["id"]: Schedule(home=self, raw_data=s)
-            for s in raw_data.get(SCHEDULES, [])
-        }
+        raw_schedules = raw_data.get("schedules", [])
+        for schedule in raw_schedules:
+            if (schedule_id := schedule["id"]) not in self.schedules:
+                self.schedules[schedule_id] = Schedule(home=self, raw_data=schedule)
+            else:
+                self.schedules[schedule_id].update_topology(schedule)
+
+        # Drop schedule if has been removed
+        for schedule in self.schedules.keys() - {s["id"] for s in raw_schedules}:
+            self.schedules.pop(schedule)
 
     async def update(
         self,
@@ -269,17 +275,18 @@ class Home:
 
     async def async_set_thermmode(
         self,
-        mode: str,
+        mode: str | None,
         end_time: int | None = None,
         schedule_id: str | None = None,
     ) -> bool:
         """Set thermotat mode."""
         if schedule_id is not None and not self.is_valid_schedule(schedule_id):
             msg = f"{schedule_id} is not a valid schedule id."
-            raise NoSchedule(msg)
+            raise NoScheduleError(msg)
         if mode is None:
             msg = f"{mode} is not a valid mode."
-            raise NoSchedule(msg)
+            raise NoScheduleError(msg)
+
         post_params = {"home_id": self.entity_id, "mode": mode}
         if end_time is not None and mode in {"hg", "away"}:
             post_params["endtime"] = str(end_time)
@@ -303,7 +310,7 @@ class Home:
         """Switch the schedule."""
         if not self.is_valid_schedule(schedule_id):
             msg = f"{schedule_id} is not a valid schedule id"
-            raise NoSchedule(msg)
+            raise NoScheduleError(msg)
         LOG.debug("Setting home (%s) schedule to %s", self.entity_id, schedule_id)
         resp = await self.auth.async_post_api_request(
             endpoint=SWITCHHOMESCHEDULE_ENDPOINT,
@@ -316,7 +323,7 @@ class Home:
         """Set state using given data."""
         if not is_valid_state(data):
             msg = "Data for '/set_state' contains errors."
-            raise InvalidState(msg)
+            raise InvalidStateError(msg)
         LOG.debug("Setting state for home (%s) according to %s", self.entity_id, data)
         resp = await self.auth.async_post_api_request(
             endpoint=SETSTATE_ENDPOINT,
@@ -354,8 +361,8 @@ class Home:
 
     async def async_set_schedule_temperatures(
         self,
-        zone_id: int,
-        temps: dict[str, int],
+        zone_id: str,
+        temps: dict[str, float],
     ) -> None:
         """Set the scheduled room temperature for the given schedule ID."""
 
@@ -363,72 +370,69 @@ class Home:
 
         if selected_schedule is None:
             msg = "Could not determine selected schedule."
-            raise NoSchedule(msg)
+            raise NoScheduleError(msg)
 
-        zones = []
+        for zone in (z for z in selected_schedule.zones if z.entity_id == zone_id):
+            for room in (r for r in zone.rooms if r.entity_id in temps):
+                room.therm_setpoint_temperature = temps[room.entity_id]
+
+        await self.async_sync_schedule(selected_schedule)
+
+    async def async_sync_schedule(
+        self,
+        schedule: Schedule,
+    ) -> None:
+        """Modify an existing schedule."""
+        if not is_valid_schedule(schedule):
+            msg = "Data for '/synchomeschedule' contains errors."
+            raise InvalidScheduleError(msg)
+        LOG.debug(
+            "Setting schedule (%s) for home (%s) to %s",
+            schedule.entity_id,
+            self.entity_id,
+            schedule,
+        )
 
         timetable_entries = [
             {
                 "m_offset": timetable_entry.m_offset,
                 "zone_id": timetable_entry.zone_id,
             }
-            for timetable_entry in selected_schedule.timetable
+            for timetable_entry in schedule.timetable
         ]
 
-        for zone in selected_schedule.zones:
-            rooms = []
+        zones = []
+        for zone in schedule.zones:
             new_zone = {
                 "id": zone.entity_id,
                 "name": zone.name,
                 "type": zone.type,
+                "rooms": [
+                    {
+                        "id": room.entity_id,
+                        "therm_setpoint_temperature": room.therm_setpoint_temperature,
+                    }
+                    for room in zone.rooms
+                ],
             }
-
-            for room in zone.rooms:
-                temp = room.therm_setpoint_temperature
-                if zone.entity_id == zone_id and room.entity_id in temps:
-                    temp = temps[room.entity_id]
-
-                rooms.append(
-                    {"id": room.entity_id, "therm_setpoint_temperature": temp},
-                )
-
-            new_zone["rooms"] = rooms
             zones.append(new_zone)
 
-        schedule = {
-            "away_temp": selected_schedule.away_temp,
-            "hg_temp": selected_schedule.hg_temp,
+        request_json = {
+            "away_temp": schedule.away_temp,
+            "hg_temp": schedule.hg_temp,
             "timetable": timetable_entries,
             "zones": zones,
         }
-
-        await self.async_sync_schedule(selected_schedule.entity_id, schedule)
-
-    async def async_sync_schedule(
-        self,
-        schedule_id: str,
-        schedule: dict[str, Any],
-    ) -> None:
-        """Modify an existing schedule."""
-        if not is_valid_schedule(schedule):
-            msg = "Data for '/synchomeschedule' contains errors."
-            raise InvalidSchedule(msg)
-        LOG.debug(
-            "Setting schedule (%s) for home (%s) to %s",
-            schedule_id,
-            self.entity_id,
-            schedule,
-        )
 
         resp = await self.auth.async_post_api_request(
             endpoint=SYNCHOMESCHEDULE_ENDPOINT,
             params={
                 "params": {
                     "home_id": self.entity_id,
-                    "schedule_id": schedule_id,
+                    "schedule_id": schedule.entity_id,
                     "name": "Default",
                 },
-                "json": schedule,
+                "json": request_json,
             },
         )
 
@@ -440,9 +444,13 @@ def is_valid_state(data: dict[str, Any]) -> bool:
     return data is not None
 
 
-def is_valid_schedule(schedule: dict[str, Any]) -> bool:
+def is_valid_schedule(schedule: Schedule) -> bool:
     """Check schedule."""
-    return schedule is not None
+    return (
+        isinstance(schedule, Schedule)
+        and hasattr(schedule, "entity_id")
+        and schedule.entity_id != ""
+    )
 
 
 def get_temperature_control_mode(

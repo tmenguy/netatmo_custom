@@ -197,7 +197,7 @@ class Room(NetatmoBase):
             for module in self.modules.values():
                 if (
                     isinstance(module, ApplianceTypeMixin)
-                    and module.device_type == DeviceType.NLC  # type: ignore # mypy issue 4335
+                    and module.device_type == DeviceType.NLC
                     and module.appliance_type == ApplianceType.radiator
                 ):
                     if isinstance(module, PowerMixin) and module.power is not None:
@@ -375,7 +375,7 @@ class Room(NetatmoBase):
 
         for module in self.modules.values():
             if hasattr(module, "boiler_status"):
-                module = cast(Boiler, module)
+                module = cast("Boiler", module)
                 if (boiler_status := module.boiler_status) is not None:
                     return boiler_status
 

@@ -4,18 +4,13 @@ from __future__ import annotations
 
 from enum import Enum
 import logging
-from typing import Any, Literal
+from typing import Literal
 
 LOG = logging.getLogger(__name__)
-
-# pylint: disable=W0613
 
 
 class DeviceType(str, Enum):
     """Class to represent Netatmo device types."""
-
-    # temporarily disable locally-disabled and locally-enabled
-    # pylint: disable=C0103
 
     # Climate/Energy
     NAPlug = "NAPlug"  # Smart thermostat gateway
@@ -117,10 +112,8 @@ class DeviceType(str, Enum):
     # Magellan
     NLDP = "NLDP"  # Pocket Remote
 
-    # pylint: enable=C0103
-
     @classmethod
-    def _missing_(cls, key: Any) -> Literal[DeviceType.NLunknown]:
+    def _missing_(cls, key: object) -> Literal[DeviceType.NLunknown]:
         """Handle unknown device types."""
 
         msg = f"{key} device is unknown"
@@ -132,7 +125,6 @@ class DeviceCategory(str, Enum):
     """Class to represent Netatmo device types."""
 
     # temporarily disable locally-disabled and locally-enabled
-    # pylint: disable=C0103
 
     climate = "climate"
     camera = "camera"
@@ -147,8 +139,6 @@ class DeviceCategory(str, Enum):
     dimmer = "dimmer"
     opening = "opening"
     fan = "fan"
-
-    # pylint: enable=C0103
 
 
 DEVICE_CATEGORY_MAP: dict[DeviceType, DeviceCategory] = {
@@ -305,7 +295,6 @@ class ApplianceType(str, Enum):
     """Class to represent appliance type of a module. This is only for Home + Control."""
 
     # temporarily disable locally-disabled and locally-enabled
-    # pylint: disable=C0103
 
     light = "light"
     fridge_freezer = "fridge_freezer"
@@ -327,7 +316,7 @@ class ApplianceType(str, Enum):
     unknown = "unknown"
 
     @classmethod
-    def _missing_(cls, key: Any) -> Literal[ApplianceType.unknown]:
+    def _missing_(cls, key: object) -> Literal[ApplianceType.unknown]:
         """Handle unknown device types."""
 
         msg = f"{key} appliance type is unknown"
