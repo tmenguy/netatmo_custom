@@ -74,11 +74,11 @@
                 "state": {
                     "e": "East",
                     "n": "North",
-                    "ne": "North-east",
-                    "nw": "North-west",
+                    "ne": "Northeast",
+                    "nw": "Northwest",
                     "s": "South",
-                    "se": "South-east",
-                    "sw": "South-west",
+                    "se": "Southeast",
+                    "sw": "Southwest",
                     "w": "West"
                 }
             },
@@ -127,11 +127,11 @@
                 "state": {
                     "e": "East",
                     "n": "North",
-                    "ne": "North-east",
-                    "nw": "North-west",
+                    "ne": "Northeast",
+                    "nw": "Northwest",
                     "s": "South",
-                    "se": "South-east",
-                    "sw": "South-west",
+                    "se": "Southeast",
+                    "sw": "Southwest",
                     "w": "West"
                 }
             }
@@ -142,10 +142,10 @@
             "public_weather": {
                 "data": {
                     "area_name": "Name of the area",
-                    "lat_ne": "North-East corner latitude",
-                    "lat_sw": "South-West corner latitude",
-                    "lon_ne": "North-East corner longitude",
-                    "lon_sw": "South-West corner longitude",
+                    "lat_ne": "Northeast corner latitude",
+                    "lat_sw": "Southwest corner latitude",
+                    "lon_ne": "Northeast corner longitude",
+                    "lon_sw": "Southwest corner longitude",
                     "mode": "Calculation",
                     "show_on_map": "Show on map"
                 },

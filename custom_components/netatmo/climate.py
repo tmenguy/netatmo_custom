@@ -328,19 +328,22 @@ class NetatmoThermostat(NetatmoRoomEntity, ClimateEntity):
         if self.home.entity_id != data["home_id"]:
             return
 
-        if data["event_type"] == EVENT_TYPE_SCHEDULE and "schedule_id" in data:
-            self._selected_schedule = getattr(
-                self.hass.data[DOMAIN][DATA_SCHEDULES][self.home.entity_id].get(
-                    data["schedule_id"]
-                ),
-                "name",
-                None,
-            )
-            self._attr_extra_state_attributes[ATTR_SELECTED_SCHEDULE] = (
-                self._selected_schedule
-            )
-            self.async_write_ha_state()
-            self.data_handler.async_force_update(self._signal_name)
+        if data["event_type"] == EVENT_TYPE_SCHEDULE:
+            # handle schedule change
+            if "schedule_id" in data:
+                self._selected_schedule = getattr(
+                    self.hass.data[DOMAIN][DATA_SCHEDULES][self.home.entity_id].get(
+                        data["schedule_id"]
+                    ),
+                    "name",
+                    None,
+                )
+                self._attr_extra_state_attributes[ATTR_SELECTED_SCHEDULE] = (
+                    self._selected_schedule
+                )
+                self.async_write_ha_state()
+                self.data_handler.async_force_update(self._signal_name)
+            # ignore other schedule events
             return
 
         home = data["home"]
@@ -400,7 +403,6 @@ class NetatmoThermostat(NetatmoRoomEntity, ClimateEntity):
             ):
                 if self._attr_hvac_mode == HVACMode.OFF:
                     self._attr_hvac_mode = HVACMode.AUTO
-
                     self._attr_preset_mode = PRESET_SCHEDULE
 
                 self.async_update_callback()
@@ -483,25 +485,31 @@ class NetatmoThermostat(NetatmoRoomEntity, ClimateEntity):
                 await self.device.async_therm_set(mode=therm_mode, end_time=end_timestamp, pilot_wire=pilot_wire)
 
 
+        elif (
+            preset_mode in (PRESET_BOOST, STATE_NETATMO_MAX)
+            and self.device_type == NA_VALVE
+            and self._attr_hvac_mode == HVACMode.HEAT
+        ):
+            await self.device.async_therm_set(
+                mode=STATE_NETATMO_HOME,
+                end_time = end_timestamp
+            )
+        elif (
+            preset_mode in (PRESET_BOOST, STATE_NETATMO_MAX)
+            and self.device_type == NA_VALVE
+        ):
+            await self.device.async_therm_set(
+                mode=STATE_NETATMO_MANUAL,
+                temp=DEFAULT_MAX_TEMP,
+                end_time = end_timestamp
+            )
+        elif (
+            preset_mode in (PRESET_BOOST, STATE_NETATMO_MAX)
+            and self._attr_hvac_mode == HVACMode.HEAT
+        ):
+            await self.device.async_therm_set(mode=STATE_NETATMO_HOME, end_time = end_timestamp)
         elif preset_mode in (PRESET_BOOST, STATE_NETATMO_MAX):
-            if (
-                self.device_type == NA_VALVE
-                and self._attr_hvac_mode == HVACMode.HEAT
-            ):
-                await self.device.async_therm_set(
-                    mode=STATE_NETATMO_HOME,
-                    end_time = end_timestamp
-                )
-            elif self.device_type == NA_VALVE:
-                await self.device.async_therm_set(
-                    mode=STATE_NETATMO_MANUAL,
-                    temp=DEFAULT_MAX_TEMP,
-                    end_time = end_timestamp
-                )
-            elif self._attr_hvac_mode == HVACMode.HEAT:
-                await self.device.async_therm_set(mode=STATE_NETATMO_HOME, end_time = end_timestamp)
-            else:
-                await self.device.async_therm_set(mode=self._preset_map_netatmo[preset_mode], end_time = end_timestamp)
+            await self.device.async_therm_set(mode=self._preset_map_netatmo[preset_mode], end_time = end_timestamp)
         elif preset_mode in THERM_MODES:
             await self.device.home.async_set_thermmode(mode=self._preset_map_netatmo[preset_mode], end_time = end_timestamp)
         else:
