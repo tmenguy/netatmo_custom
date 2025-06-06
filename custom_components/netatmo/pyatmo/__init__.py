@@ -18,7 +18,7 @@ from .modules import Module
 from .modules.device_types import DeviceType
 from .room import Room
 
-__all__ = [
+__all__: list[str] = [
     "AbstractAsyncAuth",
     "ApiError",
     "ApiHomeReachabilityError",

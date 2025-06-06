@@ -28,7 +28,7 @@ if TYPE_CHECKING:
     from ..home import Home
 
 
-LOG = logging.getLogger(__name__)
+LOG: logging.Logger = logging.getLogger(__name__)
 
 
 class NLG(FirmwareMixin, OffloadMixin, WifiMixin, Module):
