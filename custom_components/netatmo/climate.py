@@ -482,8 +482,11 @@ class NetatmoThermostat(NetatmoRoomEntity, ClimateEntity):
                 raise e
 
             if do_retry:
-                await self.device.async_therm_set(mode=therm_mode, end_time=end_timestamp, pilot_wire=pilot_wire)
-
+                try:
+                    await self.device.async_therm_set(mode=therm_mode, end_time=end_timestamp, pilot_wire=pilot_wire)
+                except Exception as e:
+                    _LOGGER.warning("Error setting preset mode: %s", e)
+                    raise e
 
         elif (
             preset_mode in (PRESET_BOOST, STATE_NETATMO_MAX)
