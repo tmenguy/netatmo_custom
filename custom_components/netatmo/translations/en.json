@@ -17,7 +17,7 @@
         "step": {
             "pick_implementation": {
                 "data": {
-                    "implementation": "Application Credentials"
+                    "implementation": "Application credentials"
                 },
                 "data_description": {
                     "implementation": "The credentials you want to use to authenticate."
@@ -160,9 +160,9 @@
             },
             "public_weather_areas_and_homes": {
                 "data": {
+                    "enabled_homes": "Enabled homes",
                     "new_area": "Area name",
                     "selected_homes": "Homes (leave all unchecked will import all of your homes)",
-                    "enabled_homes": "Enabled homes",
                     "weather_areas": "Weather areas"
                 },
                 "description": "Define the homes you want to support, Configure public weather sensors.",
