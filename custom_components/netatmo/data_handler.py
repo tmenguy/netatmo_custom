@@ -105,10 +105,10 @@ PUBLISHERS = {
 # 50 requests every 10 seconds
 # 500 requests every hour
 
-# the system will ensure that we never overcross neither CALL_PER_HOUR or CALL_PER_TEN_SECONDS
+# the system will ensure that we never cross neither CALL_PER_HOUR or CALL_PER_TEN_SECONDS
 # whatever are the other numbers of the number of devices we have
 # (each device need a call for energy, can grow a lot)
-# There is a rolling buffer of calls to be sure of what has been called in teh last
+# There is a rolling buffer of calls to be sure of what has been called in the last
 # 10s or hour and take decisions based on that
 
 CALL_PER_HOUR = "CALL_PER_HOUR"
@@ -131,13 +131,13 @@ NETATMO_DEV_CALL_LIMITS = {
     CALL_PER_HOUR: 450,        # in this case per user limit is: 500 requests every hour
     CALL_PER_TEN_SECONDS: 45,  # in this case per user limit is: 50 requests every 10 seconds
     ACCOUNT: 3600,
-    HOME: 5,
+    HOME: 10,
     WEATHER: 200,
     AIR_CARE: 100,
     PUBLIC: 200,
     EVENT: 200,
-    ENERGY_MEASURE: 900,
-    SCAN_INTERVAL: 5
+    ENERGY_MEASURE: 1200,
+    SCAN_INTERVAL: 10
 }
 
 # this is for the dynamic API rate limiting adjustement to deal with rare occasions
