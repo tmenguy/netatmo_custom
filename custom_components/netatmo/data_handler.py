@@ -46,11 +46,13 @@ from .const import (
     NETATMO_CREATE_CAMERA,
     NETATMO_CREATE_CAMERA_LIGHT,
     NETATMO_CREATE_CLIMATE,
+    NETATMO_CREATE_CONNECTIVITY_BINARY_SENSOR,
     NETATMO_CREATE_COVER,
     NETATMO_CREATE_ENERGY,
     NETATMO_CREATE_FAN,
     NETATMO_CREATE_GAS,
     NETATMO_CREATE_LIGHT,
+    NETATMO_CREATE_OPENING_BINARY_SENSOR,
     NETATMO_CREATE_ROOM_SENSOR,
     NETATMO_CREATE_SELECT,
     NETATMO_CREATE_SENSOR,
@@ -765,8 +767,7 @@ class NetatmoDataHandler:
                 NETATMO_CREATE_CAMERA,
                 NETATMO_CREATE_CAMERA_LIGHT,
             ],
-            NetatmoDeviceCategory.dimmer: [
-                NETATMO_CREATE_LIGHT,
+            NetatmoDeviceCategory.dimmer: [NETATMO_CREATE_LIGHT,
                 NETATMO_CREATE_SENSOR,
                 NETATMO_CREATE_ENERGY
             ],
@@ -782,14 +783,16 @@ class NetatmoDataHandler:
                 NETATMO_CREATE_SENSOR,
                 NETATMO_CREATE_ENERGY,
             ],
-            NetatmoDeviceCategory.meter: [
+            NetatmoDeviceCategory.meter: [NETATMO_CREATE_SENSOR,
+                NETATMO_CREATE_ENERGY
+            ],
+            NetatmoDeviceCategory.fan: [NETATMO_CREATE_FAN,
                 NETATMO_CREATE_SENSOR,
                 NETATMO_CREATE_ENERGY
             ],
-            NetatmoDeviceCategory.fan: [
-                NETATMO_CREATE_FAN,
-                NETATMO_CREATE_SENSOR,
-                NETATMO_CREATE_ENERGY
+            NetatmoDeviceCategory.opening: [
+                NETATMO_CREATE_CONNECTIVITY_BINARY_SENSOR,
+                NETATMO_CREATE_OPENING_BINARY_SENSOR,
             ],
         }
         for module in home.modules.values():
