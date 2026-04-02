@@ -9,12 +9,7 @@ import uuid
 
 import voluptuous as vol
 
-from homeassistant.config_entries import (
-    SOURCE_REAUTH,
-    ConfigEntry,
-    ConfigFlowResult,
-    OptionsFlow,
-)
+from homeassistant.config_entries import SOURCE_REAUTH, ConfigFlowResult, OptionsFlow
 from homeassistant.const import CONF_SHOW_ON_MAP, CONF_UUID
 from homeassistant.core import callback
 from homeassistant.helpers import config_entry_oauth2_flow, config_validation as cv
@@ -30,9 +25,9 @@ from .const import (
     CONF_PUBLIC_MODE,
     CONF_WEATHER_AREAS,
     DOMAIN,
-    CONF_DISABLED_HOMES,
-    DATA_HANDLER,
+    CONF_DISABLED_HOMES
 )
+from .data_handler import NetatmoConfigEntry
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -47,7 +42,7 @@ class NetatmoFlowHandler(
     @staticmethod
     @callback
     def async_get_options_flow(
-        config_entry: ConfigEntry,
+        config_entry: NetatmoConfigEntry,
     ) -> OptionsFlow:
         """Get the options flow for this handler."""
         return NetatmoOptionsFlowHandler(config_entry)
@@ -102,7 +97,7 @@ INTERMEDIATE_ENABLED_HOMES = "enabled_homes"
 class NetatmoOptionsFlowHandler(OptionsFlow):
     """Handle Netatmo options."""
 
-    def __init__(self, config_entry: ConfigEntry) -> None:
+    def __init__(self, config_entry: NetatmoConfigEntry) -> None:
         """Initialize Netatmo options flow."""
         self.options = dict(config_entry.options)
         self.options.setdefault(CONF_WEATHER_AREAS, {})
@@ -130,7 +125,7 @@ class NetatmoOptionsFlowHandler(OptionsFlow):
 
             if enabled_homes:
 
-                homes = self.hass.data[DOMAIN][self.config_entry.entry_id][DATA_HANDLER].account.all_homes_id
+                homes = self.config_entry.runtime_data.account.all_homes_id
                 disabled_homes = []
                 for hid in homes:
                     if hid not in enabled_homes:
@@ -151,7 +146,7 @@ class NetatmoOptionsFlowHandler(OptionsFlow):
 
         schema = {}
 
-        homes = self.hass.data[DOMAIN][self.config_entry.entry_id][DATA_HANDLER].account.all_homes_id
+        homes = self.config_entry.runtime_data.account.all_homes_id
 
         if len(homes) > 1:
             l_disabled_homes = self.options.get(CONF_DISABLED_HOMES, [])

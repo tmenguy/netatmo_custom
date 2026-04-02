@@ -34,7 +34,6 @@ from homeassistant.helpers.dispatcher import (
 from homeassistant.helpers.event import async_track_time_interval
 
 from .const import (
-    AUTH,
     CAMERA_CONNECTION_WEBHOOKS,
     CONF_DISABLED_HOMES,
     DATA_PERSONS,
@@ -148,6 +147,8 @@ NETATMO_DEV_CALL_LIMITS = {
 CPH_ADJUSTEMENT_DOWN = 0.8
 CPH_ADJUSTEMENT_BACK_UP = 1.1
 
+type NetatmoConfigEntry = ConfigEntry[NetatmoDataHandler]
+
 
 @dataclass
 class NetatmoDevice:
@@ -223,7 +224,12 @@ class NetatmoDataHandler:
 
     account: pyatmo.AsyncAccount | None
 
-    def __init__(self, hass: HomeAssistant, config_entry: ConfigEntry) -> None:
+    def __init__(
+        self,
+        hass: HomeAssistant,
+        config_entry: NetatmoConfigEntry,
+        auth: pyatmo.AbstractAsyncAuth,
+    ) -> None:
         """Initialize self."""
         self.hass = hass
         self.account = None
@@ -231,7 +237,7 @@ class NetatmoDataHandler:
         self._init_topology_complete = False
         self._init_update_status_complete = False
         self.config_entry = config_entry
-        self._auth = hass.data[DOMAIN][config_entry.entry_id][AUTH]
+        self.auth = auth
         self.publisher: dict[str, NetatmoPublisher] = {}
         self._sorted_publisher: list[NetatmoPublisher] = []
         self._webhook: bool = False
@@ -366,7 +372,7 @@ class NetatmoDataHandler:
         self._init_topology_complete = False
         self._init_update_status_complete = False
 
-        self.account = pyatmo.AsyncAccount(self._auth)
+        self.account = pyatmo.AsyncAccount(self.auth)
 
         if await self._do_complete_init_if_needed() is False:
             _LOGGER.info("Netatmo integration not properly initialized at startup, trying again in %i seconds",self._scan_interval)

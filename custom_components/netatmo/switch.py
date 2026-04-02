@@ -11,13 +11,12 @@ except Exception:  # pylint: disable=broad-except
     from pyatmo import modules as NaModules
 
 from homeassistant.components.switch import SwitchEntity
-from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.dispatcher import async_dispatcher_connect
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 
 from .const import CONF_URL_CONTROL, NETATMO_CREATE_SWITCH
-from .data_handler import HOME, SIGNAL_NAME, NetatmoDevice
+from .data_handler import HOME, SIGNAL_NAME, NetatmoConfigEntry, NetatmoDevice
 from .entity import NetatmoModuleEntity
 
 _LOGGER = logging.getLogger(__name__)
@@ -25,7 +24,7 @@ _LOGGER = logging.getLogger(__name__)
 
 async def async_setup_entry(
     hass: HomeAssistant,
-    entry: ConfigEntry,
+    entry: NetatmoConfigEntry,
     async_add_entities: AddConfigEntryEntitiesCallback,
 ) -> None:
     """Set up the Netatmo switch platform."""
