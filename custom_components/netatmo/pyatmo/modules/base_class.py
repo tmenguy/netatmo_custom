@@ -38,7 +38,7 @@ NETATMO_ATTRIBUTES_MAP: dict[str, Callable[[dict[str, Any], Any], Any]] = {
 }
 
 
-def default(key: str, val: Any) -> Callable[[dict[str, Any], Any], Any]:
+def default(key: str, val: Any) -> Callable[[dict[str, Any], Any], Any]:  # noqa: ANN401
     """Return default value."""
 
     return lambda x, _: x.get(key, val)
@@ -113,7 +113,7 @@ class NetatmoBase(EntityBase, ABC):
     def add_history_data(
         self,
         feature: str,
-        value: Any,
+        value: Any,  # noqa: ANN401
         time: int,
     ) -> None:
         """Add historical data at the given time."""

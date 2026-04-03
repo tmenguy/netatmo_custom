@@ -12,6 +12,7 @@ from .room import Room
 
 if TYPE_CHECKING:
     from .const import RawData
+
     from .home import Home
 
 LOG: logging.Logger = logging.getLogger(__name__)
