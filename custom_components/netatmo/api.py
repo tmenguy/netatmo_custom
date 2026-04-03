@@ -4,11 +4,7 @@ from collections.abc import Iterable
 from typing import cast
 
 from aiohttp import ClientSession
-
-try:
-    from . import pyatmo
-except Exception:  # pylint: disable=broad-except
-    import pyatmo
+import pyatmo
 
 from homeassistant.components import cloud
 from homeassistant.helpers import config_entry_oauth2_flow

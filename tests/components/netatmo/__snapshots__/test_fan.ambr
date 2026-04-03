@@ -1,0 +1,7 @@
+# serializer version: 1
+# name: test_entity[fan.centralized_ventilation_controler-entry]
+  RegistryEntry(entity_id='fan.centralized_ventilation_controler', unique_id='12:34:56:00:01:01:01:b1-DeviceType.NLLF', platform='netatmo', previous_unique_id=None, aliases=[<ComputedNameType._singleton: 0>], area_id=None, categories={}, capabilities={'preset_modes': ['slow', 'fast']}, config_entry_id='01KNA264V48X3SHT5BE5Y28NK5', config_subentry_id=None, created_at=datetime.datetime(2026, 4, 3, 16, 17, 58, 122752, tzinfo=datetime.timezone.utc), device_class=None, device_id='b4527cee3be3bf38e2b06bc44d8ae7e1', disabled_by=None, entity_category=None, has_entity_name=True, hidden_by=None, icon=None, id='83c981c4b1c94d17cc757a2449e21ea5', labels=set(), modified_at=datetime.datetime(2026, 4, 3, 16, 17, 58, 122775, tzinfo=datetime.timezone.utc), name=None, object_id_base=None, options={}, original_device_class=None, original_icon=None, original_name=None, suggested_object_id=None, supported_features=<FanEntityFeature.PRESET_MODE: 8>, translation_key=None, unit_of_measurement=None, compat_aliases=[], original_name_unprefixed=None, _cache={})
+# ---
+# name: test_entity[fan.centralized_ventilation_controler-state]
+  <state fan.centralized_ventilation_controler=on; preset_modes=['slow', 'fast'], preset_mode=slow, attribution=Data provided by Netatmo, friendly_name=Centralized ventilation controler, supported_features=8 @ 2026-04-03T09:17:58.122854-07:00>
+# ---

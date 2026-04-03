@@ -6,10 +6,7 @@ from functools import partial
 import logging
 from typing import Any, Final, cast
 
-try:
-    from .pyatmo.modules.device_types import DeviceCategory as NetatmoDeviceCategory
-except Exception:  # pylint: disable=broad-except
-    from pyatmo.modules.device_types import DeviceCategory as NetatmoDeviceCategory
+from pyatmo.modules.device_types import DeviceCategory as NetatmoDeviceCategory
 
 from homeassistant.components.binary_sensor import (
     BinarySensorDeviceClass,

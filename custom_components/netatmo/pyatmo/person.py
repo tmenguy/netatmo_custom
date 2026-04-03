@@ -10,7 +10,6 @@ from .modules.base_class import NetatmoBase
 
 if TYPE_CHECKING:
     from .const import RawData
-
     from .home import Home
 
 LOG: logging.Logger = logging.getLogger(__name__)

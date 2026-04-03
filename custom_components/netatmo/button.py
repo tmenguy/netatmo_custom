@@ -4,10 +4,7 @@ from __future__ import annotations
 
 import logging
 
-try:
-    from .pyatmo import modules as NaModules
-except:
-    from pyatmo import modules as NaModules
+from pyatmo import modules as NaModules
 
 from homeassistant.components.button import ButtonEntity
 from homeassistant.core import HomeAssistant, callback

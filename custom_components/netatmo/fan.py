@@ -5,10 +5,7 @@ from __future__ import annotations
 import logging
 from typing import Final
 
-try:
-    from .pyatmo import modules as NaModules
-except Exception:  # pylint: disable=broad-except
-    from pyatmo import modules as NaModules
+from pyatmo import modules as NaModules
 
 from homeassistant.components.fan import FanEntity, FanEntityFeature
 from homeassistant.core import HomeAssistant, callback

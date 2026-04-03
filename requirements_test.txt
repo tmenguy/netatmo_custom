@@ -1,0 +1,10 @@
+pytest-homeassistant-custom-component
+syrupy
+freezegun
+pytest-unordered
+# Transitive deps needed by HA component import chains
+PyTurboJPEG
+hassil
+home-assistant-intents
+mutagen
+ha-ffmpeg

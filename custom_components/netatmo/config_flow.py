@@ -17,6 +17,7 @@ from homeassistant.helpers import config_entry_oauth2_flow, config_validation as
 from .api import get_api_scopes
 from .const import (
     CONF_AREA_NAME,
+    CONF_DISABLED_HOMES,
     CONF_LAT_NE,
     CONF_LAT_SW,
     CONF_LON_NE,
@@ -25,7 +26,6 @@ from .const import (
     CONF_PUBLIC_MODE,
     CONF_WEATHER_AREAS,
     DOMAIN,
-    CONF_DISABLED_HOMES
 )
 from .data_handler import NetatmoConfigEntry
 
@@ -94,6 +94,8 @@ class NetatmoFlowHandler(
 
 
 INTERMEDIATE_ENABLED_HOMES = "enabled_homes"
+
+
 class NetatmoOptionsFlowHandler(OptionsFlow):
     """Handle Netatmo options."""
 
@@ -108,7 +110,7 @@ class NetatmoOptionsFlowHandler(OptionsFlow):
         return await self.async_step_public_weather_areas_and_homes()
 
     async def async_step_public_weather_areas_and_homes(
-            self, user_input: dict | None = None
+        self, user_input: dict | None = None
     ) -> ConfigFlowResult:
         """Manage configuration of Netatmo public weather areas."""
         errors: dict = {}
@@ -120,19 +122,13 @@ class NetatmoOptionsFlowHandler(OptionsFlow):
                 area: self.options[CONF_WEATHER_AREAS][area] for area in areas
             }
 
-
             enabled_homes = user_input.pop(INTERMEDIATE_ENABLED_HOMES, [])
 
             if enabled_homes:
-
                 homes = self.config_entry.runtime_data.account.all_homes_id
-                disabled_homes = []
-                for hid in homes:
-                    if hid not in enabled_homes:
-                        disabled_homes.append(hid)
+                disabled_homes = [hid for hid in homes if hid not in enabled_homes]
 
                 user_input[CONF_DISABLED_HOMES] = disabled_homes
-
 
             self.options.update(user_input)
             if new_client:
@@ -151,29 +147,29 @@ class NetatmoOptionsFlowHandler(OptionsFlow):
         if len(homes) > 1:
             l_disabled_homes = self.options.get(CONF_DISABLED_HOMES, [])
 
-            l_selected_homes = []
-            for hid in homes:
-                if hid not in l_disabled_homes:
-                    l_selected_homes.append(hid)
+            l_selected_homes = [hid for hid in homes if hid not in l_disabled_homes]
 
             if len(l_selected_homes) == 0:
-                l_selected_homes = [hid for hid in homes]
+                l_selected_homes = list(homes)
 
-            schema.update({
+            schema.update(
+                {
+                    vol.Optional(
+                        INTERMEDIATE_ENABLED_HOMES,
+                        default=l_selected_homes,
+                    ): cv.multi_select(homes),
+                }
+            )
+
+        schema.update(
+            {
                 vol.Optional(
-                    INTERMEDIATE_ENABLED_HOMES,
-                    default=l_selected_homes,
-                ): cv.multi_select(homes),
-
-            })
-
-        schema.update({
-            vol.Optional(
-                CONF_WEATHER_AREAS,
-                default=weather_areas,
-            ): cv.multi_select(dict.fromkeys(weather_areas)),
-            vol.Optional(CONF_NEW_AREA): str,
-        })
+                    CONF_WEATHER_AREAS,
+                    default=weather_areas,
+                ): cv.multi_select(dict.fromkeys(weather_areas)),
+                vol.Optional(CONF_NEW_AREA): str,
+            }
+        )
 
         data_schema = vol.Schema(schema)
 

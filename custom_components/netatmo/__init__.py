@@ -10,8 +10,13 @@ from aiohttp import ClientError
 
 try:
     from . import pyatmo
-except Exception:  # pylint: disable=broad-except
+except ImportError:
     import pyatmo
+else:
+    import sys
+
+    # Register bundled pyatmo so all integration files can use plain `import pyatmo`
+    sys.modules.setdefault("pyatmo", pyatmo)
 
 from homeassistant.components import cloud
 from homeassistant.components.webhook import (
@@ -146,12 +151,16 @@ async def async_setup_entry(hass: HomeAssistant, entry: NetatmoConfigEntry) -> b
             data = {**entry.data, CONF_WEBHOOK_ID: secrets.token_hex()}
             hass.config_entries.async_update_entry(entry, data=data)
 
-        _LOGGER.debug(f"Netatmo webhook registration {entry.data.get(CONF_WEBHOOK_ID)}")
+        _LOGGER.debug(
+            "Netatmo webhook registration %s", entry.data.get(CONF_WEBHOOK_ID)
+        )
         if cloud.async_active_subscription(hass):
             try:
                 webhook_url = await async_cloudhook_generate_url(hass, entry)
-            except Exception as e:
-                _LOGGER.warning("Error during webhook registration for cloud subscription - %s", e)
+            except (cloud.CloudNotAvailable, ValueError) as e:
+                _LOGGER.warning(
+                    "Error during webhook registration for cloud subscription - %s", e
+                )
                 return
         else:
             webhook_url = webhook_generate_url(hass, entry.data[CONF_WEBHOOK_ID])
@@ -213,7 +222,6 @@ async def async_cloudhook_generate_url(
 ) -> str:
     """Generate the full URL for a webhook_id."""
     if CONF_CLOUDHOOK_URL not in entry.data:
-
         do_delete_retry = False
         webhook_url = None
         try:
@@ -222,27 +230,29 @@ async def async_cloudhook_generate_url(
             )
         except ValueError as e:
             if "Hook is already enabled" in str(e):
-                _LOGGER.info("Retry: cloudhook was already enabled, try to delete and recreate - %s", e)
+                _LOGGER.info(
+                    "Retry: cloudhook was already enabled, try to delete and recreate - %s",
+                    e,
+                )
                 do_delete_retry = True
             else:
-                _LOGGER.warning("Error during cloudhook registration, ValueError - %s", e)
-                raise e
-        except Exception as e:
+                _LOGGER.warning(
+                    "Error during cloudhook registration, ValueError - %s", e
+                )
+                raise
+        except cloud.CloudNotAvailable as e:
             _LOGGER.warning("Error during cloudhook registration - %s", e)
-            raise e
-
+            raise
 
         if do_delete_retry:
             try:
-                await cloud.async_delete_cloudhook(
-                    hass, entry.data[CONF_WEBHOOK_ID]
-                )
+                await cloud.async_delete_cloudhook(hass, entry.data[CONF_WEBHOOK_ID])
                 webhook_url = await cloud.async_create_cloudhook(
                     hass, entry.data[CONF_WEBHOOK_ID]
                 )
-            except Exception as e:
+            except (cloud.CloudNotAvailable, ValueError) as e:
                 _LOGGER.warning("Error during cloudhook registration retry - %s", e)
-                raise e
+                raise
 
         if webhook_url is None:
             raise ValueError("Error during cloudhook registration, no webhook url")
@@ -269,14 +279,15 @@ async def async_config_entry_updated(
         enabled_homes = {
             home_id for home_id in account_home if home_id not in disabled_homes
         }
-        homes = local_data_handler.account.homes # it can have more homes, the public ones
-        current_homes = {
-            home_id for home_id in homes if home_id in account_home
-        }
+        homes = (
+            local_data_handler.account.homes
+        )  # it can have more homes, the public ones
+        current_homes = {home_id for home_id in homes if home_id in account_home}
         if current_homes != enabled_homes:
             _LOGGER.debug("Call reload to handle supported homes changes %s", homes)
             _reset_hass_domain(hass)
             await hass.config_entries.async_reload(entry.entry_id)
+
 
 async def async_unload_entry(hass: HomeAssistant, entry: NetatmoConfigEntry) -> bool:
     """Unload a config entry."""

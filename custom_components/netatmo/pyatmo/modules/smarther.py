@@ -4,13 +4,7 @@ from __future__ import annotations
 
 import logging
 
-from ..modules.module import (
-    BoilerMixin,
-    CoolerMixin,
-    FirmwareMixin,
-    Module,
-    WifiMixin,
-)
+from ..modules.module import BoilerMixin, CoolerMixin, FirmwareMixin, Module, WifiMixin
 
 LOG: logging.Logger = logging.getLogger(__name__)
 

@@ -5,14 +5,9 @@ from __future__ import annotations
 from abc import abstractmethod
 from typing import Any, cast
 
-try:
-    from .pyatmo import DeviceType, Home, Module, Room
-    from .pyatmo.modules.base_class import NetatmoBase, Place
-    from .pyatmo.modules.device_types import DEVICE_DESCRIPTION_MAP
-except Exception:  # pylint: disable=broad-except
-    from pyatmo import DeviceType, Home, Module, Room
-    from pyatmo.modules.base_class import NetatmoBase, Place
-    from pyatmo.modules.device_types import DEVICE_DESCRIPTION_MAP
+from pyatmo import DeviceType, Home, Module, Room
+from pyatmo.modules.base_class import NetatmoBase, Place
+from pyatmo.modules.device_types import DEVICE_DESCRIPTION_MAP
 
 from homeassistant.const import ATTR_LATITUDE, ATTR_LONGITUDE
 from homeassistant.core import callback
@@ -54,7 +49,7 @@ class NetatmoBaseEntity(Entity):
                     signal_name=signal_name,
                     target=publisher["target_module"],
                     update_callback=self.async_update_callback,
-                    update_only=True
+                    update_only=True,
                 )
             elif "home_id" in publisher:
                 await self.data_handler.subscribe(

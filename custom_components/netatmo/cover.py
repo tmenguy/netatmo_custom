@@ -5,10 +5,7 @@ from __future__ import annotations
 import logging
 from typing import Any
 
-try:
-    from .pyatmo import modules as NaModules
-except Exception:  # pylint: disable=broad-except
-    from pyatmo import modules as NaModules
+from pyatmo import modules as NaModules
 
 from homeassistant.components.cover import (
     ATTR_POSITION,

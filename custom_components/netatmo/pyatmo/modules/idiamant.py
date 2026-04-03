@@ -4,13 +4,7 @@ from __future__ import annotations
 
 import logging
 
-from ..modules.module import (
-    FirmwareMixin,
-    Module,
-    RfMixin,
-    ShutterMixin,
-    WifiMixin,
-)
+from ..modules.module import FirmwareMixin, Module, RfMixin, ShutterMixin, WifiMixin
 
 LOG: logging.Logger = logging.getLogger(__name__)
 

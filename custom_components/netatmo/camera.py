@@ -6,13 +6,8 @@ import logging
 from typing import Any, cast
 
 import aiohttp
-
-try:
-    from .pyatmo import ApiError as NetatmoApiError, modules as NaModules
-    from .pyatmo.event import Event as NaEvent
-except Exception:  # pylint: disable=broad-except
-    from pyatmo import ApiError as NetatmoApiError, modules as NaModules
-    from pyatmo.event import Event as NaEvent
+from pyatmo import ApiError as NetatmoApiError, modules as NaModules
+from pyatmo.event import Event as NaEvent
 import voluptuous as vol
 
 from homeassistant.components.camera import Camera, CameraEntityFeature

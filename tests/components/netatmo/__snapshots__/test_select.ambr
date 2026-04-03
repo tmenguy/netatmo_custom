@@ -1,0 +1,7 @@
+# serializer version: 1
+# name: test_entity[select.myhome-entry]
+  RegistryEntry(entity_id='select.myhome', unique_id='91763b24c43d3e344f424e8b-schedule-select', platform='netatmo', previous_unique_id=None, aliases=[<ComputedNameType._singleton: 0>], area_id=None, categories={}, capabilities={'options': ['Default', 'Winter']}, config_entry_id='01KNA2658AQHJ0NNZAHCHQ29QB', config_subentry_id=None, created_at=datetime.datetime(2026, 4, 3, 16, 17, 58, 544786, tzinfo=datetime.timezone.utc), device_class=None, device_id='83019ab9703beaff23c04c9711a5c77a', disabled_by=None, entity_category=None, has_entity_name=True, hidden_by=None, icon=None, id='e1c223eee6cd8f0af438cf6218d337c3', labels=set(), modified_at=datetime.datetime(2026, 4, 3, 16, 17, 58, 544808, tzinfo=datetime.timezone.utc), name=None, object_id_base=None, options={}, original_device_class=None, original_icon=None, original_name=None, suggested_object_id=None, supported_features=0, translation_key=None, unit_of_measurement=None, compat_aliases=[], original_name_unprefixed=None, _cache={})
+# ---
+# name: test_entity[select.myhome-state]
+  <state select.myhome=Default; options=['Default', 'Winter'], attribution=Data provided by Netatmo, friendly_name=MYHOME @ 2026-04-03T09:17:58.544885-07:00>
+# ---
