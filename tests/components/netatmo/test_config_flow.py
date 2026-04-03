@@ -27,6 +27,7 @@ from tests.common import MockConfigEntry, start_reauth_flow
 from tests.test_util.aiohttp import AiohttpClientMocker
 from tests.typing import ClientSessionGenerator
 
+from .common import selected_platforms
 from .conftest import CLIENT_ID
 
 VALID_CONFIG = {}
@@ -113,7 +114,9 @@ async def test_full_flow(
     assert len(mock_setup.mock_calls) == 1
 
 
-async def test_option_flow(hass: HomeAssistant) -> None:
+async def test_option_flow(
+    hass: HomeAssistant, config_entry, netatmo_auth
+) -> None:
     """Test config flow options."""
     valid_option = {
         "lat_ne": 32.91336,
@@ -135,18 +138,16 @@ async def test_option_flow(hass: HomeAssistant) -> None:
         "mode": "avg",
     }
 
-    config_entry = MockConfigEntry(
-        domain=DOMAIN,
-        unique_id=DOMAIN,
-        data=VALID_CONFIG,
-        options={},
-    )
-    config_entry.add_to_hass(hass)
+    with selected_platforms([]):
+        assert await hass.config_entries.async_setup(config_entry.entry_id)
+        await hass.async_block_till_done()
+
+    hass.config_entries.async_update_entry(config_entry, options={})
 
     result = await hass.config_entries.options.async_init(config_entry.entry_id)
 
     assert result["type"] is FlowResultType.FORM
-    assert result["step_id"] == "public_weather_areas"
+    assert result["step_id"] == "public_weather_areas_and_homes"
 
     result = await hass.config_entries.options.async_configure(
         result["flow_id"], user_input={CONF_NEW_AREA: "Home"}
@@ -160,7 +161,7 @@ async def test_option_flow(hass: HomeAssistant) -> None:
     )
 
     assert result["type"] is FlowResultType.FORM
-    assert result["step_id"] == "public_weather_areas"
+    assert result["step_id"] == "public_weather_areas_and_homes"
 
     result = await hass.config_entries.options.async_configure(
         result["flow_id"], user_input={}
@@ -171,7 +172,9 @@ async def test_option_flow(hass: HomeAssistant) -> None:
         assert config_entry.options[CONF_WEATHER_AREAS]["Home"][k] == v
 
 
-async def test_option_flow_wrong_coordinates(hass: HomeAssistant) -> None:
+async def test_option_flow_wrong_coordinates(
+    hass: HomeAssistant, config_entry, netatmo_auth
+) -> None:
     """Test config flow options with mixed up coordinates."""
     valid_option = {
         "lat_ne": 32.1234567,
@@ -193,18 +196,16 @@ async def test_option_flow_wrong_coordinates(hass: HomeAssistant) -> None:
         "mode": "avg",
     }
 
-    config_entry = MockConfigEntry(
-        domain=DOMAIN,
-        unique_id=DOMAIN,
-        data=VALID_CONFIG,
-        options={},
-    )
-    config_entry.add_to_hass(hass)
+    with selected_platforms([]):
+        assert await hass.config_entries.async_setup(config_entry.entry_id)
+        await hass.async_block_till_done()
+
+    hass.config_entries.async_update_entry(config_entry, options={})
 
     result = await hass.config_entries.options.async_init(config_entry.entry_id)
 
     assert result["type"] is FlowResultType.FORM
-    assert result["step_id"] == "public_weather_areas"
+    assert result["step_id"] == "public_weather_areas_and_homes"
 
     result = await hass.config_entries.options.async_configure(
         result["flow_id"], user_input={CONF_NEW_AREA: "Home"}
@@ -218,7 +219,7 @@ async def test_option_flow_wrong_coordinates(hass: HomeAssistant) -> None:
     )
 
     assert result["type"] is FlowResultType.FORM
-    assert result["step_id"] == "public_weather_areas"
+    assert result["step_id"] == "public_weather_areas_and_homes"
 
     result = await hass.config_entries.options.async_configure(
         result["flow_id"], user_input={}

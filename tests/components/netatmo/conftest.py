@@ -7,6 +7,8 @@ from unittest.mock import AsyncMock, patch
 
 from pyatmo.const import ALL_SCOPES
 import pytest
+from pytest_homeassistant_custom_component.syrupy import HomeAssistantSnapshotExtension
+from syrupy.assertion import SnapshotAssertion
 
 from homeassistant.components.application_credentials import (
     DOMAIN as APPLICATION_CREDENTIALS_DOMAIN,
@@ -22,6 +24,12 @@ from .common import fake_get_image, fake_post_request
 
 CLIENT_ID = "1234"
 CLIENT_SECRET = "5678"
+
+
+@pytest.fixture
+def snapshot(snapshot: SnapshotAssertion) -> SnapshotAssertion:
+    """Return snapshot with HA extension (writes to snapshots/ not __snapshots__/)."""
+    return snapshot.use_extension(HomeAssistantSnapshotExtension)
 
 
 @pytest.fixture(autouse=True)

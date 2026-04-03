@@ -776,22 +776,21 @@ async def test_service_preset_mode_with_end_time_thermostats(
         hass.states.get(climate_entity_livingroom).attributes["preset_mode"] == "away"
     )
 
-    # Test setting an invalid preset mode (not in THERM_MODES) and a valid end datetime
-    with pytest.raises(MultipleInvalid):
-        await hass.services.async_call(
-            "netatmo",
-            SERVICE_SET_PRESET_MODE_WITH_END_DATETIME,
-            {
-                ATTR_ENTITY_ID: climate_entity_livingroom,
-                ATTR_PRESET_MODE: PRESET_BOOST,
-                ATTR_END_DATETIME: (dt_util.now() + timedelta(days=10)).strftime(
-                    "%Y-%m-%d %H:%M:%S"
-                ),
-            },
-            blocking=True,
-        )
+    # Custom component allows all presets (not just THERM_MODES)
+    await hass.services.async_call(
+        "netatmo",
+        SERVICE_SET_PRESET_MODE_WITH_END_DATETIME,
+        {
+            ATTR_ENTITY_ID: climate_entity_livingroom,
+            ATTR_PRESET_MODE: PRESET_BOOST,
+            ATTR_END_DATETIME: (dt_util.now() + timedelta(days=10)).strftime(
+                "%Y-%m-%d %H:%M:%S"
+            ),
+        },
+        blocking=True,
+    )
 
-    # Test setting a valid preset mode (that allow an end datetime in Netatmo == THERM_MODES) without an end datetime
+    # end_datetime is required
     with pytest.raises(MultipleInvalid):
         await hass.services.async_call(
             "netatmo",

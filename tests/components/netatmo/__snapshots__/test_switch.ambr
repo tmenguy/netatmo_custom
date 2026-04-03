@@ -1,7 +1,0 @@
-# serializer version: 1
-# name: test_entity[switch.prise-entry]
-  RegistryEntry(entity_id='switch.prise', unique_id='12:34:56:80:00:12:ac:f2-DeviceType.NLP', platform='netatmo', previous_unique_id=None, aliases=[<ComputedNameType._singleton: 0>], area_id=None, categories={}, capabilities=None, config_entry_id='01KNA2666Y8DJJYYK27B2BVZ5P', config_subentry_id=None, created_at=datetime.datetime(2026, 4, 3, 16, 17, 59, 524784, tzinfo=datetime.timezone.utc), device_class=None, device_id='15bdc4dd0c5b34f1d045f250b7186916', disabled_by=None, entity_category=None, has_entity_name=True, hidden_by=None, icon=None, id='8222d7b7bc3cd5255d7ec5b3e892942d', labels=set(), modified_at=datetime.datetime(2026, 4, 3, 16, 17, 59, 524806, tzinfo=datetime.timezone.utc), name=None, object_id_base=None, options={}, original_device_class=None, original_icon=None, original_name=None, suggested_object_id=None, supported_features=0, translation_key=None, unit_of_measurement=None, compat_aliases=[], original_name_unprefixed=None, _cache={})
-# ---
-# name: test_entity[switch.prise-state]
-  <state switch.prise=on; attribution=Data provided by Netatmo, friendly_name=Prise @ 2026-04-03T09:17:59.524886-07:00>
-# ---

@@ -57,6 +57,8 @@ if "custom_components.netatmo" not in sys.modules:
     sys.modules["custom_components.netatmo"] = _cc_netatmo_stub
 
 # Load pyatmo via importlib (avoids sys.path pollution from select.py etc.)
+# exec_module naturally loads all submodules (modules/__init__.py imports
+# .netatmo, .legrand, etc.), so we get a complete, consistent module tree.
 _pyatmo_spec = importlib.util.spec_from_file_location(
     "pyatmo",
     str(_PYATMO_DIR / "__init__.py"),
@@ -71,61 +73,14 @@ sys.modules["custom_components.netatmo"].pyatmo = _pyatmo_mod
 
 _pyatmo_spec.loader.exec_module(_pyatmo_mod)
 
-# Register pyatmo subpackages under both names
-for _sub in _PYATMO_DIR.iterdir():
-    if _sub.is_dir() and (_sub / "__init__.py").exists():
-        _top_name = f"pyatmo.{_sub.name}"
-        _cc_name = f"custom_components.netatmo.pyatmo.{_sub.name}"
-        _sub_spec = importlib.util.spec_from_file_location(
-            _top_name,
-            str(_sub / "__init__.py"),
-            submodule_search_locations=[str(_sub)],
-        )
-        _sub_mod = importlib.util.module_from_spec(_sub_spec)
-        # Single identity: both names point to same object
-        sys.modules[_top_name] = _sub_mod
-        sys.modules[_cc_name] = _sub_mod
-        setattr(_pyatmo_mod, _sub.name, _sub_mod)
-        _sub_spec.loader.exec_module(_sub_mod)
-
-# Also register individual .py files as submodules (pyatmo.home, pyatmo.const, etc.)
-for _file in _PYATMO_DIR.glob("*.py"):
-    if _file.name == "__init__.py":
-        continue
-    _mod_base = _file.stem
-    _top_name = f"pyatmo.{_mod_base}"
-    _cc_name = f"custom_components.netatmo.pyatmo.{_mod_base}"
-    if _top_name not in sys.modules:
-        _file_spec = importlib.util.spec_from_file_location(
-            _top_name, str(_file)
-        )
-        _file_mod = importlib.util.module_from_spec(_file_spec)
-        sys.modules[_top_name] = _file_mod
-        sys.modules[_cc_name] = _file_mod
-        setattr(_pyatmo_mod, _mod_base, _file_mod)
-        _file_spec.loader.exec_module(_file_mod)
-
-# Register nested submodules (pyatmo.modules.netatmo, pyatmo.modules.base_class, etc.)
-for _sub in _PYATMO_DIR.iterdir():
-    if _sub.is_dir() and (_sub / "__init__.py").exists():
-        for _nested in _sub.glob("*.py"):
-            if _nested.name == "__init__.py":
-                continue
-            _mod_base = _nested.stem
-            _top_name = f"pyatmo.{_sub.name}.{_mod_base}"
-            _cc_name = f"custom_components.netatmo.pyatmo.{_sub.name}.{_mod_base}"
-            if _top_name not in sys.modules:
-                _nested_spec = importlib.util.spec_from_file_location(
-                    _top_name, str(_nested)
-                )
-                _nested_mod = importlib.util.module_from_spec(_nested_spec)
-                sys.modules[_top_name] = _nested_mod
-                sys.modules[_cc_name] = _nested_mod
-                # parent subpackage
-                _parent = sys.modules.get(f"pyatmo.{_sub.name}")
-                if _parent:
-                    setattr(_parent, _mod_base, _nested_mod)
-                _nested_spec.loader.exec_module(_nested_mod)
+# After exec_module, all pyatmo submodules are naturally loaded in sys.modules.
+# Alias each one under custom_components.netatmo.pyatmo.* so both paths
+# resolve to the SAME module object (critical for unittest.mock.patch).
+_CC_PYATMO_PREFIX = "custom_components.netatmo.pyatmo."
+for _key in list(sys.modules):
+    if _key.startswith("pyatmo."):
+        _cc_key = _CC_PYATMO_PREFIX + _key[len("pyatmo."):]
+        sys.modules[_cc_key] = sys.modules[_key]
 
 
 # ---------------------------------------------------------------------------
@@ -146,50 +101,7 @@ _netatmo_stub.DATA_EVENTS = "netatmo_events"
 sys.modules["homeassistant.components.netatmo"] = _netatmo_stub
 
 # ---------------------------------------------------------------------------
-# Phase 3 (module level): Pre-register homeassistant.components.cloud stub.
-# ---------------------------------------------------------------------------
-
-if "homeassistant.components.cloud" not in sys.modules:
-    import enum
-
-    import homeassistant.components
-
-    _cloud_dir = str(Path(homeassistant.components.__path__[0]) / "cloud")
-
-    _cloud_stub = types.ModuleType("homeassistant.components.cloud")
-    _cloud_stub.__path__ = [_cloud_dir]
-    _cloud_stub.__file__ = str(Path(_cloud_dir) / "__init__.py")
-    _cloud_stub.__package__ = "homeassistant.components.cloud"
-    _cloud_stub.DOMAIN = "cloud"
-
-    # Functions used by the netatmo integration at runtime
-    _cloud_stub.async_active_subscription = lambda hass: False
-    _cloud_stub.async_is_connected = lambda hass: False
-    _cloud_stub.async_listen_connection_change = lambda hass, cb: lambda: None
-    _cloud_stub.async_create_cloudhook = None
-    _cloud_stub.async_delete_cloudhook = None
-
-    class _CloudConnectionState(enum.Enum):
-        CLOUD_CONNECTED = "cloud_connected"
-        CLOUD_DISCONNECTED = "cloud_disconnected"
-
-    _cloud_stub.CloudConnectionState = _CloudConnectionState
-
-    class _CloudNotAvailable(Exception):
-        pass
-
-    _cloud_stub.CloudNotAvailable = _CloudNotAvailable
-
-    # Provide async_setup so async_setup_component("cloud", ...) can succeed
-    async def _cloud_async_setup(hass, config):
-        return True
-
-    _cloud_stub.async_setup = _cloud_async_setup
-
-    sys.modules["homeassistant.components.cloud"] = _cloud_stub
-
-# ---------------------------------------------------------------------------
-# Phase 4 (fixtures): Finalize aliasing after HA environment is ready
+# Phase 3 (fixtures): Finalize aliasing after HA environment is ready
 # ---------------------------------------------------------------------------
 
 from collections.abc import Generator  # noqa: E402
@@ -197,11 +109,45 @@ from unittest.mock import patch as mock_patch  # noqa: E402
 
 import pytest  # noqa: E402
 
+import homeassistant.util.dt as _ha_dt_util  # noqa: E402
+
 
 @pytest.fixture(autouse=True)
 def auto_enable_custom_integrations(enable_custom_integrations):
     """Enable custom integrations for all tests."""
     return
+
+
+@pytest.fixture(autouse=True)
+def _patch_data_handler_time():
+    """Patch time() and asyncio.sleep() in data_handler for frozen time.
+
+    The data handler uses ``from time import time`` for rate limiting and
+    ``await asyncio.sleep(delta_sleep)`` to space out API calls. In tests
+    with frozen time, wall-clock ``time()`` never advances (causing rate
+    limit deadlocks) and real ``asyncio.sleep()`` blocks for seconds per
+    candidate (causing timeouts).
+
+    Patching ``time`` to use HA's frozen clock and ``asyncio.sleep`` to
+    a no-op keeps the rate limiter consistent while avoiding real waits.
+    """
+    _orig_sleep = importlib.import_module("asyncio").sleep
+
+    async def _fast_sleep(delay):
+        """Skip intentional inter-call delays, preserve zero-length yields."""
+        await _orig_sleep(0)
+
+    with (
+        mock_patch(
+            "custom_components.netatmo.data_handler.time",
+            side_effect=lambda: _ha_dt_util.utcnow().timestamp(),
+        ),
+        mock_patch(
+            "custom_components.netatmo.data_handler.asyncio.sleep",
+            side_effect=_fast_sleep,
+        ),
+    ):
+        yield
 
 
 @pytest.fixture

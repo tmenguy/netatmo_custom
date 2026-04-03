@@ -4,7 +4,7 @@
     'area_id': None,
     'config_entries': <ANY>,
     'config_entries_subentries': <ANY>,
-    'configuration_url': 'https://home.netatmo.com/control',
+    'configuration_url': 'https://my.netatmo.com/app/energy',
     'connections': set({
     }),
     'disabled_by': None,
@@ -35,7 +35,7 @@
     'area_id': None,
     'config_entries': <ANY>,
     'config_entries_subentries': <ANY>,
-    'configuration_url': 'https://home.netatmo.com/control',
+    'configuration_url': 'https://my.netatmo.com/app/energy',
     'connections': set({
     }),
     'disabled_by': None,
@@ -66,7 +66,7 @@
     'area_id': None,
     'config_entries': <ANY>,
     'config_entries_subentries': <ANY>,
-    'configuration_url': 'https://home.netatmo.com/control',
+    'configuration_url': 'https://my.netatmo.com/app/energy',
     'connections': set({
     }),
     'disabled_by': None,
@@ -159,7 +159,7 @@
     'area_id': None,
     'config_entries': <ANY>,
     'config_entries_subentries': <ANY>,
-    'configuration_url': 'https://home.netatmo.com/control',
+    'configuration_url': 'https://my.netatmo.com/app/energy',
     'connections': set({
     }),
     'disabled_by': None,
@@ -178,6 +178,37 @@
     'model': 'Light switch/dimmer with neutral',
     'model_id': None,
     'name': 'Bathroom light',
+    'name_by_user': None,
+    'primary_config_entry': <ANY>,
+    'serial_number': None,
+    'sw_version': None,
+    'via_device_id': None,
+  })
+# ---
+# name: test_devices[netatmo-12:34:56:00:01:01:01:b1]
+  DeviceRegistryEntrySnapshot({
+    'area_id': None,
+    'config_entries': <ANY>,
+    'config_entries_subentries': <ANY>,
+    'configuration_url': 'https://my.netatmo.com/app/energy',
+    'connections': set({
+    }),
+    'disabled_by': None,
+    'entry_type': None,
+    'hw_version': None,
+    'id': <ANY>,
+    'identifiers': set({
+      tuple(
+        'netatmo',
+        '12:34:56:00:01:01:01:b1',
+      ),
+    }),
+    'labels': set({
+    }),
+    'manufacturer': 'Legrand',
+    'model': 'Centralized ventilation device',
+    'model_id': None,
+    'name': 'Centralized ventilation controler',
     'name_by_user': None,
     'primary_config_entry': <ANY>,
     'serial_number': None,
@@ -457,37 +488,6 @@
     'model': 'Connected Ecometer',
     'model_id': None,
     'name': 'Cold water',
-    'name_by_user': None,
-    'primary_config_entry': <ANY>,
-    'serial_number': None,
-    'sw_version': None,
-    'via_device_id': None,
-  })
-# ---
-# name: test_devices[netatmo-12:34:56:00:16:0e]
-  DeviceRegistryEntrySnapshot({
-    'area_id': None,
-    'config_entries': <ANY>,
-    'config_entries_subentries': <ANY>,
-    'configuration_url': 'https://my.netatmo.com/app/energy',
-    'connections': set({
-    }),
-    'disabled_by': None,
-    'entry_type': None,
-    'hw_version': None,
-    'id': <ANY>,
-    'identifiers': set({
-      tuple(
-        'netatmo',
-        '12:34:56:00:16:0e',
-      ),
-    }),
-    'labels': set({
-    }),
-    'manufacturer': 'Legrand',
-    'model': 'Connected Ecometer',
-    'model_id': None,
-    'name': 'Écocompteur',
     'name_by_user': None,
     'primary_config_entry': <ANY>,
     'serial_number': None,
