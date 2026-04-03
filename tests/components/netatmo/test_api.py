@@ -2,14 +2,14 @@
 
 from pyatmo.const import ALL_SCOPES
 
-from homeassistant.components import cloud
+from homeassistant.components.cloud.const import DOMAIN as CLOUD_DOMAIN
 from homeassistant.components.netatmo import api
 from homeassistant.components.netatmo.const import API_SCOPES_EXCLUDED_FROM_CLOUD
 
 
 async def test_get_api_scopes_cloud() -> None:
     """Test method to get API scopes when using cloud auth implementation."""
-    result = api.get_api_scopes(cloud.DOMAIN)
+    result = api.get_api_scopes(CLOUD_DOMAIN)
 
     for scope in API_SCOPES_EXCLUDED_FROM_CLOUD:
         assert scope not in result

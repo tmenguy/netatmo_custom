@@ -29,6 +29,16 @@ _PROJECT_ROOT = Path(__file__).resolve().parent.parent
 _CC_NETATMO = _PROJECT_ROOT / "custom_components" / "netatmo"
 _PYATMO_DIR = _CC_NETATMO / "pyatmo"
 
+# ---------------------------------------------------------------------------
+# Phase 0: Stub out optional native deps that are hard to install but get
+# pulled in transitively by HA components (cloud → assist_pipeline →
+# pyspeex_noise).  Our tests never exercise audio processing.
+# ---------------------------------------------------------------------------
+if "pyspeex_noise" not in sys.modules:
+    _speex_stub = types.ModuleType("pyspeex_noise")
+    _speex_stub.AudioProcessor = type("AudioProcessor", (), {})
+    sys.modules["pyspeex_noise"] = _speex_stub
+
 # Ensure custom_components is importable
 if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
