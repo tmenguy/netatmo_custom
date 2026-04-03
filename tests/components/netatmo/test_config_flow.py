@@ -114,9 +114,7 @@ async def test_full_flow(
     assert len(mock_setup.mock_calls) == 1
 
 
-async def test_option_flow(
-    hass: HomeAssistant, config_entry, netatmo_auth
-) -> None:
+async def test_option_flow(hass: HomeAssistant, config_entry, netatmo_auth) -> None:
     """Test config flow options."""
     valid_option = {
         "lat_ne": 32.91336,

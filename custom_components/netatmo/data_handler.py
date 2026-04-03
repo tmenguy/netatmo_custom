@@ -908,7 +908,11 @@ class NetatmoDataHandler:
                 NETATMO_CREATE_ENERGY,
             ],
             NetatmoDeviceCategory.meter: [NETATMO_CREATE_SENSOR, NETATMO_CREATE_ENERGY],
-            NetatmoDeviceCategory.fan: [NETATMO_CREATE_FAN, NETATMO_CREATE_SENSOR, NETATMO_CREATE_ENERGY],
+            NetatmoDeviceCategory.fan: [
+                NETATMO_CREATE_FAN,
+                NETATMO_CREATE_SENSOR,
+                NETATMO_CREATE_ENERGY,
+            ],
             NetatmoDeviceCategory.opening: [
                 NETATMO_CREATE_CONNECTIVITY_BINARY_SENSOR,
                 NETATMO_CREATE_OPENING_BINARY_SENSOR,

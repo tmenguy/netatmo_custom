@@ -1,0 +1,329 @@
+{
+  "body": {
+    "homes": [
+      {
+        "id": "aabbccddee000001",
+        "name": "Test Home Pilot Wire",
+        "altitude": 100,
+        "coordinates": [2.3522, 48.8566],
+        "country": "FR",
+        "timezone": "Europe/Paris",
+        "rooms": [
+          {
+            "id": "1000000001",
+            "name": "Parents Bathroom",
+            "type": "bathroom",
+            "module_ids": ["12:34:56:80:01:01"]
+          },
+          {
+            "id": "1000000002",
+            "name": "Kids Bathroom",
+            "type": "bathroom",
+            "module_ids": ["12:34:56:80:01:02"]
+          },
+          {
+            "id": "1000000003",
+            "name": "Arthur Bathroom",
+            "type": "bathroom",
+            "module_ids": ["12:34:56:80:01:03"]
+          },
+          {
+            "id": "1000000004",
+            "name": "Electrical Cabinet",
+            "type": "electrical_cabinet",
+            "module_ids": [
+              "12:34:56:80:00:01",
+              "12:34:56:80:02:01",
+              "12:34:56:80:02:02",
+              "12:34:56:80:01:01",
+              "12:34:56:80:01:02",
+              "12:34:56:80:01:03",
+              "12:34:56:80:03:01"
+            ]
+          }
+        ],
+        "modules": [
+          {
+            "id": "12:34:56:80:00:01",
+            "type": "NLG",
+            "name": "Legrand Gateway",
+            "setup_date": 1559292039,
+            "room_id": "1000000004",
+            "bridge": "12:34:56:80:00:01"
+          },
+          {
+            "id": "12:34:56:80:01:01",
+            "type": "NLC",
+            "name": "Radiator Parents",
+            "setup_date": 1559292039,
+            "room_id": "1000000001",
+            "bridge": "12:34:56:80:00:01",
+            "appliance_type": "radiator"
+          },
+          {
+            "id": "12:34:56:80:01:02",
+            "type": "NLC",
+            "name": "Radiator Kids",
+            "setup_date": 1559292039,
+            "room_id": "1000000002",
+            "bridge": "12:34:56:80:00:01",
+            "appliance_type": "radiator"
+          },
+          {
+            "id": "12:34:56:80:01:03",
+            "type": "NLC",
+            "name": "Radiator Arthur",
+            "setup_date": 1559292039,
+            "room_id": "1000000003",
+            "bridge": "12:34:56:80:00:01",
+            "appliance_type": "radiator"
+          },
+          {
+            "id": "12:34:56:80:02:01",
+            "type": "NLPC",
+            "name": "Energy Meter Kitchen",
+            "setup_date": 1559292039,
+            "room_id": "1000000004",
+            "bridge": "12:34:56:80:00:01"
+          },
+          {
+            "id": "12:34:56:80:02:02",
+            "type": "NLPC",
+            "name": "Energy Meter Laundry",
+            "setup_date": 1559292039,
+            "room_id": "1000000004",
+            "bridge": "12:34:56:80:00:01"
+          },
+          {
+            "id": "12:34:56:80:03:01",
+            "type": "NLPO",
+            "name": "Water Heater Contactor",
+            "setup_date": 1559292039,
+            "room_id": "1000000004",
+            "bridge": "12:34:56:80:00:01",
+            "appliance_type": "water_heater"
+          }
+        ],
+        "schedules": [
+          {
+            "timetable": [
+              {"zone_id": 2, "m_offset": 0}
+            ],
+            "zones": [
+              {
+                "name": "Comfort",
+                "id": 0,
+                "type": 0,
+                "rooms_temp": [
+                  {"room_id": "1000000001", "therm_setpoint_fp": "comfort"},
+                  {"room_id": "1000000002", "therm_setpoint_fp": "comfort"},
+                  {"room_id": "1000000003", "therm_setpoint_fp": "comfort"}
+                ],
+                "rooms": [
+                  {"id": "1000000001", "therm_setpoint_fp": "comfort"},
+                  {"id": "1000000002", "therm_setpoint_fp": "comfort"},
+                  {"id": "1000000003", "therm_setpoint_fp": "comfort"}
+                ]
+              },
+              {
+                "name": "Night",
+                "id": 1,
+                "type": 0,
+                "rooms_temp": [
+                  {"room_id": "1000000001", "therm_setpoint_fp": "away"},
+                  {"room_id": "1000000002", "therm_setpoint_fp": "away"},
+                  {"room_id": "1000000003", "therm_setpoint_fp": "away"}
+                ],
+                "rooms": [
+                  {"id": "1000000001", "therm_setpoint_fp": "away"},
+                  {"id": "1000000002", "therm_setpoint_fp": "away"},
+                  {"id": "1000000003", "therm_setpoint_fp": "away"}
+                ]
+              },
+              {
+                "name": "Frost Guard",
+                "id": 2,
+                "type": 1,
+                "rooms_temp": [
+                  {"room_id": "1000000001", "therm_setpoint_fp": "frost_guard"},
+                  {"room_id": "1000000002", "therm_setpoint_fp": "frost_guard"},
+                  {"room_id": "1000000003", "therm_setpoint_fp": "frost_guard"}
+                ],
+                "rooms": [
+                  {"id": "1000000001", "therm_setpoint_fp": "frost_guard"},
+                  {"id": "1000000002", "therm_setpoint_fp": "frost_guard"},
+                  {"id": "1000000003", "therm_setpoint_fp": "frost_guard"}
+                ]
+              }
+            ],
+            "name": "Mon planning",
+            "default": true,
+            "away_temp": 12,
+            "hg_temp": 7,
+            "id": "aabb000000000000000001",
+            "type": "therm",
+            "selected": true
+          },
+          {
+            "timetable": [
+              {"zone_id": 1, "m_offset": 0},
+              {"zone_id": 0, "m_offset": 420},
+              {"zone_id": 1, "m_offset": 1320}
+            ],
+            "zones": [
+              {"id": 0, "price": 0.2065, "price_type": "peak", "name": "__LEG_PEAKTIME_ABBREVIATED"},
+              {"id": 1, "price": 0.1579, "price_type": "off_peak", "name": "__LEG_OFFPEAKTIME_ABBREVIATED"}
+            ],
+            "name": "electricity",
+            "default": false,
+            "power_threshold": 36,
+            "contract_power_unit": "kW",
+            "version": 2,
+            "id": "aabb000000000000000002",
+            "type": "electricity",
+            "selected": true
+          }
+        ]
+      },
+      {
+        "id": "aabbccddee000002",
+        "name": "Second Home",
+        "altitude": 50,
+        "coordinates": [3.8767, 43.6108],
+        "country": "FR",
+        "timezone": "Europe/Paris",
+        "rooms": [
+          {
+            "id": "2000000001",
+            "name": "Living Room",
+            "type": "livingroom",
+            "module_ids": ["12:34:56:90:00:01", "12:34:56:90:01:01"]
+          }
+        ],
+        "modules": [
+          {
+            "id": "12:34:56:90:00:01",
+            "type": "NLG",
+            "name": "Legrand Gateway 2",
+            "setup_date": 1559292039,
+            "room_id": "2000000001",
+            "bridge": "12:34:56:90:00:01"
+          },
+          {
+            "id": "12:34:56:90:01:01",
+            "type": "NLC",
+            "name": "Radiator Living Room",
+            "setup_date": 1559292039,
+            "room_id": "2000000001",
+            "bridge": "12:34:56:90:00:01",
+            "appliance_type": "radiator"
+          }
+        ],
+        "schedules": [
+          {
+            "timetable": [
+              {"zone_id": 0, "m_offset": 0}
+            ],
+            "zones": [
+              {
+                "name": "Comfort",
+                "id": 0,
+                "type": 0,
+                "rooms_temp": [
+                  {"room_id": "2000000001", "therm_setpoint_fp": "comfort"}
+                ],
+                "rooms": [
+                  {"id": "2000000001", "therm_setpoint_fp": "comfort"}
+                ]
+              },
+              {
+                "name": "Frost Guard",
+                "id": 1,
+                "type": 1,
+                "rooms_temp": [
+                  {"room_id": "2000000001", "therm_setpoint_fp": "frost_guard"}
+                ],
+                "rooms": [
+                  {"id": "2000000001", "therm_setpoint_fp": "frost_guard"}
+                ]
+              }
+            ],
+            "name": "Default Schedule",
+            "default": true,
+            "away_temp": 12,
+            "hg_temp": 7,
+            "id": "aabb000000000000000003",
+            "type": "therm",
+            "selected": true
+          }
+        ]
+      },
+      {
+        "id": "aabbccddee000003",
+        "name": "Holiday Home",
+        "altitude": 200,
+        "coordinates": [6.8652, 45.8326],
+        "country": "FR",
+        "timezone": "Europe/Paris",
+        "rooms": [
+          {
+            "id": "3000000001",
+            "name": "Main Room",
+            "type": "livingroom",
+            "module_ids": ["12:34:56:a0:00:01"]
+          }
+        ],
+        "modules": [
+          {
+            "id": "12:34:56:a0:00:01",
+            "type": "NLG",
+            "name": "Legrand Gateway Holiday",
+            "setup_date": 1559292039,
+            "room_id": "3000000001",
+            "bridge": "12:34:56:a0:00:01"
+          }
+        ],
+        "schedules": [
+          {
+            "timetable": [
+              {"zone_id": 0, "m_offset": 0}
+            ],
+            "zones": [
+              {
+                "name": "Frost Guard",
+                "id": 0,
+                "type": 1,
+                "rooms_temp": [
+                  {"room_id": "3000000001", "therm_setpoint_fp": "frost_guard"}
+                ],
+                "rooms": [
+                  {"id": "3000000001", "therm_setpoint_fp": "frost_guard"}
+                ]
+              }
+            ],
+            "name": "Minimal Schedule",
+            "default": true,
+            "away_temp": 12,
+            "hg_temp": 7,
+            "id": "aabb000000000000000004",
+            "type": "therm",
+            "selected": true
+          }
+        ]
+      }
+    ],
+    "user": {
+      "email": "john@doe.com",
+      "language": "fr-FR",
+      "locale": "fr-FR",
+      "feel_like_algorithm": 0,
+      "unit_pressure": 0,
+      "unit_system": 0,
+      "unit_wind": 0,
+      "id": "aabbccddeeff001122334455"
+    }
+  },
+  "status": "ok",
+  "time_exec": 0.5,
+  "time_server": 1559292039
+}

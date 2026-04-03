@@ -1,0 +1,15 @@
+{
+  "status": "ok",
+  "time_server": 1559292039,
+  "body": {
+    "home": {
+      "id": "aabbccddee000003"
+    },
+    "errors": [
+      {
+        "code": 6,
+        "id": "12:34:56:a0:00:01"
+      }
+    ]
+  }
+}

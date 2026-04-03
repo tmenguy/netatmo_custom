@@ -1,0 +1,41 @@
+{
+  "status": "ok",
+  "time_server": 1559292039,
+  "body": {
+    "home": {
+      "id": "aabbccddee000002",
+      "rooms": [
+        {
+          "id": "2000000001",
+          "reachable": true,
+          "therm_setpoint_end_time": 2147483647,
+          "therm_setpoint_fp": "comfort",
+          "therm_setpoint_mode": "home"
+        }
+      ],
+      "modules": [
+        {
+          "id": "12:34:56:90:00:01",
+          "type": "NLG",
+          "offload": false,
+          "firmware_revision": 1303,
+          "last_seen": 1559292039,
+          "wifi_strength": 55,
+          "reachable": true,
+          "use_pincode": false
+        },
+        {
+          "id": "12:34:56:90:01:01",
+          "type": "NLC",
+          "on": true,
+          "offload": false,
+          "firmware_revision": 39,
+          "last_seen": 1559292039,
+          "power": 800,
+          "reachable": true,
+          "bridge": "12:34:56:90:00:01"
+        }
+      ]
+    }
+  }
+}

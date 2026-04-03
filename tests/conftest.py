@@ -89,7 +89,7 @@ _pyatmo_spec.loader.exec_module(_pyatmo_mod)
 _CC_PYATMO_PREFIX = "custom_components.netatmo.pyatmo."
 for _key in list(sys.modules):
     if _key.startswith("pyatmo."):
-        _cc_key = _CC_PYATMO_PREFIX + _key[len("pyatmo."):]
+        _cc_key = _CC_PYATMO_PREFIX + _key[len("pyatmo.") :]
         sys.modules[_cc_key] = sys.modules[_key]
 
 

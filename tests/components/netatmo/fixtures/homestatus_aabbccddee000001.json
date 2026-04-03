@@ -1,0 +1,106 @@
+{
+  "status": "ok",
+  "time_server": 1559292039,
+  "body": {
+    "home": {
+      "id": "aabbccddee000001",
+      "rooms": [
+        {
+          "id": "1000000001",
+          "reachable": true,
+          "therm_setpoint_end_time": 2147483647,
+          "therm_setpoint_fp": "frost_guard",
+          "therm_setpoint_mode": "home"
+        },
+        {
+          "id": "1000000002",
+          "reachable": true,
+          "therm_setpoint_end_time": 2147483647,
+          "therm_setpoint_fp": "comfort",
+          "therm_setpoint_mode": "manual"
+        },
+        {
+          "id": "1000000003",
+          "reachable": true,
+          "therm_setpoint_end_time": 2147483647,
+          "therm_setpoint_fp": "away",
+          "therm_setpoint_mode": "manual"
+        }
+      ],
+      "modules": [
+        {
+          "id": "12:34:56:80:00:01",
+          "type": "NLG",
+          "offload": false,
+          "firmware_revision": 1303,
+          "last_seen": 1559292039,
+          "wifi_strength": 62,
+          "reachable": true,
+          "use_pincode": false
+        },
+        {
+          "id": "12:34:56:80:01:01",
+          "type": "NLC",
+          "on": true,
+          "offload": false,
+          "firmware_revision": 39,
+          "last_seen": 1559292039,
+          "power": 0,
+          "reachable": true,
+          "bridge": "12:34:56:80:00:01"
+        },
+        {
+          "id": "12:34:56:80:01:02",
+          "type": "NLC",
+          "on": true,
+          "offload": false,
+          "firmware_revision": 39,
+          "last_seen": 1559292039,
+          "power": 1500,
+          "reachable": true,
+          "bridge": "12:34:56:80:00:01"
+        },
+        {
+          "id": "12:34:56:80:01:03",
+          "type": "NLC",
+          "on": true,
+          "offload": false,
+          "firmware_revision": 39,
+          "last_seen": 1559292039,
+          "power": 0,
+          "reachable": true,
+          "bridge": "12:34:56:80:00:01"
+        },
+        {
+          "id": "12:34:56:80:02:01",
+          "type": "NLPC",
+          "firmware_revision": 104,
+          "last_seen": 1559292039,
+          "power": 43,
+          "reachable": true,
+          "bridge": "12:34:56:80:00:01"
+        },
+        {
+          "id": "12:34:56:80:02:02",
+          "type": "NLPC",
+          "firmware_revision": 104,
+          "last_seen": 1559292039,
+          "power": 0,
+          "reachable": true,
+          "bridge": "12:34:56:80:00:01"
+        },
+        {
+          "id": "12:34:56:80:03:01",
+          "type": "NLPO",
+          "on": true,
+          "offload": false,
+          "firmware_revision": 104,
+          "last_seen": 1559292039,
+          "power": 3,
+          "reachable": true,
+          "bridge": "12:34:56:80:00:01"
+        }
+      ]
+    }
+  }
+}
