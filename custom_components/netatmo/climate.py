@@ -210,7 +210,7 @@ async def async_setup_entry(
         SERVICE_SET_PRESET_MODE_WITH_END_DATETIME,
         {
             vol.Required(ATTR_PRESET_MODE): vol.In(SERVICE_ALLOWED_PRESETS),
-            vol.Optional(ATTR_END_DATETIME): cv.datetime,
+            vol.Required(ATTR_END_DATETIME): cv.datetime,
         },
         "_async_service_set_preset_mode_with_end_datetime",
     )
@@ -685,7 +685,7 @@ class NetatmoThermostat(NetatmoRoomEntity, ClimateEntity):
             "Setting %s preset to %s with end datetime %s",
             self.home.entity_id,
             preset_mode,
-            int(dt_util.as_timestamp(end_datetime)),
+            int(dt_util.as_timestamp(end_datetime)) if end_datetime else None,
         )
 
     async def _async_service_set_temperature_with_end_datetime(
