@@ -79,6 +79,7 @@ def lint(extra_args: list[str]) -> int:
         cmd.append("--fix")
     cmd += [
         "--output-format=concise",
+        "--extend-exclude", str(COMPONENT_DIR / "pyatmo"),
         *targets,
     ]
 
@@ -98,7 +99,9 @@ def lint_format_check() -> int:
     section_header("FORMAT: ruff format --check")
 
     cmd = [
-        sys.executable, "-m", "ruff", "format", "--check",
+        sys.executable, "-m", "ruff", "format",
+        "--exclude", str(COMPONENT_DIR / "pyatmo"),
+        "--check",
         str(COMPONENT_DIR), str(TESTS_DIR),
     ]
 
@@ -108,7 +111,7 @@ def lint_format_check() -> int:
         print(f"\n{GREEN}{BOLD}  FORMAT OK{RESET}")
     else:
         print(f"\n{RED}{BOLD}  FORMAT ISSUES{RESET}")
-        print(f"\n{YELLOW}To auto-fix:{RESET} ruff format custom_components/netatmo tests")
+        print(f"\n{YELLOW}To auto-fix:{RESET} ruff format --exclude custom_components/netatmo/pyatmo custom_components/netatmo tests")
 
     return result.returncode
 
@@ -162,7 +165,7 @@ def summary(results: dict[str, int]) -> int:
         print("- Run `python scripts/quality_gate.py lint --fix` to auto-fix lint issues")
         print("- Remaining lint issues need manual fixes (see ruff output above)")
     if results.get("format", 0) != 0:
-        print("- Run `ruff format custom_components/netatmo tests` to fix formatting")
+        print("- Run `ruff format --exclude custom_components/netatmo/pyatmo custom_components/netatmo tests` to fix formatting")
     if results.get("test", 0) != 0:
         print("- Run `python scripts/quality_gate.py test -v` to see detailed test failures")
         print("- Snapshot mismatches: `python scripts/quality_gate.py test --snapshot-update`")
