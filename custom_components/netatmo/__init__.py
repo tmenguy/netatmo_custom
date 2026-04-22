@@ -14,9 +14,17 @@ except ImportError:
     import pyatmo
 else:
     import sys
+    import pkgutil
+    import importlib
 
-    # Register bundled pyatmo so all integration files can use plain `import pyatmo`
     sys.modules.setdefault("pyatmo", pyatmo)
+
+    # Eagerly import every submodule and alias it under the bare name
+    prefix = pyatmo.__name__ + "."  # e.g. "my_integration.pyatmo."
+    for _, fullname, _ in pkgutil.walk_packages(pyatmo.__path__, prefix):
+        module = importlib.import_module(fullname)
+        alias = "pyatmo." + fullname[len(prefix):]
+        sys.modules.setdefault(alias, module)
 
 from homeassistant.components import cloud
 from homeassistant.components.webhook import (
