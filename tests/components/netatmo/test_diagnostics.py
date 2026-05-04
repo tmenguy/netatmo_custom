@@ -8,11 +8,12 @@ from syrupy.filters import paths
 
 from homeassistant.core import HomeAssistant
 from homeassistant.setup import async_setup_component
+
+from .common import fake_post_request
+
 from tests.common import MockConfigEntry
 from tests.components.diagnostics import get_diagnostics_for_config_entry
 from tests.typing import ClientSessionGenerator
-
-from .common import fake_post_request
 
 
 async def test_entry_diagnostics(

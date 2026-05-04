@@ -23,6 +23,9 @@ from homeassistant.helpers.service_info.zeroconf import (
     ATTR_PROPERTIES_ID,
     ZeroconfServiceInfo,
 )
+
+from .conftest import CLIENT_ID
+
 from tests.common import MockConfigEntry, start_reauth_flow
 from tests.test_util.aiohttp import AiohttpClientMocker
 from tests.typing import ClientSessionGenerator

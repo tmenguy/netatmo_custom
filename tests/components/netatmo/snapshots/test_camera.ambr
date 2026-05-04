@@ -32,7 +32,7 @@
     'suggested_object_id': None,
     'supported_features': <CameraEntityFeature: 3>,
     'translation_key': None,
-    'unique_id': '12:34:56:10:b9:0e-DeviceType.NOC',
+    'unique_id': '12:34:56:10:b9:0e-NOC',
     'unit_of_measurement': None,
   })
 # ---
@@ -96,7 +96,7 @@
     'suggested_object_id': None,
     'supported_features': <CameraEntityFeature: 3>,
     'translation_key': None,
-    'unique_id': '12:34:56:00:f1:62-DeviceType.NACamera',
+    'unique_id': '12:34:56:00:f1:62-NACamera',
     'unit_of_measurement': None,
   })
 # ---
@@ -160,7 +160,7 @@
     'suggested_object_id': None,
     'supported_features': <CameraEntityFeature: 1>,
     'translation_key': None,
-    'unique_id': '12:34:56:10:f1:66-DeviceType.NDB',
+    'unique_id': '12:34:56:10:f1:66-NDB',
     'unit_of_measurement': None,
   })
 # ---
@@ -174,7 +174,7 @@
       'entity_picture': '/api/camera_proxy/camera.netatmo_doorbell?token=1caab5c3b3',
       'friendly_name': 'Netatmo-Doorbell',
       'id': '12:34:56:10:f1:66',
-      'is_local': None,
+      'is_local': False,
       'light_state': None,
       'local_url': None,
       'monitoring': True,

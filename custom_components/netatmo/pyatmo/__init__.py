@@ -17,6 +17,7 @@ from .home import Home
 from .modules import Module
 from .modules.device_types import DeviceType
 from .room import Room
+from .webrtc import WebRTCStream
 
 __all__: list[str] = [
     "AbstractAsyncAuth",
@@ -33,6 +34,7 @@ __all__: list[str] = [
     "NoDeviceError",
     "NoScheduleError",
     "Room",
+    "WebRTCStream",
     "const",
     "modules",
 ]

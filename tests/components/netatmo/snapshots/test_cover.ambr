@@ -32,7 +32,7 @@
     'suggested_object_id': None,
     'supported_features': <CoverEntityFeature: 15>,
     'translation_key': None,
-    'unique_id': '0009999993-DeviceType.NBO',
+    'unique_id': '0009999993-NBO',
     'unit_of_measurement': None,
   })
 # ---
@@ -87,7 +87,7 @@
     'suggested_object_id': None,
     'supported_features': <CoverEntityFeature: 15>,
     'translation_key': None,
-    'unique_id': '0009999992-DeviceType.NBR',
+    'unique_id': '0009999992-NBR',
     'unit_of_measurement': None,
   })
 # ---

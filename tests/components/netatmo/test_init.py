@@ -22,9 +22,6 @@ from homeassistant.helpers.config_entry_oauth2_flow import (
 )
 from homeassistant.setup import async_setup_component
 from homeassistant.util import dt as dt_util
-from tests.common import MockConfigEntry, async_fire_time_changed
-from tests.components.cloud import mock_cloud
-from tests.typing import WebSocketGenerator
 
 from .common import (
     FAKE_WEBHOOK_ACTIVATION,
@@ -32,6 +29,10 @@ from .common import (
     selected_platforms,
     simulate_webhook,
 )
+
+from tests.common import MockConfigEntry, async_fire_time_changed
+from tests.components.cloud import mock_cloud
+from tests.typing import WebSocketGenerator
 
 # Fake webhook thermostat mode change to "Max"
 FAKE_WEBHOOK = {

@@ -9,9 +9,10 @@ from homeassistant.components.button import DOMAIN as BUTTON_DOMAIN, SERVICE_PRE
 from homeassistant.const import ATTR_ENTITY_ID, STATE_UNKNOWN, Platform
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers import entity_registry as er
-from tests.common import MockConfigEntry
 
 from .common import selected_platforms, snapshot_platform_entities
+
+from tests.common import MockConfigEntry
 
 
 @pytest.mark.usefixtures("entity_registry_enabled_by_default")

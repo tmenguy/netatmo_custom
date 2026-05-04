@@ -13,7 +13,6 @@ from homeassistant.const import CONF_WEBHOOK_ID, Platform
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers import entity_registry as er
 import homeassistant.util.dt as dt_util
-from tests.common import MockConfigEntry, async_fire_time_changed
 
 from .common import (
     FAKE_WEBHOOK_ACTIVATION,
@@ -21,6 +20,8 @@ from .common import (
     simulate_webhook,
     snapshot_platform_entities,
 )
+
+from tests.common import MockConfigEntry, async_fire_time_changed
 
 
 @pytest.mark.usefixtures("entity_registry_enabled_by_default")

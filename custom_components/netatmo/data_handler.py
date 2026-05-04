@@ -1,8 +1,5 @@
 """The Netatmo data handler."""
 # pylint: disable=hass-use-runtime-data  # Uses legacy hass.data[DOMAIN] pattern
-
-from __future__ import annotations
-
 import asyncio
 from dataclasses import dataclass
 from datetime import datetime, timedelta
@@ -33,16 +30,17 @@ from .const import (
     DATA_SCHEDULES,
     DOMAIN,
     MANUFACTURER,
-    NETATMO_CREATE_BATTERY,
     NETATMO_CREATE_BUTTON,
     NETATMO_CREATE_CAMERA,
     NETATMO_CREATE_CAMERA_LIGHT,
     NETATMO_CREATE_CLIMATE,
+    NETATMO_CREATE_CLIMATE_BATTERY_SENSOR,
     NETATMO_CREATE_CONNECTIVITY_BINARY_SENSOR,
     NETATMO_CREATE_COVER,
     NETATMO_CREATE_ENERGY,
     NETATMO_CREATE_FAN,
     NETATMO_CREATE_GAS,
+    NETATMO_CREATE_LEGACY_SENSOR,
     NETATMO_CREATE_LIGHT,
     NETATMO_CREATE_OPENING_BINARY_SENSOR,
     NETATMO_CREATE_ROOM_SENSOR,
@@ -893,30 +891,31 @@ class NetatmoDataHandler:
             ],
             NetatmoDeviceCategory.dimmer: [
                 NETATMO_CREATE_LIGHT,
-                NETATMO_CREATE_SENSOR,
+                NETATMO_CREATE_LEGACY_SENSOR,
                 NETATMO_CREATE_ENERGY,
             ],
             NetatmoDeviceCategory.shutter: [
                 NETATMO_CREATE_COVER,
                 NETATMO_CREATE_BUTTON,
-                NETATMO_CREATE_SENSOR,
+                NETATMO_CREATE_LEGACY_SENSOR,
                 NETATMO_CREATE_ENERGY,
             ],
             NetatmoDeviceCategory.switch: [
                 NETATMO_CREATE_LIGHT,
                 NETATMO_CREATE_SWITCH,
-                NETATMO_CREATE_SENSOR,
+                NETATMO_CREATE_LEGACY_SENSOR,
                 NETATMO_CREATE_ENERGY,
             ],
-            NetatmoDeviceCategory.meter: [NETATMO_CREATE_SENSOR, NETATMO_CREATE_ENERGY],
+            NetatmoDeviceCategory.meter: [NETATMO_CREATE_LEGACY_SENSOR, NETATMO_CREATE_ENERGY],
             NetatmoDeviceCategory.fan: [
                 NETATMO_CREATE_FAN,
-                NETATMO_CREATE_SENSOR,
+                NETATMO_CREATE_LEGACY_SENSOR,
                 NETATMO_CREATE_ENERGY,
             ],
             NetatmoDeviceCategory.opening: [
                 NETATMO_CREATE_CONNECTIVITY_BINARY_SENSOR,
                 NETATMO_CREATE_OPENING_BINARY_SENSOR,
+                NETATMO_CREATE_SENSOR,
             ],
         }
         for module in home.modules.values():
@@ -951,9 +950,9 @@ class NetatmoDataHandler:
 
                     if num > 5:
                         if num == 6:
-                            signals = [NETATMO_CREATE_SENSOR, NETATMO_CREATE_GAS]
+                            signals = [NETATMO_CREATE_LEGACY_SENSOR, NETATMO_CREATE_GAS]
                         else:
-                            signals = [NETATMO_CREATE_SENSOR, NETATMO_CREATE_WATER]
+                            signals = [NETATMO_CREATE_LEGACY_SENSOR, NETATMO_CREATE_WATER]
 
             for signal in signals:
                 async_dispatcher_send(
@@ -1001,7 +1000,7 @@ class NetatmoDataHandler:
                     if module.device_category is NetatmoDeviceCategory.climate:
                         async_dispatcher_send(
                             self.hass,
-                            NETATMO_CREATE_BATTERY,
+                            NETATMO_CREATE_CLIMATE_BATTERY_SENSOR,
                             NetatmoDevice(
                                 self,
                                 module,

@@ -13,8 +13,6 @@ from homeassistant.components.netatmo import DOMAIN
 from homeassistant.const import ATTR_ENTITY_ID, CONF_WEBHOOK_ID, Platform
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers import entity_registry as er
-from tests.common import MockConfigEntry
-from tests.test_util.aiohttp import AiohttpClientMockResponse
 
 from .common import (
     FAKE_WEBHOOK_ACTIVATION,
@@ -22,6 +20,9 @@ from .common import (
     simulate_webhook,
     snapshot_platform_entities,
 )
+
+from tests.common import MockConfigEntry
+from tests.test_util.aiohttp import AiohttpClientMockResponse
 
 
 async def test_entity(

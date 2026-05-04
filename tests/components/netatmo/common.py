@@ -14,6 +14,7 @@ from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers import entity_registry as er
 from homeassistant.util.aiohttp import MockRequest
+
 from tests.common import MockConfigEntry, async_load_fixture
 from tests.test_util.aiohttp import AiohttpClientMockResponse
 

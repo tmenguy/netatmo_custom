@@ -17,6 +17,7 @@ from homeassistant.const import ATTR_DEVICE_ID
 from homeassistant.core import HomeAssistant, ServiceCall
 from homeassistant.helpers import device_registry as dr, entity_registry as er
 from homeassistant.setup import async_setup_component
+
 from tests.common import (
     MockConfigEntry,
     async_capture_events,

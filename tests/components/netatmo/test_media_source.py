@@ -15,6 +15,7 @@ from homeassistant.components.media_source import (
 from homeassistant.components.netatmo import DATA_CAMERAS, DATA_EVENTS, DOMAIN
 from homeassistant.core import HomeAssistant
 from homeassistant.setup import async_setup_component
+
 from tests.common import async_load_fixture
 
 

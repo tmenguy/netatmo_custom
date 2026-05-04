@@ -1,7 +1,5 @@
 """The Netatmo integration."""
 
-from __future__ import annotations
-
 import logging
 import secrets
 from typing import Any
@@ -78,6 +76,9 @@ MAX_WEBHOOK_RETRIES = 3
 
 
 def _reset_hass_domain(hass: HomeAssistant):
+    """reset hass data."""
+    # Uses legacy hass.data[DOMAIN] pattern
+    # pylint: disable-next=hass-use-runtime-data
     hass.data[DOMAIN][DATA_PERSONS] = {}
     hass.data[DOMAIN][DATA_DEVICE_IDS] = {}
     hass.data[DOMAIN][DATA_SCHEDULES] = {}
@@ -88,6 +89,8 @@ def _reset_hass_domain(hass: HomeAssistant):
 
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     """Set up the Netatmo component."""
+    # Uses legacy hass.data[DOMAIN] pattern
+    # pylint: disable-next=hass-use-runtime-data
     hass.data[DOMAIN] = {}
 
     _reset_hass_domain(hass)
