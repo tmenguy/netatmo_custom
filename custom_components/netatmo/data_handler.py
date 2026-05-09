@@ -139,13 +139,6 @@ NETATMO_DEV_CALL_LIMITS = {
 CPH_ADJUSTEMENT_DOWN = 0.8
 CPH_ADJUSTEMENT_BACK_UP = 1.1
 
-# Minimum time between successive throttle-induced down-adjustments. Kept short
-# so we react quickly to repeated 429s (the API's own 10s window is the floor).
-THROTTLE_DOWN_GATE_SEC = 60
-# Minimum time between successive recovery up-adjustments. Slow walk-back to
-# avoid oscillation around the limit after a transient throttle.
-RECOVERY_UP_GATE_SEC = 600
-
 type NetatmoConfigEntry = ConfigEntry[NetatmoDataHandler]
 
 
@@ -270,9 +263,12 @@ class NetatmoDataHandler:
 
         self.rolling_hour = []  # used to store API calls and have a rolling windws of calls
         self._adjusted_hourly_rate_limit = None
-        # Split gates: throttle-down reacts fast, recovery-up walks back slowly.
-        self._last_throttle_down: float | None = None
-        self._last_recovery_up: float | None = None
+        # Single gate (3600s) deliberately matches the rolling-hour window
+        # length: only re-decide rate adjustments after the rolling
+        # measurement is fully clean. Splitting into separate up/down gates
+        # was tried and reverted because faster recovery led to oscillation
+        # in steady-state over-demand scenarios.
+        self._last_cph_change = None
 
         self._max_call_per_interval = None
 
@@ -491,17 +487,17 @@ class NetatmoDataHandler:
         return candidates, num_predicted_calls
 
     def adjust_per_scan_numbers(self):
-        """Compute the per-scan call cap from the 10-second rate limit only.
+        """Adjust per-scan call limits based on rate limits."""
+        hrl = self._adjusted_hourly_rate_limit
+        if hrl is None:
+            hrl = self._initial_hourly_rate_limit
 
-        The hourly budget is enforced separately in ``async_update`` via
-        ``min(_max_call_per_interval, hourly_limit - cph_init)``. Mixing the
-        two limits here used to introduce an integer-truncation hole (e.g.
-        ``20 * 60 // 3600 == 0`` for the cloud user) that the previous
-        ``max()`` then masked, defeating the design intent. Deriving the cap
-        purely from the 10s burst limit keeps the math honest.
-        """
+        scan_limit_per_hour = (hrl * self._scan_interval) // 3600
+
         self._max_call_per_interval = int(
-            (self._scan_interval / 10.0) * self._10s_rate_limit
+            max(
+                scan_limit_per_hour, (self._scan_interval / 10.0) * self._10s_rate_limit
+            )
         )
 
     def adjust_intervals_to_target(
@@ -624,11 +620,6 @@ class NetatmoDataHandler:
             delta_sleep = 0
 
         has_been_throttled = False
-        # Track successful fetches inside the loop instead of comparing
-        # ``cph`` against a stale ``cph_init`` snapshot — the rolling-hour
-        # window mutates as we make calls, so the snapshot comparison was
-        # racy and fragile to partial errors.
-        num_made_calls = 0
         for i, data_class in enumerate(candidates):
             # Sleep *before* each non-first call to enforce inter-call
             # spacing without paying an extra wait at the loop tail.
@@ -653,7 +644,6 @@ class NetatmoDataHandler:
                         current + self._scan_interval
                     )  # *(data_class.num_consecutive_errors + 1)
                 else:
-                    num_made_calls += 1
                     self.publisher[publisher].push_emission(current)
                     self.publisher[publisher].set_next_scan(current)
 
@@ -669,17 +659,18 @@ class NetatmoDataHandler:
             len(self._sorted_publisher),
         )
 
-        # Two independent gates: throttle-down reacts within
-        # ``THROTTLE_DOWN_GATE_SEC`` so repeated 429s are addressed quickly,
-        # while recovery-up uses ``RECOVERY_UP_GATE_SEC`` so we don't
-        # oscillate. Previously a single 3600s gate locked the system at
-        # the lower target for an entire hour after any transient throttle.
-        if has_been_throttled or (
-            cph > self._adjusted_hourly_rate_limit and num_made_calls > 0
-        ):
-            if (
-                self._last_throttle_down is None
-                or current - self._last_throttle_down > THROTTLE_DOWN_GATE_SEC
+        # Single 3600s gate, deliberately aligned to the rolling-hour
+        # window: only re-decide once the rolling measurement is fully
+        # clean. ``cph > cph_init`` is the "we are actively making
+        # things worse" check — if the natural aging-out of old calls
+        # is keeping pace with new calls (rolling window flat or
+        # shrinking) we don't throttle, even when over budget, because
+        # the dynamic interval rescaling will drain us naturally.
+        if self._last_cph_change is None or current - self._last_cph_change > 3600:
+            if has_been_throttled or (
+                cph > self._adjusted_hourly_rate_limit
+                and cph > cph_init
+                and num_predicted_calls > 0
             ):
                 _LOGGER.info(
                     "Calls per hour hit rate limit: %i/%i throttled API: %s",
@@ -697,28 +688,27 @@ class NetatmoDataHandler:
                     redo_next_scan=True,
                     do_wait_scan_for_cph_to_target=True,
                 )
-                self._last_throttle_down = current
-        elif self._adjusted_hourly_rate_limit != self._initial_hourly_rate_limit and (
-            self._last_recovery_up is None
-            or current - self._last_recovery_up > RECOVERY_UP_GATE_SEC
-        ):
-            new_target = int(
-                min(
-                    self._initial_hourly_rate_limit,
-                    int(self._adjusted_hourly_rate_limit * CPH_ADJUSTEMENT_BACK_UP),
+                self._last_cph_change = current
+            else:
+                new_target = int(
+                    min(
+                        self._initial_hourly_rate_limit,
+                        int(self._adjusted_hourly_rate_limit * CPH_ADJUSTEMENT_BACK_UP),
+                    )
                 )
-            )
-            _LOGGER.debug(
-                "bumping back rate limit: %i / (initial: %i)",
-                new_target,
-                self._initial_hourly_rate_limit,
-            )
-            # every "good" recovery window, let the rate limit walk back up
-            # by ~10% (half of what we went down in case of issue).
-            self.adjust_intervals_to_target(
-                new_target, force_adjust=True, redo_next_scan=False
-            )
-            self._last_recovery_up = current
+                if self._adjusted_hourly_rate_limit != self._initial_hourly_rate_limit:
+                    _LOGGER.debug(
+                        "bumping back rate limit: %i / (initial: %i)",
+                        new_target,
+                        self._initial_hourly_rate_limit,
+                    )
+                    # every "good" hour window, let the rate limit walk back
+                    # up (with a cap) by ~10% — half of what we went down
+                    # in case of issue.
+                    self.adjust_intervals_to_target(
+                        new_target, force_adjust=True, redo_next_scan=False
+                    )
+                    self._last_cph_change = current
 
     @callback
     def async_force_update(self, signal_name: str) -> None:

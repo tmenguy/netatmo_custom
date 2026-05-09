@@ -605,7 +605,7 @@ async def test_throttle_adjusts_rate_down(
 
     # Make publisher ready and simulate throttle
     first_pub.next_scan = 0
-    data_handler._last_throttle_down = None  # Allow rate adjustment
+    data_handler._last_cph_change = None  # Allow rate adjustment
 
     with patch.object(
         data_handler.publisher[first_pub_name].target,
@@ -640,7 +640,7 @@ async def test_recovery_bumps_rate_back_up(
 
     reduced_rate = int(data_handler._initial_hourly_rate_limit * CPH_ADJUSTEMENT_DOWN)
     data_handler._adjusted_hourly_rate_limit = reduced_rate
-    data_handler._last_recovery_up = None  # Allow recovery up-step
+    data_handler._last_cph_change = None  # Allow rate change
     data_handler.rolling_hour = []  # Clean slate
 
     await data_handler.async_update(dt_util.utcnow())
