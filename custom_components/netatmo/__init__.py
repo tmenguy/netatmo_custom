@@ -21,7 +21,7 @@ else:
     prefix = pyatmo.__name__ + "."  # e.g. "my_integration.pyatmo."
     for _, fullname, _ in pkgutil.walk_packages(pyatmo.__path__, prefix):
         module = importlib.import_module(fullname)
-        alias = "pyatmo." + fullname[len(prefix):]
+        alias = "pyatmo." + fullname[len(prefix) :]
         sys.modules.setdefault(alias, module)
 
 from homeassistant.components import cloud

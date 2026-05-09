@@ -586,8 +586,11 @@ async def async_setup_entry(
     def _create_energy_entity(netatmo_device: NetatmoDevice) -> None:
 
         if (
-            NETATMO_ENERGY_SENSOR_DESCRIPTION.netatmo_name in netatmo_device.device.features
-            or hasattr(netatmo_device.device, NETATMO_ENERGY_SENSOR_DESCRIPTION.netatmo_name)
+            NETATMO_ENERGY_SENSOR_DESCRIPTION.netatmo_name
+            in netatmo_device.device.features
+            or hasattr(
+                netatmo_device.device, NETATMO_ENERGY_SENSOR_DESCRIPTION.netatmo_name
+            )
         ):
             _LOGGER.debug(
                 "Adding %s energy sensor %s",
@@ -607,8 +610,11 @@ async def async_setup_entry(
     def _create_gas_entity(netatmo_device: NetatmoDevice) -> None:
 
         if (
-            NETATMO_GAS_SENSOR_DESCRIPTION.netatmo_name in netatmo_device.device.features
-            or hasattr(netatmo_device.device, NETATMO_GAS_SENSOR_DESCRIPTION.netatmo_name)
+            NETATMO_GAS_SENSOR_DESCRIPTION.netatmo_name
+            in netatmo_device.device.features
+            or hasattr(
+                netatmo_device.device, NETATMO_GAS_SENSOR_DESCRIPTION.netatmo_name
+            )
         ):
             _LOGGER.debug(
                 "Adding %s gas sensor %s",
@@ -628,8 +634,11 @@ async def async_setup_entry(
     def _create_water_entity(netatmo_device: NetatmoDevice) -> None:
 
         if (
-            NETATMO_WATER_SENSOR_DESCRIPTION.netatmo_name in netatmo_device.device.features
-            or hasattr(netatmo_device.device, NETATMO_WATER_SENSOR_DESCRIPTION.netatmo_name)
+            NETATMO_WATER_SENSOR_DESCRIPTION.netatmo_name
+            in netatmo_device.device.features
+            or hasattr(
+                netatmo_device.device, NETATMO_WATER_SENSOR_DESCRIPTION.netatmo_name
+            )
         ):
             _LOGGER.debug(
                 "Adding %s water sensor %s",
@@ -769,12 +778,12 @@ class NetatmoBaseSensor(NetatmoModuleEntity, SensorEntity):
             if (state := getattr(self.device, self.entity_description.key)) is None:
                 return
 
-            #attr_name = (
+            # attr_name = (
             #    self.entity_description.netatmo_name or self.entity_description.key
-            #)
-            #if (state := getattr(self.device, attr_name, None)) is None:
+            # )
+            # if (state := getattr(self.device, attr_name, None)) is None:
             #    return
-            #state = self.entity_description.value_fn(state)
+            # state = self.entity_description.value_fn(state)
         else:
             state = self.device.reachable
             if state is None:
@@ -960,7 +969,6 @@ class NetatmoSensor(NetatmoBaseSensor):
             self._attr_available = True
             self._attr_native_value = state
 
-
         self.async_write_ha_state()
 
 
@@ -994,7 +1002,6 @@ class NetatmoEnergySensor(NetatmoLegacySensor):
 
         self._current_start_anchor = datetime.fromisoformat("2024-07-24 00:00:00")
         self._last_val_sent = None
-
 
     async def async_update_energy(self, **kwargs):
         """Update energy measurements from the Netatmo API."""

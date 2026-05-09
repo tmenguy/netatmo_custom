@@ -233,29 +233,34 @@ class TestPublisherCandidates:
 
 
 class TestAdjustPerScanNumbers:
-    """Tests for adjust_per_scan_numbers."""
+    """Tests for adjust_per_scan_numbers.
 
-    def test_initial_calculation(self) -> None:
-        """Test per-scan limits calculated from initial rate limit."""
+    The per-scan cap is derived purely from the 10-second rate limit; the
+    hourly budget is enforced separately in async_update. Mixing them here
+    used to introduce an integer-truncation hole that the previous max()
+    masked.
+    """
+
+    def test_initial_calculation_cloud(self) -> None:
+        """Test per-scan cap = scan_interval/10 * 10s_limit (cloud)."""
         handler = _make_data_handler(auth_implementation="cloud")
-        # Cloud: CPH=20, 10s=2, scan_interval=60
-        # scan_limit_per_hour = (20 * 60) // 3600 = 0
-        # 10s_limit = (60/10) * 2 = 12
-        # min = min(0, 12) = 0
-        # max = max(0, 12) = 12
-        assert handler._min_call_per_interval is not None
-        assert handler._max_call_per_interval is not None
-        assert handler._min_call_per_interval <= handler._max_call_per_interval
+        # Cloud: 10s=2, scan_interval=60 → 60/10 * 2 = 12
+        assert handler._max_call_per_interval == 12
 
-    def test_with_adjusted_rate(self) -> None:
-        """Test per-scan limits recalculated with adjusted rate."""
+    def test_initial_calculation_dev(self) -> None:
+        """Test per-scan cap = scan_interval/10 * 10s_limit (dev)."""
         handler = _make_data_handler(auth_implementation="my_dev_app")
-        # Dev: CPH=450, 10s=45, scan_interval=10
-        handler._adjusted_hourly_rate_limit = 225  # halved
+        # Dev: 10s=45, scan_interval=10 → 10/10 * 45 = 45
+        assert handler._max_call_per_interval == 45
+
+    def test_independent_of_adjusted_rate(self) -> None:
+        """Per-scan cap depends only on the 10s rate, not the hourly budget."""
+        handler = _make_data_handler(auth_implementation="my_dev_app")
+        before = handler._max_call_per_interval
+        # Halving the hourly budget should not change the per-scan physical cap.
+        handler._adjusted_hourly_rate_limit = 225
         handler.adjust_per_scan_numbers()
-        # scan_limit_per_hour = (225 * 10) // 3600 = 0
-        # 10s_limit = (10/10) * 45 = 45
-        assert handler._min_call_per_interval is not None
+        assert handler._max_call_per_interval == before
 
 
 class TestAdjustIntervalsToTarget:
@@ -600,7 +605,7 @@ async def test_throttle_adjusts_rate_down(
 
     # Make publisher ready and simulate throttle
     first_pub.next_scan = 0
-    data_handler._last_cph_change = None  # Allow rate adjustment
+    data_handler._last_throttle_down = None  # Allow rate adjustment
 
     with patch.object(
         data_handler.publisher[first_pub_name].target,
@@ -635,7 +640,7 @@ async def test_recovery_bumps_rate_back_up(
 
     reduced_rate = int(data_handler._initial_hourly_rate_limit * CPH_ADJUSTEMENT_DOWN)
     data_handler._adjusted_hourly_rate_limit = reduced_rate
-    data_handler._last_cph_change = None  # Allow rate change
+    data_handler._last_recovery_up = None  # Allow recovery up-step
     data_handler.rolling_hour = []  # Clean slate
 
     await data_handler.async_update(dt_util.utcnow())

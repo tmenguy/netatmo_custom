@@ -1,4 +1,5 @@
 """The Netatmo data handler."""
+
 # pylint: disable=hass-use-runtime-data  # Uses legacy hass.data[DOMAIN] pattern
 import asyncio
 from dataclasses import dataclass
@@ -138,6 +139,13 @@ NETATMO_DEV_CALL_LIMITS = {
 CPH_ADJUSTEMENT_DOWN = 0.8
 CPH_ADJUSTEMENT_BACK_UP = 1.1
 
+# Minimum time between successive throttle-induced down-adjustments. Kept short
+# so we react quickly to repeated 429s (the API's own 10s window is the floor).
+THROTTLE_DOWN_GATE_SEC = 60
+# Minimum time between successive recovery up-adjustments. Slow walk-back to
+# avoid oscillation around the limit after a transient throttle.
+RECOVERY_UP_GATE_SEC = 600
+
 type NetatmoConfigEntry = ConfigEntry[NetatmoDataHandler]
 
 
@@ -262,9 +270,10 @@ class NetatmoDataHandler:
 
         self.rolling_hour = []  # used to store API calls and have a rolling windws of calls
         self._adjusted_hourly_rate_limit = None
-        self._last_cph_change = None
+        # Split gates: throttle-down reacts fast, recovery-up walks back slowly.
+        self._last_throttle_down: float | None = None
+        self._last_recovery_up: float | None = None
 
-        self._min_call_per_interval = None
         self._max_call_per_interval = None
 
         self.adjust_per_scan_numbers()
@@ -317,48 +326,75 @@ class NetatmoDataHandler:
         return self._init_topology_complete
 
     async def _init_update_status_if_needed(self):
-        """Initialize update status if not already done."""
+        """Initialize update status if not already done.
+
+        With several homes the per-home status fetches happen back-to-back
+        in this loop. Without spacing the loop violates the per-10s burst
+        limit (e.g. 5 homes / 5 seconds for the cloud user where the limit
+        is 2 calls per 10s) and triggers 429s that silently get swallowed
+        by the generic ``ApiError`` handler — leaving setup with a partial
+        topology. We pace the calls to the documented burst limit and bail
+        out on ``ApiThrottlingError`` so the next ``async_update`` retries.
+        """
         if self._init_update_status_complete is False:
             num_house_ok = 0
             num_calls = 0
+            inter_call_delay = 10.0 / self._10s_rate_limit
+            is_first = True
             for h in self.account.homes:
                 # check the home is a real one
-                if h in self.account.all_homes_id:
-                    _LOGGER.debug(
-                        "do init account.async_update_status for home %s %s",
-                        h,
-                        self.account.homes[h].name,
-                    )
-                    has_error = False
-                    try:
-                        await self.account.async_update_status(h)
-                        num_calls += 1
-                    except pyatmo.ApiHomeReachabilityError as err:
-                        _LOGGER.debug(
-                            "init account.async_update_status error Not Reachable Home: %s",
-                            err,
-                        )
-                        has_error = True
-                    except (pyatmo.NoDeviceError, pyatmo.ApiError) as err:
-                        _LOGGER.debug(
-                            "init account.async_update_status error NoDeviceError or ApiError %s",
-                            err,
-                        )
-                        has_error = True
-                    except (TimeoutError, aiohttp.ClientConnectorError) as err:
-                        _LOGGER.debug(
-                            "init account.async_update_status error Timeout or ClientConnectorError: %s",
-                            err,
-                        )
-                        has_error = True
-                    except (OSError, KeyError) as err:
-                        _LOGGER.debug(
-                            "init account.async_update_status error unknown %s", err
-                        )
-                        has_error = True
+                if h not in self.account.all_homes_id:
+                    continue
 
-                    if has_error is False:
-                        num_house_ok += 1
+                if not is_first:
+                    await asyncio.sleep(inter_call_delay)
+                is_first = False
+
+                _LOGGER.debug(
+                    "do init account.async_update_status for home %s %s",
+                    h,
+                    self.account.homes[h].name,
+                )
+                has_error = False
+                try:
+                    await self.account.async_update_status(h)
+                    num_calls += 1
+                except pyatmo.ApiThrottlingError as err:
+                    _LOGGER.debug(
+                        "init account.async_update_status throttled, "
+                        "will retry on next scan: %s",
+                        err,
+                    )
+                    # No point making more calls in this init burst — the
+                    # next async_update tick will re-enter and resume.
+                    has_error = True
+                    break
+                except pyatmo.ApiHomeReachabilityError as err:
+                    _LOGGER.debug(
+                        "init account.async_update_status error Not Reachable Home: %s",
+                        err,
+                    )
+                    has_error = True
+                except (pyatmo.NoDeviceError, pyatmo.ApiError) as err:
+                    _LOGGER.debug(
+                        "init account.async_update_status error NoDeviceError or ApiError %s",
+                        err,
+                    )
+                    has_error = True
+                except (TimeoutError, aiohttp.ClientConnectorError) as err:
+                    _LOGGER.debug(
+                        "init account.async_update_status error Timeout or ClientConnectorError: %s",
+                        err,
+                    )
+                    has_error = True
+                except (OSError, KeyError) as err:
+                    _LOGGER.debug(
+                        "init account.async_update_status error unknown %s", err
+                    )
+                    has_error = True
+
+                if has_error is False:
+                    num_house_ok += 1
 
             self.add_api_call(num_calls)
 
@@ -455,22 +491,17 @@ class NetatmoDataHandler:
         return candidates, num_predicted_calls
 
     def adjust_per_scan_numbers(self):
-        """Adjust per-scan call limits based on rate limits."""
-        hrl = self._adjusted_hourly_rate_limit
-        if hrl is None:
-            hrl = self._initial_hourly_rate_limit
+        """Compute the per-scan call cap from the 10-second rate limit only.
 
-        scan_limit_per_hour = (hrl * self._scan_interval) // 3600
-
-        self._min_call_per_interval = int(
-            min(
-                scan_limit_per_hour, (self._scan_interval / 10.0) * self._10s_rate_limit
-            )
-        )
+        The hourly budget is enforced separately in ``async_update`` via
+        ``min(_max_call_per_interval, hourly_limit - cph_init)``. Mixing the
+        two limits here used to introduce an integer-truncation hole (e.g.
+        ``20 * 60 // 3600 == 0`` for the cloud user) that the previous
+        ``max()`` then masked, defeating the design intent. Deriving the cap
+        purely from the 10s burst limit keeps the math honest.
+        """
         self._max_call_per_interval = int(
-            max(
-                scan_limit_per_hour, (self._scan_interval / 10.0) * self._10s_rate_limit
-            )
+            (self._scan_interval / 10.0) * self._10s_rate_limit
         )
 
     def adjust_intervals_to_target(
@@ -565,7 +596,16 @@ class NetatmoDataHandler:
         )
 
         if num_call > 0:
-            delta_sleep = self._scan_interval / (3.0 * num_call)
+            # Spread calls evenly across the full scan interval, but never
+            # closer than the 10-second rate limit allows. The floor matters
+            # when ``num_call`` is small; the spread matters when it is close
+            # to the per-scan cap. Both invariants together guarantee that
+            # any sliding 10s window contains at most ``_10s_rate_limit``
+            # calls, even at startup or just after a recovery up-step.
+            delta_sleep = max(
+                self._scan_interval / num_call,
+                10.0 / self._10s_rate_limit,
+            )
         else:
             _LOGGER.info(
                 "Getting 0 approved calls: adjusted limit : %f current cph: %i",
@@ -584,7 +624,17 @@ class NetatmoDataHandler:
             delta_sleep = 0
 
         has_been_throttled = False
-        for data_class in candidates:
+        # Track successful fetches inside the loop instead of comparing
+        # ``cph`` against a stale ``cph_init`` snapshot — the rolling-hour
+        # window mutates as we make calls, so the snapshot comparison was
+        # racy and fragile to partial errors.
+        num_made_calls = 0
+        for i, data_class in enumerate(candidates):
+            # Sleep *before* each non-first call to enforce inter-call
+            # spacing without paying an extra wait at the loop tail.
+            if i > 0 and delta_sleep > 0:
+                await asyncio.sleep(delta_sleep)
+
             if publisher := data_class.name:
                 error, throttling_error = await self.async_fetch_data(publisher)
 
@@ -603,11 +653,9 @@ class NetatmoDataHandler:
                         current + self._scan_interval
                     )  # *(data_class.num_consecutive_errors + 1)
                 else:
+                    num_made_calls += 1
                     self.publisher[publisher].push_emission(current)
                     self.publisher[publisher].set_next_scan(current)
-
-            if delta_sleep > 0:
-                await asyncio.sleep(delta_sleep)
 
         cph = self.get_current_calls_count_per_hour()
         current = int(time())
@@ -621,11 +669,17 @@ class NetatmoDataHandler:
             len(self._sorted_publisher),
         )
 
-        if self._last_cph_change is None or current - self._last_cph_change > 3600:
-            if has_been_throttled or (
-                cph > self._adjusted_hourly_rate_limit
-                and cph > cph_init
-                and num_predicted_calls > 0
+        # Two independent gates: throttle-down reacts within
+        # ``THROTTLE_DOWN_GATE_SEC`` so repeated 429s are addressed quickly,
+        # while recovery-up uses ``RECOVERY_UP_GATE_SEC`` so we don't
+        # oscillate. Previously a single 3600s gate locked the system at
+        # the lower target for an entire hour after any transient throttle.
+        if has_been_throttled or (
+            cph > self._adjusted_hourly_rate_limit and num_made_calls > 0
+        ):
+            if (
+                self._last_throttle_down is None
+                or current - self._last_throttle_down > THROTTLE_DOWN_GATE_SEC
             ):
                 _LOGGER.info(
                     "Calls per hour hit rate limit: %i/%i throttled API: %s",
@@ -643,26 +697,28 @@ class NetatmoDataHandler:
                     redo_next_scan=True,
                     do_wait_scan_for_cph_to_target=True,
                 )
-                self._last_cph_change = current
-            else:
-                new_target = int(
-                    min(
-                        self._initial_hourly_rate_limit,
-                        int(self._adjusted_hourly_rate_limit * CPH_ADJUSTEMENT_BACK_UP),
-                    )
+                self._last_throttle_down = current
+        elif self._adjusted_hourly_rate_limit != self._initial_hourly_rate_limit and (
+            self._last_recovery_up is None
+            or current - self._last_recovery_up > RECOVERY_UP_GATE_SEC
+        ):
+            new_target = int(
+                min(
+                    self._initial_hourly_rate_limit,
+                    int(self._adjusted_hourly_rate_limit * CPH_ADJUSTEMENT_BACK_UP),
                 )
-                if self._adjusted_hourly_rate_limit != self._initial_hourly_rate_limit:
-                    _LOGGER.debug(
-                        "bumping back rate limit: %i / (initial: %i)",
-                        new_target,
-                        self._initial_hourly_rate_limit,
-                    )
-                    # every "good"  hour window, let get the rate limit up (with a limit) going up only by half
-                    # what we went down in case of issue (so here 10% up)
-                    self.adjust_intervals_to_target(
-                        new_target, force_adjust=True, redo_next_scan=False
-                    )
-                    self._last_cph_change = current
+            )
+            _LOGGER.debug(
+                "bumping back rate limit: %i / (initial: %i)",
+                new_target,
+                self._initial_hourly_rate_limit,
+            )
+            # every "good" recovery window, let the rate limit walk back up
+            # by ~10% (half of what we went down in case of issue).
+            self.adjust_intervals_to_target(
+                new_target, force_adjust=True, redo_next_scan=False
+            )
+            self._last_recovery_up = current
 
     @callback
     def async_force_update(self, signal_name: str) -> None:
@@ -906,7 +962,10 @@ class NetatmoDataHandler:
                 NETATMO_CREATE_LEGACY_SENSOR,
                 NETATMO_CREATE_ENERGY,
             ],
-            NetatmoDeviceCategory.meter: [NETATMO_CREATE_LEGACY_SENSOR, NETATMO_CREATE_ENERGY],
+            NetatmoDeviceCategory.meter: [
+                NETATMO_CREATE_LEGACY_SENSOR,
+                NETATMO_CREATE_ENERGY,
+            ],
             NetatmoDeviceCategory.fan: [
                 NETATMO_CREATE_FAN,
                 NETATMO_CREATE_LEGACY_SENSOR,
@@ -952,7 +1011,10 @@ class NetatmoDataHandler:
                         if num == 6:
                             signals = [NETATMO_CREATE_LEGACY_SENSOR, NETATMO_CREATE_GAS]
                         else:
-                            signals = [NETATMO_CREATE_LEGACY_SENSOR, NETATMO_CREATE_WATER]
+                            signals = [
+                                NETATMO_CREATE_LEGACY_SENSOR,
+                                NETATMO_CREATE_WATER,
+                            ]
 
             for signal in signals:
                 async_dispatcher_send(
