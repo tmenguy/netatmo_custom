@@ -778,12 +778,6 @@ class NetatmoBaseSensor(NetatmoModuleEntity, SensorEntity):
             if (state := getattr(self.device, self.entity_description.key)) is None:
                 return
 
-            # attr_name = (
-            #    self.entity_description.netatmo_name or self.entity_description.key
-            # )
-            # if (state := getattr(self.device, attr_name, None)) is None:
-            #    return
-            # state = self.entity_description.value_fn(state)
         else:
             state = self.device.reachable
             if state is None:
