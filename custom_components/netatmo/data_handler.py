@@ -1,6 +1,6 @@
 """The Netatmo data handler."""
+# pylint: disable=home-assistant-use-runtime-data  # Uses legacy hass.data[DOMAIN] pattern
 
-# pylint: disable=hass-use-runtime-data  # Uses legacy hass.data[DOMAIN] pattern
 import asyncio
 from dataclasses import dataclass
 from datetime import datetime, timedelta
