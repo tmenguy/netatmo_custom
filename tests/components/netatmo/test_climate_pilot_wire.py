@@ -45,9 +45,9 @@ COMMON_RESPONSE_PW = {
 PILOT_WIRE_HOME_ID = "aabbccddee000001"
 
 # Entity IDs for the three pilot wire rooms
-ENTITY_PARENTS = "climate.parents_bathroom"
-ENTITY_KIDS = "climate.kids_bathroom"
-ENTITY_ARTHUR = "climate.arthur_bathroom"
+ENTITY_PARENTS = "climate.parents_bathroom_parents_bathroom"
+ENTITY_KIDS = "climate.kids_bathroom_kids_bathroom"
+ENTITY_ARTHUR = "climate.arthur_bathroom_arthur_bathroom"
 
 
 async def fake_post_request_pw(hass: HomeAssistant, *args: Any, **kwargs: Any) -> Any:

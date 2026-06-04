@@ -3,6 +3,7 @@
 from . import const, modules
 from .account import AsyncAccount
 from .auth import AbstractAsyncAuth
+from .const import SIREN_BASE_URL
 from .exceptions import (
     ApiError,
     ApiHomeReachabilityError,
@@ -34,6 +35,7 @@ __all__: list[str] = [
     "NoDeviceError",
     "NoScheduleError",
     "Room",
+    "SIREN_BASE_URL",
     "WebRTCStream",
     "const",
     "modules",
