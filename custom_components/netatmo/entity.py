@@ -1,7 +1,7 @@
 """Base class for Netatmo entities."""
 
 from abc import abstractmethod
-from typing import Any, cast
+from typing import Any, cast, override
 
 from pyatmo import DeviceType, Home, Module, Room
 from pyatmo.modules.base_class import NetatmoBase, Place
@@ -36,6 +36,7 @@ class NetatmoBaseEntity(Entity):
         self._publishers: list[dict[str, Any]] = []
         self._attr_extra_state_attributes = {}
 
+    @override
     async def async_added_to_hass(self) -> None:
         """Entity created."""
         for publisher in self._publishers:
@@ -81,6 +82,7 @@ class NetatmoBaseEntity(Entity):
 
         self.async_update_callback()
 
+    @override
     async def async_will_remove_from_hass(self) -> None:
         """Run when entity will be removed from hass."""
         await super().async_will_remove_from_hass()
@@ -139,6 +141,7 @@ class NetatmoRoomEntity(NetatmoDeviceEntity):
             suggested_area=room.room.name,
         )
 
+    @override
     async def async_added_to_hass(self) -> None:
         """Entity created."""
         await super().async_added_to_hass()
@@ -151,6 +154,7 @@ class NetatmoRoomEntity(NetatmoDeviceEntity):
             self.hass.data[DOMAIN][DATA_DEVICE_IDS][self.device.entity_id] = device.id
 
     @property
+    @override
     def device_type(self) -> DeviceType:
         """Return the device type."""
         assert self.device.climate_type
@@ -175,6 +179,7 @@ class NetatmoModuleEntity(NetatmoDeviceEntity):
         )
 
     @property
+    @override
     def device_type(self) -> DeviceType:
         """Return the device type."""
         return self.device.device_type
@@ -210,6 +215,7 @@ class NetatmoWeatherModuleEntity(NetatmoModuleEntity):
                 )
 
     @property
+    @override
     def device_type(self) -> DeviceType:
         """Return the Netatmo device type."""
         if "." not in self.device.device_type:
