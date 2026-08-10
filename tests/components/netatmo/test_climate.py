@@ -1,6 +1,7 @@
 """The tests for the Netatmo climate platform."""
 
 from datetime import timedelta
+from typing import Any
 from unittest.mock import AsyncMock, patch
 
 import pytest
@@ -44,7 +45,13 @@ from homeassistant.exceptions import ServiceValidationError
 from homeassistant.helpers import entity_registry as er
 from homeassistant.util import dt as dt_util
 
-from .common import selected_platforms, simulate_webhook, snapshot_platform_entities
+from .common import (
+    fake_get_image,
+    fake_post_request,
+    selected_platforms,
+    simulate_webhook,
+    snapshot_platform_entities,
+)
 
 from tests.common import MockConfigEntry
 
@@ -779,21 +786,23 @@ async def test_service_preset_mode_with_end_time_thermostats(
         hass.states.get(climate_entity_livingroom).attributes["preset_mode"] == "away"
     )
 
-    # Custom component allows all presets (not just THERM_MODES)
-    await hass.services.async_call(
-        "netatmo",
-        SERVICE_SET_PRESET_MODE_WITH_END_DATETIME,
-        {
-            ATTR_ENTITY_ID: climate_entity_livingroom,
-            ATTR_PRESET_MODE: PRESET_BOOST,
-            ATTR_END_DATETIME: (dt_util.now() + timedelta(days=10)).strftime(
-                "%Y-%m-%d %H:%M:%S"
-            ),
-        },
-        blocking=True,
-    )
+    # Test setting an invalid preset mode (not in THERM_MODES) and a valid end datetime
+    with pytest.raises(MultipleInvalid):
+        await hass.services.async_call(
+            "netatmo",
+            SERVICE_SET_PRESET_MODE_WITH_END_DATETIME,
+            {
+                ATTR_ENTITY_ID: climate_entity_livingroom,
+                ATTR_PRESET_MODE: PRESET_BOOST,
+                ATTR_END_DATETIME: (dt_util.now() + timedelta(days=10)).strftime(
+                    "%Y-%m-%d %H:%M:%S"
+                ),
+            },
+            blocking=True,
+        )
 
-    # end_datetime is required
+    # Test setting a valid preset mode (that allow an end datetime
+    # in Netatmo == THERM_MODES) without an end datetime
     with pytest.raises(MultipleInvalid):
         await hass.services.async_call(
             "netatmo",
@@ -1093,6 +1102,47 @@ async def test_webhook_home_id_mismatch(
     await simulate_webhook(hass, webhook_id, response)
 
     assert hass.states.get(climate_entity_entrada).state == "auto"
+
+
+async def test_thermostat_update_with_none_therm_setpoint_mode(
+    hass: HomeAssistant, config_entry: MockConfigEntry
+) -> None:
+    """Test thermostat setup when Netatmo returns no therm setpoint mode."""
+
+    def set_none_therm_setpoint_mode(payload: dict[str, Any]) -> None:
+        """Set the thermostat setpoint mode to None in the backend response."""
+        home = payload.get("body", {}).get("home")
+        if home is None:
+            return
+
+        for room in home.get("rooms", []):
+            if room["id"] == "2746182631":
+                room["therm_setpoint_mode"] = None
+
+    async def fake_post(*args: Any, **kwargs: Any):
+        """Return backend data with a missing thermostat setpoint mode."""
+        kwargs["msg_callback"] = set_none_therm_setpoint_mode
+        return await fake_post_request(hass, *args, **kwargs)
+
+    with (
+        selected_platforms([Platform.CLIMATE]),
+        patch(
+            "homeassistant.components.netatmo.api.AsyncConfigEntryNetatmoAuth"
+        ) as mock_auth,
+    ):
+        mock_auth.return_value.async_post_request.side_effect = fake_post
+        mock_auth.return_value.async_post_api_request.side_effect = fake_post
+        mock_auth.return_value.async_get_image.side_effect = fake_get_image
+        mock_auth.return_value.async_addwebhook.side_effect = AsyncMock()
+        mock_auth.return_value.async_dropwebhook.side_effect = AsyncMock()
+
+        assert await hass.config_entries.async_setup(config_entry.entry_id)
+        await hass.async_block_till_done()
+
+    state = hass.states.get("climate.livingroom_livingroom")
+    assert state is not None
+    assert state.state == HVACMode.AUTO
+    assert state.attributes["preset_mode"] == PRESET_SCHEDULE
 
 
 async def test_webhook_set_point(

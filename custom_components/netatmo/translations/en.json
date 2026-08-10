@@ -156,11 +156,23 @@
         }
     },
     "exceptions": {
+        "entry_not_loaded": {
+            "message": "The Netatmo integration is not loaded. Please set it up before calling this action."
+        },
         "oauth2_implementation_unavailable": {
             "message": "OAuth2 implementation unavailable, will retry"
         }
     },
+    "issues": {
+        "deprecated_webhook_service": {
+            "description": "The `register_webhook` and `unregister_webhook` actions are deprecated and will be removed in a future release. Netatmo manages the webhook automatically, so these actions are no longer needed. Please remove them from your automations and scripts.",
+            "title": "Netatmo webhook actions are deprecated"
+        }
+    },
     "options": {
+        "error": {
+            "empty_home_selection": "At least one home must remain enabled"
+        },
         "step": {
             "public_weather": {
                 "data": {
@@ -172,18 +184,31 @@
                     "mode": "Calculation",
                     "show_on_map": "Show on map"
                 },
+                "data_description": {
+                    "area_name": "Name used to identify this weather area.",
+                    "lat_ne": "Latitude of the northeast corner of the area.",
+                    "lat_sw": "Latitude of the southwest corner of the area.",
+                    "lon_ne": "Longitude of the northeast corner of the area.",
+                    "lon_sw": "Longitude of the southwest corner of the area.",
+                    "mode": "How values from multiple stations in the area are aggregated.",
+                    "show_on_map": "Whether to show the sensors on the map."
+                },
                 "description": "Configure a public weather sensor for an area.",
                 "title": "Netatmo public weather sensor"
             },
-            "public_weather_areas_and_homes": {
+            "public_weather_areas": {
                 "data": {
                     "enabled_homes": "Enabled homes",
                     "new_area": "Area name",
-                    "selected_homes": "Homes (leave all unchecked will import all of your homes)",
                     "weather_areas": "Weather areas"
                 },
-                "description": "Define the homes you want to support, Configure public weather sensors.",
-                "title": "Homes selection and Netatmo public weather sensor"
+                "data_description": {
+                    "enabled_homes": "Homes to be managed by this integration. Newly added homes are enabled by default.",
+                    "new_area": "Name of a new weather area to add.",
+                    "weather_areas": "Configured weather areas to edit or remove."
+                },
+                "description": "Configure enabled homes and public weather sensors. Newly added homes are enabled by default.",
+                "title": "Home selection and public weather"
             }
         }
     },
@@ -193,7 +218,7 @@
             "name": "Clear temperature setting"
         },
         "register_webhook": {
-            "description": "Registers the webhook to the Netatmo backend.",
+            "description": "Registers the webhook to the Netatmo backend. Deprecated: the webhook is managed automatically and this action will be removed in 2027.2.0.",
             "name": "Register webhook"
         },
         "set_camera_light": {
@@ -279,7 +304,7 @@
             "name": "Set temperature with time period"
         },
         "unregister_webhook": {
-            "description": "Unregisters the webhook from the Netatmo backend.",
+            "description": "Unregisters the webhook from the Netatmo backend. Deprecated: the webhook is managed automatically and this action will be removed in 2027.2.0.",
             "name": "Unregister webhook"
         }
     }

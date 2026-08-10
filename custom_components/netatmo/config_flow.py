@@ -7,10 +7,11 @@ import uuid
 
 import voluptuous as vol
 
-from homeassistant.config_entries import SOURCE_REAUTH, ConfigFlowResult, OptionsFlow
+from homeassistant.config_entries import ConfigEntryState, ConfigFlowResult, OptionsFlow
 from homeassistant.const import CONF_SHOW_ON_MAP, CONF_UUID
 from homeassistant.core import callback
 from homeassistant.helpers import config_entry_oauth2_flow, config_validation as cv
+from homeassistant.helpers.typing import VolDictType
 
 from .api import get_api_scopes
 from .const import (
@@ -25,9 +26,13 @@ from .const import (
     CONF_WEATHER_AREAS,
     DOMAIN,
 )
-from .data_handler import NetatmoConfigEntry
+from .coordinator import NetatmoConfigEntry
 
 _LOGGER = logging.getLogger(__name__)
+
+# Form-only key: the UI presents enabled homes while the stored option keeps
+# disabled ones, so homes added to the account later are enabled by default.
+CONF_ENABLED_HOMES = "enabled_homes"
 
 
 class NetatmoFlowHandler(
@@ -63,10 +68,6 @@ class NetatmoFlowHandler(
     async def async_step_user(self, user_input: dict | None = None) -> ConfigFlowResult:
         """Handle a flow start."""
         await self.async_set_unique_id(DOMAIN)
-
-        if self.source != SOURCE_REAUTH and self._async_current_entries():
-            return self.async_abort(reason="single_instance_allowed")
-
         return await super().async_step_user(user_input)
 
     async def async_step_reauth(
@@ -96,9 +97,6 @@ class NetatmoFlowHandler(
         return await super().async_oauth_create_entry(data)
 
 
-INTERMEDIATE_ENABLED_HOMES = "enabled_homes"
-
-
 class NetatmoOptionsFlowHandler(OptionsFlow):
     """Handle Netatmo options."""
 
@@ -107,15 +105,36 @@ class NetatmoOptionsFlowHandler(OptionsFlow):
         self.options = dict(config_entry.options)
         self.options.setdefault(CONF_WEATHER_AREAS, {})
         self.options.setdefault(CONF_DISABLED_HOMES, [])
+        # Homes shown on the last render; None when the selector was not offered
+        self._offered_homes: dict[str, str] | None = None
+
+    def _get_all_homes(self) -> dict[str, str]:
+        """Return a mapping of home id to home display name."""
+        if self.config_entry.state is not ConfigEntryState.LOADED:
+            return {}
+        all_home_names = self.config_entry.runtime_data.account.all_home_names
+        return {
+            home_id: home_name or home_id
+            for home_id, home_name in all_home_names.items()
+        }
+
+    def _homes_selection_offered(self, homes: dict[str, str]) -> bool:
+        """Return if the homes selector is offered for the given homes.
+
+        Also offered with a single home left disabled, so it can be re-enabled.
+        """
+        return len(homes) > 1 or (
+            bool(homes) and bool(self.options[CONF_DISABLED_HOMES])
+        )
 
     async def async_step_init(self, user_input: dict | None = None) -> ConfigFlowResult:
         """Manage the Netatmo options."""
-        return await self.async_step_public_weather_areas_and_homes()
+        return await self.async_step_public_weather_areas()
 
-    async def async_step_public_weather_areas_and_homes(
+    async def async_step_public_weather_areas(
         self, user_input: dict | None = None
     ) -> ConfigFlowResult:
-        """Manage configuration of Netatmo public weather areas."""
+        """Manage configuration of Netatmo homes and public weather areas."""
         errors: dict = {}
 
         if user_input is not None:
@@ -125,43 +144,42 @@ class NetatmoOptionsFlowHandler(OptionsFlow):
                 area: self.options[CONF_WEATHER_AREAS][area] for area in areas
             }
 
-            enabled_homes = user_input.pop(INTERMEDIATE_ENABLED_HOMES, [])
+            enabled_homes = user_input.pop(CONF_ENABLED_HOMES, [])
+            # Compare against the homes offered on the form, not a fresh
+            # fetch: a home added in the meantime must stay enabled by default
+            if self._offered_homes is not None:
+                if enabled_homes:
+                    user_input[CONF_DISABLED_HOMES] = [
+                        home_id
+                        for home_id in self._offered_homes
+                        if home_id not in enabled_homes
+                    ]
+                else:
+                    errors[CONF_ENABLED_HOMES] = "empty_home_selection"
 
-            if enabled_homes:
-                homes = self.config_entry.runtime_data.account.all_homes_id
-                disabled_homes = [hid for hid in homes if hid not in enabled_homes]
+            if not errors:
+                self.options.update(user_input)
+                if new_client:
+                    return await self.async_step_public_weather(
+                        user_input={CONF_NEW_AREA: new_client}
+                    )
 
-                user_input[CONF_DISABLED_HOMES] = disabled_homes
-
-            self.options.update(user_input)
-            if new_client:
-                return await self.async_step_public_weather(
-                    user_input={CONF_NEW_AREA: new_client}
-                )
-
-            return self._create_options_entry()
+                return self._create_options_entry()
 
         weather_areas = list(self.options[CONF_WEATHER_AREAS])
 
-        schema = {}
+        schema: VolDictType = {}
 
-        homes = self.config_entry.runtime_data.account.all_homes_id
-
-        if len(homes) > 1:
-            l_disabled_homes = self.options.get(CONF_DISABLED_HOMES, [])
-
-            l_selected_homes = [hid for hid in homes if hid not in l_disabled_homes]
-
-            if len(l_selected_homes) == 0:
-                l_selected_homes = list(homes)
-
-            schema.update(
-                {
-                    vol.Optional(
-                        INTERMEDIATE_ENABLED_HOMES,
-                        default=l_selected_homes,
-                    ): cv.multi_select(homes),
-                }
+        homes = self._get_all_homes()
+        self._offered_homes = homes if self._homes_selection_offered(homes) else None
+        if self._offered_homes is not None:
+            enabled_homes = [
+                home_id
+                for home_id in homes
+                if home_id not in self.options[CONF_DISABLED_HOMES]
+            ]
+            schema[vol.Optional(CONF_ENABLED_HOMES, default=enabled_homes)] = (
+                cv.multi_select(homes)
             )
 
         schema.update(
@@ -173,11 +191,9 @@ class NetatmoOptionsFlowHandler(OptionsFlow):
                 vol.Optional(CONF_NEW_AREA): str,
             }
         )
-
         data_schema = vol.Schema(schema)
-
         return self.async_show_form(
-            step_id="public_weather_areas_and_homes",
+            step_id="public_weather_areas",
             data_schema=data_schema,
             errors=errors,
         )
@@ -193,7 +209,7 @@ class NetatmoOptionsFlowHandler(OptionsFlow):
                 str(uuid.uuid4())
             )
 
-            return await self.async_step_public_weather_areas_and_homes()
+            return await self.async_step_public_weather_areas()
 
         orig_options = self.config_entry.options.get(CONF_WEATHER_AREAS, {}).get(
             user_input[CONF_NEW_AREA], {}

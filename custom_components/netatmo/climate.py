@@ -1,5 +1,4 @@
 """Support for Netatmo Smart thermostats."""
-# pylint: disable=home-assistant-use-runtime-data  # Uses legacy hass.data[DOMAIN] pattern
 
 import asyncio
 import datetime as dt
@@ -52,7 +51,6 @@ from .const import (
     ATTR_SELECTED_SCHEDULE_ID,
     ATTR_TARGET_TEMPERATURE,
     ATTR_TIME_PERIOD,
-    DATA_SCHEDULES,
     DOMAIN,
     EVENT_TYPE_CANCEL_SET_POINT,
     EVENT_TYPE_SCHEDULE,
@@ -65,11 +63,13 @@ from .const import (
     SERVICE_SET_TEMPERATURE_WITH_END_DATETIME,
     SERVICE_SET_TEMPERATURE_WITH_TIME_PERIOD,
 )
-from .data_handler import HOME, SIGNAL_NAME, NetatmoConfigEntry, NetatmoRoom
+from .coordinator import HOME, SIGNAL_NAME, NetatmoConfigEntry, NetatmoRoom
 from .entity import NetatmoRoomEntity
 from .helper import device_type_to_str
 
 _LOGGER = logging.getLogger(__name__)
+
+PARALLEL_UPDATES = 0
 
 PRESET_FROST_GUARD = "frost_guard"
 PRESET_SCHEDULE = "schedule"
@@ -333,7 +333,7 @@ class NetatmoThermostat(NetatmoRoomEntity, ClimateEntity):
         if data["event_type"] == EVENT_TYPE_SCHEDULE:
             # handle schedule change
             if "schedule_id" in data:
-                selected_schedule = self.hass.data[DOMAIN][DATA_SCHEDULES][
+                selected_schedule = self.data_handler.schedules[
                     self.home.entity_id
                 ].get(data["schedule_id"])
                 self._selected_schedule = getattr(
@@ -363,6 +363,7 @@ class NetatmoThermostat(NetatmoRoomEntity, ClimateEntity):
             if self.device_type is DeviceType.NLC:
                 self.async_update_callback()
                 self.data_handler.async_force_update(self._signal_name)
+                return
             else:
                 self._attr_preset_mode = self._netatmo_map_preset[
                     home[EVENT_TYPE_THERM_MODE]
@@ -375,6 +376,7 @@ class NetatmoThermostat(NetatmoRoomEntity, ClimateEntity):
                 elif self._attr_preset_mode in [PRESET_SCHEDULE, PRESET_HOME]:
                     self.async_update_callback()
                     self.data_handler.async_force_update(self._signal_name)
+                    return
             self.async_write_ha_state()
             return
 
@@ -417,7 +419,6 @@ class NetatmoThermostat(NetatmoRoomEntity, ClimateEntity):
                     self._attr_preset_mode = PRESET_SCHEDULE
 
                 self.async_update_callback()
-                self.async_write_ha_state()
                 return
 
     @property
@@ -590,15 +591,16 @@ class NetatmoThermostat(NetatmoRoomEntity, ClimateEntity):
     @override
     def available(self) -> bool:
         """If the device hasn't been able to connect, mark as unavailable."""
-        return bool(self._connected)
+        return super().available and bool(self._connected)
 
     @callback
     @override
     def async_update_callback(self) -> None:
         """Update the entity's state."""
         if not self.device.reachable:
-            if self.available:
+            if self._connected:
                 self._connected = False
+            self.async_write_ha_state()
             return
 
         self._connected = True
@@ -626,13 +628,13 @@ class NetatmoThermostat(NetatmoRoomEntity, ClimateEntity):
             else:
                 self._attr_hvac_mode = HVACMode.HEAT
         else:
-            self._attr_preset_mode = self._netatmo_map_preset[
-                getattr(
-                    self.device,
-                    "therm_setpoint_mode",
-                    self._netatmo_map_preset.get(PRESET_SCHEDULE),
-                )
-            ]
+
+            therm_setpoint_mode = getattr(self.device, "therm_setpoint_mode", None)
+
+            if therm_setpoint_mode is None:
+                therm_setpoint_mode = STATE_NETATMO_SCHEDULE
+
+            self._attr_preset_mode = self._netatmo_map_preset[therm_setpoint_mode]
             self._attr_hvac_mode = self._hvac_map_netatmo[self._attr_preset_mode]
 
         self._away = self._attr_hvac_mode == self._hvac_map_netatmo[STATE_NETATMO_AWAY]
@@ -663,9 +665,7 @@ class NetatmoThermostat(NetatmoRoomEntity, ClimateEntity):
     async def _async_service_set_schedule(self, **kwargs: Any) -> None:
         schedule_name = kwargs.get(ATTR_SCHEDULE_NAME)
         schedule_id = None
-        for sid, schedule in self.hass.data[DOMAIN][DATA_SCHEDULES][
-            self.home.entity_id
-        ].items():
+        for sid, schedule in self.data_handler.schedules[self.home.entity_id].items():
             if schedule.name == schedule_name:
                 schedule_id = sid
                 break

@@ -1,5 +1,4 @@
 """The Netatmo data handler."""
-# pylint: disable=home-assistant-use-runtime-data  # Uses legacy hass.data[DOMAIN] pattern
 
 import asyncio
 from dataclasses import dataclass
@@ -14,6 +13,7 @@ from pyatmo.modules.device_types import (
     DeviceCategory as NetatmoDeviceCategory,
     DeviceType as NetatmoDeviceType,
 )
+from pyatmo.schedule import Schedule
 
 from homeassistant.components import cloud
 from homeassistant.config_entries import ConfigEntry
@@ -27,8 +27,6 @@ from homeassistant.helpers.event import async_track_time_interval
 from .const import (
     CAMERA_CONNECTION_WEBHOOKS,
     CONF_DISABLED_HOMES,
-    DATA_PERSONS,
-    DATA_SCHEDULES,
     DOMAIN,
     MANUFACTURER,
     NETATMO_CREATE_BUTTON,
@@ -133,13 +131,24 @@ NETATMO_DEV_CALL_LIMITS = {
     SCAN_INTERVAL: 10,
 }
 
-# this is for the dynamic API rate limiting adjustement to deal with rare occasions
+# this is for the dynamic API rate limiting adjustment to deal with rare occasions
 # where there may be a need to go lower in API consumption (and then back higher
-# to get to an equilibrium)
-CPH_ADJUSTEMENT_DOWN = 0.8
-CPH_ADJUSTEMENT_BACK_UP = 1.1
+# to get to an equilibrium) (CPH : call per hour)
+CPH_ADJUSTMENT_DOWN = 0.8
+CPH_ADJUSTMENT_BACK_UP = 1.1
+
+# Number of consecutive failed fetches a publisher tolerates before its
+# entities are reported as unavailable. Transient backend errors are common,
+# and flipping entities to unavailable on the first one makes them flicker.
+UNAVAILABLE_AFTER_ERRORS = 3
 
 type NetatmoConfigEntry = ConfigEntry[NetatmoDataHandler]
+
+
+def async_get_loaded_entry(hass: HomeAssistant) -> NetatmoConfigEntry | None:
+    """Return the single loaded Netatmo config entry, if any."""
+    entries = hass.config_entries.async_loaded_entries(DOMAIN)
+    return entries[0] if entries else None
 
 
 @dataclass
@@ -179,34 +188,13 @@ class NetatmoPublisher:
     name: str
     interval: int
     next_scan: float
-    target: Any
     subscriptions: set[CALLBACK_TYPE | None]
     method: str
     kwargs: dict
-    num_consecutive_errors: int
-    data_handler: NetatmoDataHandler
-
-    def __init__(
-        self,
-        name,
-        interval,
-        next_scan,
-        target,
-        subscriptions,
-        method,
-        data_handler,
-        kwargs,
-    ):
-        """Initialize the publisher."""
-        self.name = name
-        self.interval = interval
-        self.next_scan = next_scan
-        self.target = target
-        self.subscriptions = subscriptions
-        self.method = method
-        self.kwargs = kwargs
-        self.num_consecutive_errors = 0
-        self.data_handler = data_handler
+    target: Any
+    available: bool = True
+    num_consecutive_errors: int = 0
+    data_handler: NetatmoDataHandler|None = None
 
     def push_emission(self, ts):
         """Record a successful emission."""
@@ -243,8 +231,14 @@ class NetatmoDataHandler:
         self._init_complete = False
         self._init_topology_complete = False
         self._init_update_status_complete = False
+        # Homes whose status was already fetched by the init pass, so that
+        # async_dispatch does not immediately fetch them a second time
+        self._initial_status_homes: set[str] = set()
         self.config_entry = config_entry
         self.auth = auth
+        self.disabled_homes: set[str] = set(
+            config_entry.options.get(CONF_DISABLED_HOMES, [])
+        )
         self.publisher: dict[str, NetatmoPublisher] = {}
         self._sorted_publisher: list[NetatmoPublisher] = []
         self._webhook: bool = False
@@ -261,18 +255,26 @@ class NetatmoDataHandler:
 
         self._10s_rate_limit = limits[CALL_PER_TEN_SECONDS]
 
-        self.rolling_hour = []  # used to store API calls and have a rolling windws of calls
+        self.rolling_hour = []  # used to store API calls and have a rolling windows of calls
         self._adjusted_hourly_rate_limit = None
         # Single gate (3600s) deliberately matches the rolling-hour window
         # length: only re-decide rate adjustments after the rolling
         # measurement is fully clean. Splitting into separate up/down gates
         # was tried and reverted because faster recovery led to oscillation
-        # in steady-state over-demand scenarios.
+        # in steady-state over-demand scenarios. (cph : call per hour)
         self._last_cph_change = None
 
         self._max_call_per_interval = None
 
         self.adjust_per_scan_numbers()
+
+        self.persons: dict[str, dict[str, str | None]] = {}
+        self.schedules: dict[str, dict[str, Schedule]] = {}
+        self.device_ids: dict[str, str] = {}
+        self.cameras: dict[str, str] = {}
+        self.events: dict[str, dict] = {}
+
+
 
     def add_api_call(self, n):
         """Add an API call to the rolling window of calls."""
@@ -290,12 +292,9 @@ class NetatmoDataHandler:
     async def _init_update_topology_if_needed(self):
         """Initialize topology if not already done."""
         if self._init_topology_complete is False:
-            disabled_homes = self.config_entry.options.get(CONF_DISABLED_HOMES, [])
             has_error = False
             try:
-                await self.account.async_update_topology(
-                    disabled_homes_ids=disabled_homes
-                )
+                await self.account.async_update_topology()
                 self.add_api_call(1)
 
             except (pyatmo.NoDeviceError, pyatmo.ApiError) as err:
@@ -339,7 +338,7 @@ class NetatmoDataHandler:
             is_first = True
             for h in self.account.homes:
                 # check the home is a real one
-                if h not in self.account.all_homes_id:
+                if h not in self.account.all_home_names:
                     continue
 
                 if not is_first:
@@ -391,6 +390,7 @@ class NetatmoDataHandler:
 
                 if has_error is False:
                     num_house_ok += 1
+                    self._initial_status_homes.add(h)
 
             self.add_api_call(num_calls)
 
@@ -435,8 +435,11 @@ class NetatmoDataHandler:
         self._init_complete = False
         self._init_topology_complete = False
         self._init_update_status_complete = False
+        self._initial_status_homes.clear()
 
-        self.account = pyatmo.AsyncAccount(self.auth)
+        self.account = pyatmo.AsyncAccount(
+            self.auth, disabled_homes_ids=list(self.disabled_homes)
+        )
 
         if await self._do_complete_init_if_needed() is False:
             _LOGGER.info(
@@ -527,7 +530,8 @@ class NetatmoDataHandler:
             return
 
         if do_wait_scan_for_cph_to_target:
-            # wait for a bit longer to reach 80% of the target cph to have 20% of room to breath
+            # wait for a bit longer to reach 80% of the target cph
+            # (call per hour) to have 20% of room to breath
             wait_time = self.get_wait_time_to_reach_targets(current, int(target * 0.80))
         else:
             wait_time = 0
@@ -633,7 +637,7 @@ class NetatmoDataHandler:
                     has_been_throttled = True
                     break
                 if error:
-                    data_class.num_consecutive_errors += 1
+                    # async_fetch_data already bumped num_consecutive_errors
                     _LOGGER.debug(
                         "Error on publisher: %s, num_errors: %i",
                         publisher,
@@ -680,7 +684,7 @@ class NetatmoDataHandler:
                 )
                 # remove 20% each time ...
                 new_target = int(
-                    self._adjusted_hourly_rate_limit * CPH_ADJUSTEMENT_DOWN
+                    self._adjusted_hourly_rate_limit * CPH_ADJUSTMENT_DOWN
                 )
                 self.adjust_intervals_to_target(
                     new_target,
@@ -693,7 +697,7 @@ class NetatmoDataHandler:
                 new_target = int(
                     min(
                         self._initial_hourly_rate_limit,
-                        int(self._adjusted_hourly_rate_limit * CPH_ADJUSTEMENT_BACK_UP),
+                        int(self._adjusted_hourly_rate_limit * CPH_ADJUSTMENT_BACK_UP),
                     )
                 )
                 if self._adjusted_hourly_rate_limit != self._initial_hourly_rate_limit:
@@ -735,6 +739,7 @@ class NetatmoDataHandler:
         """Fetch data and notify."""
         has_error = False
         has_throttling_error = False
+        add_call = True
 
         if update_only is False:
             try:
@@ -756,18 +761,42 @@ class NetatmoDataHandler:
                 has_error = True
             except (TimeoutError, aiohttp.ClientConnectorError) as err:
                 _LOGGER.debug("fetch error Timeout or ClientConnectorError: %s", err)
-                return True, False
+                has_error = True
+                add_call = False
             except (OSError, KeyError) as err:
                 _LOGGER.debug("fetch error unknown %s", err)
                 has_error = True
 
-            self.add_api_call(1)
+            if add_call:
+                self.add_api_call(1)
 
+            publisher = self.publisher[signal_name]
+            # A throttling error says nothing about the backend's health, so it
+            # leaves the consecutive error count untouched.
+            if not has_throttling_error:
+                if has_error:
+                    publisher.num_consecutive_errors += 1
+                else:
+                    publisher.num_consecutive_errors = 0
+
+            publisher.available = (
+                publisher.num_consecutive_errors < UNAVAILABLE_AFTER_ERRORS
+            )
+
+        self._notify_subscribers(signal_name)
+
+        return has_error, has_throttling_error
+
+    def _notify_subscribers(self, signal_name: str) -> None:
+        """Notify all subscribers of a publisher to update their state."""
         for update_callback in self.publisher[signal_name].subscriptions:
             if update_callback:
                 update_callback()
 
-        return has_error, has_throttling_error
+    def is_signal_available(self, signal_name: str) -> bool:
+        """Return whether the last fetch for a publisher succeeded."""
+        publisher = self.publisher.get(signal_name)
+        return publisher is None or publisher.available
 
     async def subscribe(
         self,
@@ -804,14 +833,9 @@ class NetatmoDataHandler:
         if target is None:
             target = self.account
 
-        if publisher == PUBLIC:
+        if publisher == "public":
             kwargs = {"area_id": self.account.register_public_weather_area(**kwargs)}
-        elif publisher == ACCOUNT:
-            kwargs = {
-                "disabled_homes_ids": self.config_entry.options.get(
-                    CONF_DISABLED_HOMES, []
-                )
-            }
+
 
         interval = int(self._limits[publisher])
         self.publisher[signal_name] = NetatmoPublisher(
@@ -895,14 +919,25 @@ class NetatmoDataHandler:
         for home in self.account.homes.values():
             signal_home = f"{HOME}-{home.entity_id}"
 
-            await self.subscribe(HOME, signal_home, None, home_id=home.entity_id)
+            # The init pass already fetched the status of the homes it got
+            # through, so only the ones it missed (an error, or the early exit
+            # on throttling) still need a fetch here. On the cloud limits a
+            # redundant round costs one call per home out of 20 per hour.
+            await self.subscribe_with_target(
+                publisher=HOME,
+                signal_name=signal_home,
+                target=None,
+                update_callback=None,
+                update_only=home.entity_id in self._initial_status_homes,
+                home_id=home.entity_id,
+            )
             await self.subscribe(EVENT, signal_home, None, home_id=home.entity_id)
 
             self.setup_climate_schedule_select(home, signal_home)
             self.setup_rooms(home, signal_home)
             self.setup_modules(home, signal_home)
 
-            self.hass.data[DOMAIN][DATA_PERSONS][home.entity_id] = {
+            self.persons[home.entity_id] = {
                 person.entity_id: person.pseudo for person in home.persons.values()
             }
 
@@ -1080,7 +1115,7 @@ class NetatmoDataHandler:
         if NetatmoDeviceCategory.climate in [
             next(iter(x)) for x in [room.features for room in home.rooms.values()] if x
         ]:
-            self.hass.data[DOMAIN][DATA_SCHEDULES][home.entity_id] = self.account.homes[
+            self.schedules[home.entity_id] = self.account.homes[
                 home.entity_id
             ].schedules
 

@@ -6,7 +6,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -47,13 +47,13 @@
 # name: test_entity[sensor.baby_bedroom_atmospheric_pressure-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'atmospheric_pressure',
-      'friendly_name': 'Baby Bedroom Atmospheric pressure',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfPressure.HPA: 'hPa'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'atmospheric_pressure',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Baby Bedroom Atmospheric pressure',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfPressure.HPA: 'hPa'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.baby_bedroom_atmospheric_pressure',
@@ -70,7 +70,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -99,19 +99,19 @@
     'supported_features': 0,
     'translation_key': 'co2',
     'unique_id': '12:34:56:26:68:92-co2',
-    'unit_of_measurement': 'ppm',
+    'unit_of_measurement': <UnitOfRatio.PARTS_PER_MILLION: 'ppm'>,
   })
 # ---
 # name: test_entity[sensor.baby_bedroom_carbon_dioxide-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'carbon_dioxide',
-      'friendly_name': 'Baby Bedroom Carbon dioxide',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': 'ppm',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'carbon_dioxide',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Baby Bedroom Carbon dioxide',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PARTS_PER_MILLION: 'ppm'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.baby_bedroom_carbon_dioxide',
@@ -128,7 +128,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'options': list([
+      <SensorEntityCapabilityAttribute.OPTIONS: 'options'>: list([
         'healthy',
         'fine',
         'fair',
@@ -169,12 +169,12 @@
 # name: test_entity[sensor.baby_bedroom_health_index-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'enum',
-      'friendly_name': 'Baby Bedroom Health index',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
-      'options': list([
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'enum',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Baby Bedroom Health index',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
+      <SensorEntityCapabilityAttribute.OPTIONS: 'options'>: list([
         'healthy',
         'fine',
         'fair',
@@ -197,7 +197,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -226,19 +226,19 @@
     'supported_features': 0,
     'translation_key': 'humidity',
     'unique_id': '12:34:56:26:68:92-humidity',
-    'unit_of_measurement': '%',
+    'unit_of_measurement': <UnitOfRatio.PERCENTAGE: '%'>,
   })
 # ---
 # name: test_entity[sensor.baby_bedroom_humidity-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'humidity',
-      'friendly_name': 'Baby Bedroom Humidity',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': '%',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'humidity',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Baby Bedroom Humidity',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PERCENTAGE: '%'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.baby_bedroom_humidity',
@@ -255,7 +255,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -293,13 +293,13 @@
 # name: test_entity[sensor.baby_bedroom_noise-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'sound_pressure',
-      'friendly_name': 'Baby Bedroom Noise',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfSoundPressure.DECIBEL: 'dB'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'sound_pressure',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Baby Bedroom Noise',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfSoundPressure.DECIBEL: 'dB'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.baby_bedroom_noise',
@@ -349,10 +349,10 @@
 # name: test_entity[sensor.baby_bedroom_pressure_trend-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Baby Bedroom Pressure trend',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Baby Bedroom Pressure trend',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.baby_bedroom_pressure_trend',
@@ -402,10 +402,10 @@
 # name: test_entity[sensor.baby_bedroom_reachability-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Baby Bedroom Reachability',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Baby Bedroom Reachability',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.baby_bedroom_reachability',
@@ -422,7 +422,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -460,13 +460,13 @@
 # name: test_entity[sensor.baby_bedroom_temperature-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'temperature',
-      'friendly_name': 'Baby Bedroom Temperature',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'temperature',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Baby Bedroom Temperature',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfTemperature.CELSIUS: '°C'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.baby_bedroom_temperature',
@@ -516,10 +516,10 @@
 # name: test_entity[sensor.baby_bedroom_temperature_trend-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Baby Bedroom Temperature trend',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Baby Bedroom Temperature trend',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.baby_bedroom_temperature_trend',
@@ -569,10 +569,10 @@
 # name: test_entity[sensor.baby_bedroom_wi_fi_strength-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Baby Bedroom Wi-Fi strength',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Baby Bedroom Wi-Fi strength',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.baby_bedroom_wi_fi_strength',
@@ -589,7 +589,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -627,11 +627,11 @@
 # name: test_entity[sensor.bathroom_light_energy-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'energy',
-      'friendly_name': 'Bathroom light Energy',
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfEnergy.WATT_HOUR: 'Wh'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'energy',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Bathroom light Energy',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfEnergy.WATT_HOUR: 'Wh'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.bathroom_light_energy',
@@ -648,7 +648,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -689,11 +689,11 @@
 # name: test_entity[sensor.bedroom_atmospheric_pressure-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'atmospheric_pressure',
-      'friendly_name': 'Bedroom Atmospheric pressure',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfPressure.HPA: 'hPa'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'atmospheric_pressure',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Bedroom Atmospheric pressure',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfPressure.HPA: 'hPa'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.bedroom_atmospheric_pressure',
@@ -710,7 +710,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -739,17 +739,17 @@
     'supported_features': 0,
     'translation_key': 'co2',
     'unique_id': '12:34:56:26:69:0c-co2',
-    'unit_of_measurement': 'ppm',
+    'unit_of_measurement': <UnitOfRatio.PARTS_PER_MILLION: 'ppm'>,
   })
 # ---
 # name: test_entity[sensor.bedroom_carbon_dioxide-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'carbon_dioxide',
-      'friendly_name': 'Bedroom Carbon dioxide',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': 'ppm',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'carbon_dioxide',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Bedroom Carbon dioxide',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PARTS_PER_MILLION: 'ppm'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.bedroom_carbon_dioxide',
@@ -766,7 +766,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'options': list([
+      <SensorEntityCapabilityAttribute.OPTIONS: 'options'>: list([
         'healthy',
         'fine',
         'fair',
@@ -807,10 +807,10 @@
 # name: test_entity[sensor.bedroom_health_index-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'enum',
-      'friendly_name': 'Bedroom Health index',
-      'options': list([
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'enum',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Bedroom Health index',
+      <SensorEntityCapabilityAttribute.OPTIONS: 'options'>: list([
         'healthy',
         'fine',
         'fair',
@@ -833,7 +833,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -862,17 +862,17 @@
     'supported_features': 0,
     'translation_key': 'humidity',
     'unique_id': '12:34:56:26:69:0c-humidity',
-    'unit_of_measurement': '%',
+    'unit_of_measurement': <UnitOfRatio.PERCENTAGE: '%'>,
   })
 # ---
 # name: test_entity[sensor.bedroom_humidity-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'humidity',
-      'friendly_name': 'Bedroom Humidity',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': '%',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'humidity',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Bedroom Humidity',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PERCENTAGE: '%'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.bedroom_humidity',
@@ -889,7 +889,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -927,11 +927,11 @@
 # name: test_entity[sensor.bedroom_noise-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'sound_pressure',
-      'friendly_name': 'Bedroom Noise',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfSoundPressure.DECIBEL: 'dB'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'sound_pressure',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Bedroom Noise',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfSoundPressure.DECIBEL: 'dB'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.bedroom_noise',
@@ -981,8 +981,8 @@
 # name: test_entity[sensor.bedroom_pressure_trend-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Bedroom Pressure trend',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Bedroom Pressure trend',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.bedroom_pressure_trend',
@@ -1032,10 +1032,10 @@
 # name: test_entity[sensor.bedroom_reachability-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Bedroom Reachability',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Bedroom Reachability',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.bedroom_reachability',
@@ -1052,7 +1052,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -1090,11 +1090,11 @@
 # name: test_entity[sensor.bedroom_temperature-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'temperature',
-      'friendly_name': 'Bedroom Temperature',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'temperature',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Bedroom Temperature',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfTemperature.CELSIUS: '°C'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.bedroom_temperature',
@@ -1144,8 +1144,8 @@
 # name: test_entity[sensor.bedroom_temperature_trend-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Bedroom Temperature trend',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Bedroom Temperature trend',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.bedroom_temperature_trend',
@@ -1195,10 +1195,10 @@
 # name: test_entity[sensor.bedroom_wi_fi_strength-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Bedroom Wi-Fi strength',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Bedroom Wi-Fi strength',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.bedroom_wi_fi_strength',
@@ -1248,8 +1248,8 @@
 # name: test_entity[sensor.bubendorff_blind-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Bubendorff blind',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Bubendorff blind',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.bubendorff_blind',
@@ -1306,7 +1306,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -1335,17 +1335,17 @@
     'supported_features': 0,
     'translation_key': None,
     'unique_id': '222452125-12:34:56:20:f5:8c-battery',
-    'unit_of_measurement': '%',
+    'unit_of_measurement': <UnitOfRatio.PERCENTAGE: '%'>,
   })
 # ---
 # name: test_entity[sensor.bureau_modulate_battery-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'battery',
-      'friendly_name': 'Bureau Modulate Battery',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': '%',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'battery',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Bureau Modulate Battery',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PERCENTAGE: '%'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.bureau_modulate_battery',
@@ -1395,8 +1395,8 @@
 # name: test_entity[sensor.centralized_ventilation_controler-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Centralized ventilation controler',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Centralized ventilation controler',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.centralized_ventilation_controler',
@@ -1413,7 +1413,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -1451,11 +1451,11 @@
 # name: test_entity[sensor.centralized_ventilation_controler_power-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'power',
-      'friendly_name': 'Centralized ventilation controler Power',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfPower.WATT: 'W'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'power',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Centralized ventilation controler Power',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfPower.WATT: 'W'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.centralized_ventilation_controler_power',
@@ -1505,8 +1505,8 @@
 # name: test_entity[sensor.cold_water-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Cold water',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Cold water',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.cold_water',
@@ -1523,7 +1523,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -1561,11 +1561,11 @@
 # name: test_entity[sensor.cold_water_water-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'water',
-      'friendly_name': 'Cold water Water',
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfVolume.LITERS: 'L'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'water',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Cold water Water',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfVolume.LITERS: 'L'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.cold_water_water',
@@ -1615,8 +1615,8 @@
 # name: test_entity[sensor.consumption_meter-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Consumption meter',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Consumption meter',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.consumption_meter',
@@ -1633,7 +1633,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -1671,11 +1671,11 @@
 # name: test_entity[sensor.consumption_meter_energy-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'energy',
-      'friendly_name': 'Consumption meter Energy',
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfEnergy.WATT_HOUR: 'Wh'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'energy',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Consumption meter Energy',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfEnergy.WATT_HOUR: 'Wh'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.consumption_meter_energy',
@@ -1692,7 +1692,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -1730,11 +1730,11 @@
 # name: test_entity[sensor.consumption_meter_power-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'power',
-      'friendly_name': 'Consumption meter Power',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfPower.WATT: 'W'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'power',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Consumption meter Power',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfPower.WATT: 'W'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.consumption_meter_power',
@@ -1751,7 +1751,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -1780,17 +1780,17 @@
     'supported_features': 0,
     'translation_key': None,
     'unique_id': '1002003001-1002003001-humidity',
-    'unit_of_measurement': '%',
+    'unit_of_measurement': <UnitOfRatio.PERCENTAGE: '%'>,
   })
 # ---
 # name: test_entity[sensor.corridor_corridor_humidity-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'humidity',
-      'friendly_name': 'Corridor Humidity',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': '%',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'humidity',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Corridor Humidity',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PERCENTAGE: '%'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.corridor_corridor_humidity',
@@ -1840,8 +1840,8 @@
 # name: test_entity[sensor.entrance_blinds-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Entrance Blinds',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Entrance Blinds',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.entrance_blinds',
@@ -1931,8 +1931,8 @@
 # name: test_entity[sensor.gas-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Gas',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Gas',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.gas',
@@ -1949,7 +1949,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -1987,11 +1987,11 @@
 # name: test_entity[sensor.gas_gas-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'gas',
-      'friendly_name': 'Gas Gas',
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfVolume.LITERS: 'L'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'gas',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Gas Gas',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfVolume.LITERS: 'L'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.gas_gas',
@@ -2008,7 +2008,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -2049,13 +2049,13 @@
 # name: test_entity[sensor.home_avg_atmospheric_pressure-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'atmospheric_pressure',
-      'friendly_name': 'Home avg Atmospheric pressure',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfPressure.HPA: 'hPa'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'atmospheric_pressure',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home avg Atmospheric pressure',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfPressure.HPA: 'hPa'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_avg_atmospheric_pressure',
@@ -2072,7 +2072,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -2107,13 +2107,13 @@
 # name: test_entity[sensor.home_avg_gust_angle-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'wind_direction',
-      'friendly_name': 'Home avg Gust angle',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
-      'unit_of_measurement': '°',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'wind_direction',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home avg Gust angle',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: '°',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_avg_gust_angle',
@@ -2130,7 +2130,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -2168,13 +2168,13 @@
 # name: test_entity[sensor.home_avg_gust_strength-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'wind_speed',
-      'friendly_name': 'Home avg Gust strength',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'wind_speed',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home avg Gust strength',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_avg_gust_strength',
@@ -2191,7 +2191,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -2220,19 +2220,19 @@
     'supported_features': 0,
     'translation_key': None,
     'unique_id': 'Home-avg-humidity',
-    'unit_of_measurement': '%',
+    'unit_of_measurement': <UnitOfRatio.PERCENTAGE: '%'>,
   })
 # ---
 # name: test_entity[sensor.home_avg_humidity-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'humidity',
-      'friendly_name': 'Home avg Humidity',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': '%',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'humidity',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home avg Humidity',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PERCENTAGE: '%'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_avg_humidity',
@@ -2249,7 +2249,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -2287,13 +2287,13 @@
 # name: test_entity[sensor.home_avg_precipitation-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'precipitation',
-      'friendly_name': 'Home avg Precipitation',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfPrecipitationDepth.MILLIMETERS: 'mm'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'precipitation',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home avg Precipitation',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfPrecipitationDepth.MILLIMETERS: 'mm'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_avg_precipitation',
@@ -2310,7 +2310,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.TOTAL: 'total'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL: 'total'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -2348,13 +2348,13 @@
 # name: test_entity[sensor.home_avg_precipitation_last_hour-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'precipitation',
-      'friendly_name': 'Home avg Precipitation last hour',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.TOTAL: 'total'>,
-      'unit_of_measurement': <UnitOfPrecipitationDepth.MILLIMETERS: 'mm'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'precipitation',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home avg Precipitation last hour',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL: 'total'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfPrecipitationDepth.MILLIMETERS: 'mm'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_avg_precipitation_last_hour',
@@ -2371,7 +2371,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -2409,13 +2409,13 @@
 # name: test_entity[sensor.home_avg_precipitation_today-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'precipitation',
-      'friendly_name': 'Home avg Precipitation today',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfPrecipitationDepth.MILLIMETERS: 'mm'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'precipitation',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home avg Precipitation today',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfPrecipitationDepth.MILLIMETERS: 'mm'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_avg_precipitation_today',
@@ -2432,7 +2432,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -2470,13 +2470,13 @@
 # name: test_entity[sensor.home_avg_temperature-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'temperature',
-      'friendly_name': 'Home avg Temperature',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'temperature',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home avg Temperature',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfTemperature.CELSIUS: '°C'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_avg_temperature',
@@ -2493,7 +2493,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -2528,13 +2528,13 @@
 # name: test_entity[sensor.home_avg_wind_direction-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'wind_direction',
-      'friendly_name': 'Home avg Wind direction',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
-      'unit_of_measurement': '°',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'wind_direction',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home avg Wind direction',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: '°',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_avg_wind_direction',
@@ -2551,7 +2551,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -2589,13 +2589,13 @@
 # name: test_entity[sensor.home_avg_wind_speed-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'wind_speed',
-      'friendly_name': 'Home avg Wind speed',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'wind_speed',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home avg Wind speed',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_avg_wind_speed',
@@ -2612,7 +2612,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -2653,13 +2653,13 @@
 # name: test_entity[sensor.home_max_atmospheric_pressure-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'atmospheric_pressure',
-      'friendly_name': 'Home max Atmospheric pressure',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfPressure.HPA: 'hPa'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'atmospheric_pressure',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home max Atmospheric pressure',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfPressure.HPA: 'hPa'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_max_atmospheric_pressure',
@@ -2676,7 +2676,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -2711,13 +2711,13 @@
 # name: test_entity[sensor.home_max_gust_angle-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'wind_direction',
-      'friendly_name': 'Home max Gust angle',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
-      'unit_of_measurement': '°',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'wind_direction',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home max Gust angle',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: '°',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_max_gust_angle',
@@ -2734,7 +2734,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -2772,13 +2772,13 @@
 # name: test_entity[sensor.home_max_gust_strength-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'wind_speed',
-      'friendly_name': 'Home max Gust strength',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'wind_speed',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home max Gust strength',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_max_gust_strength',
@@ -2795,7 +2795,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -2824,19 +2824,19 @@
     'supported_features': 0,
     'translation_key': None,
     'unique_id': 'Home-max-humidity',
-    'unit_of_measurement': '%',
+    'unit_of_measurement': <UnitOfRatio.PERCENTAGE: '%'>,
   })
 # ---
 # name: test_entity[sensor.home_max_humidity-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'humidity',
-      'friendly_name': 'Home max Humidity',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': '%',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'humidity',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home max Humidity',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PERCENTAGE: '%'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_max_humidity',
@@ -2853,7 +2853,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -2891,13 +2891,13 @@
 # name: test_entity[sensor.home_max_precipitation-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'precipitation',
-      'friendly_name': 'Home max Precipitation',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfPrecipitationDepth.MILLIMETERS: 'mm'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'precipitation',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home max Precipitation',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfPrecipitationDepth.MILLIMETERS: 'mm'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_max_precipitation',
@@ -2914,7 +2914,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.TOTAL: 'total'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL: 'total'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -2952,13 +2952,13 @@
 # name: test_entity[sensor.home_max_precipitation_last_hour-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'precipitation',
-      'friendly_name': 'Home max Precipitation last hour',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.TOTAL: 'total'>,
-      'unit_of_measurement': <UnitOfPrecipitationDepth.MILLIMETERS: 'mm'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'precipitation',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home max Precipitation last hour',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL: 'total'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfPrecipitationDepth.MILLIMETERS: 'mm'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_max_precipitation_last_hour',
@@ -2975,7 +2975,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -3013,13 +3013,13 @@
 # name: test_entity[sensor.home_max_precipitation_today-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'precipitation',
-      'friendly_name': 'Home max Precipitation today',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfPrecipitationDepth.MILLIMETERS: 'mm'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'precipitation',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home max Precipitation today',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfPrecipitationDepth.MILLIMETERS: 'mm'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_max_precipitation_today',
@@ -3036,7 +3036,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -3074,13 +3074,13 @@
 # name: test_entity[sensor.home_max_temperature-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'temperature',
-      'friendly_name': 'Home max Temperature',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'temperature',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home max Temperature',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfTemperature.CELSIUS: '°C'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_max_temperature',
@@ -3097,7 +3097,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -3132,13 +3132,13 @@
 # name: test_entity[sensor.home_max_wind_direction-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'wind_direction',
-      'friendly_name': 'Home max Wind direction',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
-      'unit_of_measurement': '°',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'wind_direction',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home max Wind direction',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: '°',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_max_wind_direction',
@@ -3155,7 +3155,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -3193,13 +3193,13 @@
 # name: test_entity[sensor.home_max_wind_speed-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'wind_speed',
-      'friendly_name': 'Home max Wind speed',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'wind_speed',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home max Wind speed',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_max_wind_speed',
@@ -3216,7 +3216,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -3257,13 +3257,13 @@
 # name: test_entity[sensor.home_min_atmospheric_pressure-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'atmospheric_pressure',
-      'friendly_name': 'Home min Atmospheric pressure',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfPressure.HPA: 'hPa'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'atmospheric_pressure',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home min Atmospheric pressure',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfPressure.HPA: 'hPa'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_min_atmospheric_pressure',
@@ -3280,7 +3280,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -3315,13 +3315,13 @@
 # name: test_entity[sensor.home_min_gust_angle-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'wind_direction',
-      'friendly_name': 'Home min Gust angle',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
-      'unit_of_measurement': '°',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'wind_direction',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home min Gust angle',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: '°',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_min_gust_angle',
@@ -3338,7 +3338,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -3376,13 +3376,13 @@
 # name: test_entity[sensor.home_min_gust_strength-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'wind_speed',
-      'friendly_name': 'Home min Gust strength',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'wind_speed',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home min Gust strength',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_min_gust_strength',
@@ -3399,7 +3399,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -3428,19 +3428,19 @@
     'supported_features': 0,
     'translation_key': None,
     'unique_id': 'Home-min-humidity',
-    'unit_of_measurement': '%',
+    'unit_of_measurement': <UnitOfRatio.PERCENTAGE: '%'>,
   })
 # ---
 # name: test_entity[sensor.home_min_humidity-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'humidity',
-      'friendly_name': 'Home min Humidity',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': '%',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'humidity',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home min Humidity',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PERCENTAGE: '%'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_min_humidity',
@@ -3457,7 +3457,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -3495,13 +3495,13 @@
 # name: test_entity[sensor.home_min_precipitation-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'precipitation',
-      'friendly_name': 'Home min Precipitation',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfPrecipitationDepth.MILLIMETERS: 'mm'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'precipitation',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home min Precipitation',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfPrecipitationDepth.MILLIMETERS: 'mm'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_min_precipitation',
@@ -3518,7 +3518,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.TOTAL: 'total'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL: 'total'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -3556,13 +3556,13 @@
 # name: test_entity[sensor.home_min_precipitation_last_hour-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'precipitation',
-      'friendly_name': 'Home min Precipitation last hour',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.TOTAL: 'total'>,
-      'unit_of_measurement': <UnitOfPrecipitationDepth.MILLIMETERS: 'mm'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'precipitation',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home min Precipitation last hour',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL: 'total'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfPrecipitationDepth.MILLIMETERS: 'mm'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_min_precipitation_last_hour',
@@ -3579,7 +3579,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -3617,13 +3617,13 @@
 # name: test_entity[sensor.home_min_precipitation_today-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'precipitation',
-      'friendly_name': 'Home min Precipitation today',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfPrecipitationDepth.MILLIMETERS: 'mm'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'precipitation',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home min Precipitation today',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfPrecipitationDepth.MILLIMETERS: 'mm'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_min_precipitation_today',
@@ -3640,7 +3640,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -3678,13 +3678,13 @@
 # name: test_entity[sensor.home_min_temperature-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'temperature',
-      'friendly_name': 'Home min Temperature',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'temperature',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home min Temperature',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfTemperature.CELSIUS: '°C'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_min_temperature',
@@ -3701,7 +3701,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -3736,13 +3736,13 @@
 # name: test_entity[sensor.home_min_wind_direction-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'wind_direction',
-      'friendly_name': 'Home min Wind direction',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
-      'unit_of_measurement': '°',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'wind_direction',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home min Wind direction',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: '°',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_min_wind_direction',
@@ -3759,7 +3759,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -3797,13 +3797,13 @@
 # name: test_entity[sensor.home_min_wind_speed-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'wind_speed',
-      'friendly_name': 'Home min Wind speed',
-      'latitude': 32.17901225,
-      'longitude': -117.17901225,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'wind_speed',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Home min Wind speed',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 32.17901225,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: -117.17901225,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.home_min_wind_speed',
@@ -3853,8 +3853,8 @@
 # name: test_entity[sensor.hot_water-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Hot water',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Hot water',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.hot_water',
@@ -3871,7 +3871,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -3909,11 +3909,11 @@
 # name: test_entity[sensor.hot_water_water-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'water',
-      'friendly_name': 'Hot water Water',
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfVolume.LITERS: 'L'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'water',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Hot water Water',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfVolume.LITERS: 'L'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.hot_water_water',
@@ -3930,7 +3930,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -3971,13 +3971,13 @@
 # name: test_entity[sensor.kitchen_atmospheric_pressure-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'atmospheric_pressure',
-      'friendly_name': 'Kitchen Atmospheric pressure',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfPressure.HPA: 'hPa'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'atmospheric_pressure',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Kitchen Atmospheric pressure',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfPressure.HPA: 'hPa'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.kitchen_atmospheric_pressure',
@@ -3994,7 +3994,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -4023,19 +4023,19 @@
     'supported_features': 0,
     'translation_key': 'co2',
     'unique_id': '12:34:56:25:cf:a8-co2',
-    'unit_of_measurement': 'ppm',
+    'unit_of_measurement': <UnitOfRatio.PARTS_PER_MILLION: 'ppm'>,
   })
 # ---
 # name: test_entity[sensor.kitchen_carbon_dioxide-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'carbon_dioxide',
-      'friendly_name': 'Kitchen Carbon dioxide',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': 'ppm',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'carbon_dioxide',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Kitchen Carbon dioxide',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PARTS_PER_MILLION: 'ppm'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.kitchen_carbon_dioxide',
@@ -4052,7 +4052,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'options': list([
+      <SensorEntityCapabilityAttribute.OPTIONS: 'options'>: list([
         'healthy',
         'fine',
         'fair',
@@ -4093,12 +4093,12 @@
 # name: test_entity[sensor.kitchen_health_index-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'enum',
-      'friendly_name': 'Kitchen Health index',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
-      'options': list([
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'enum',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Kitchen Health index',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
+      <SensorEntityCapabilityAttribute.OPTIONS: 'options'>: list([
         'healthy',
         'fine',
         'fair',
@@ -4121,7 +4121,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -4150,19 +4150,19 @@
     'supported_features': 0,
     'translation_key': 'humidity',
     'unique_id': '12:34:56:25:cf:a8-humidity',
-    'unit_of_measurement': '%',
+    'unit_of_measurement': <UnitOfRatio.PERCENTAGE: '%'>,
   })
 # ---
 # name: test_entity[sensor.kitchen_humidity-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'humidity',
-      'friendly_name': 'Kitchen Humidity',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': '%',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'humidity',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Kitchen Humidity',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PERCENTAGE: '%'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.kitchen_humidity',
@@ -4179,7 +4179,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -4217,13 +4217,13 @@
 # name: test_entity[sensor.kitchen_noise-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'sound_pressure',
-      'friendly_name': 'Kitchen Noise',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfSoundPressure.DECIBEL: 'dB'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'sound_pressure',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Kitchen Noise',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfSoundPressure.DECIBEL: 'dB'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.kitchen_noise',
@@ -4273,10 +4273,10 @@
 # name: test_entity[sensor.kitchen_pressure_trend-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Kitchen Pressure trend',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Kitchen Pressure trend',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.kitchen_pressure_trend',
@@ -4326,10 +4326,10 @@
 # name: test_entity[sensor.kitchen_reachability-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Kitchen Reachability',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Kitchen Reachability',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.kitchen_reachability',
@@ -4346,7 +4346,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -4384,13 +4384,13 @@
 # name: test_entity[sensor.kitchen_temperature-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'temperature',
-      'friendly_name': 'Kitchen Temperature',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'temperature',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Kitchen Temperature',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfTemperature.CELSIUS: '°C'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.kitchen_temperature',
@@ -4440,10 +4440,10 @@
 # name: test_entity[sensor.kitchen_temperature_trend-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Kitchen Temperature trend',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Kitchen Temperature trend',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.kitchen_temperature_trend',
@@ -4493,10 +4493,10 @@
 # name: test_entity[sensor.kitchen_wi_fi_strength-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Kitchen Wi-Fi strength',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Kitchen Wi-Fi strength',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.kitchen_wi_fi_strength',
@@ -4546,8 +4546,8 @@
 # name: test_entity[sensor.line_1-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Line 1',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Line 1',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.line_1',
@@ -4564,7 +4564,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -4602,11 +4602,11 @@
 # name: test_entity[sensor.line_1_energy-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'energy',
-      'friendly_name': 'Line 1 Energy',
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfEnergy.WATT_HOUR: 'Wh'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'energy',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Line 1 Energy',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfEnergy.WATT_HOUR: 'Wh'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.line_1_energy',
@@ -4656,8 +4656,8 @@
 # name: test_entity[sensor.line_2-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Line 2',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Line 2',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.line_2',
@@ -4674,7 +4674,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -4712,11 +4712,11 @@
 # name: test_entity[sensor.line_2_energy-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'energy',
-      'friendly_name': 'Line 2 Energy',
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfEnergy.WATT_HOUR: 'Wh'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'energy',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Line 2 Energy',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfEnergy.WATT_HOUR: 'Wh'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.line_2_energy',
@@ -4766,8 +4766,8 @@
 # name: test_entity[sensor.line_3-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Line 3',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Line 3',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.line_3',
@@ -4784,7 +4784,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -4822,11 +4822,11 @@
 # name: test_entity[sensor.line_3_energy-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'energy',
-      'friendly_name': 'Line 3 Energy',
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfEnergy.WATT_HOUR: 'Wh'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'energy',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Line 3 Energy',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfEnergy.WATT_HOUR: 'Wh'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.line_3_energy',
@@ -4876,8 +4876,8 @@
 # name: test_entity[sensor.line_4-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Line 4',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Line 4',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.line_4',
@@ -4894,7 +4894,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -4932,11 +4932,11 @@
 # name: test_entity[sensor.line_4_energy-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'energy',
-      'friendly_name': 'Line 4 Energy',
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfEnergy.WATT_HOUR: 'Wh'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'energy',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Line 4 Energy',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfEnergy.WATT_HOUR: 'Wh'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.line_4_energy',
@@ -4986,8 +4986,8 @@
 # name: test_entity[sensor.line_5-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Line 5',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Line 5',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.line_5',
@@ -5004,7 +5004,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -5042,11 +5042,11 @@
 # name: test_entity[sensor.line_5_energy-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'energy',
-      'friendly_name': 'Line 5 Energy',
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfEnergy.WATT_HOUR: 'Wh'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'energy',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Line 5 Energy',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfEnergy.WATT_HOUR: 'Wh'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.line_5_energy',
@@ -5063,7 +5063,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -5104,13 +5104,13 @@
 # name: test_entity[sensor.livingroom_atmospheric_pressure-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'atmospheric_pressure',
-      'friendly_name': 'Livingroom Atmospheric pressure',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfPressure.HPA: 'hPa'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'atmospheric_pressure',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Livingroom Atmospheric pressure',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfPressure.HPA: 'hPa'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.livingroom_atmospheric_pressure',
@@ -5127,7 +5127,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -5156,17 +5156,17 @@
     'supported_features': 0,
     'translation_key': None,
     'unique_id': '2746182631-12:34:56:00:01:ae-battery',
-    'unit_of_measurement': '%',
+    'unit_of_measurement': <UnitOfRatio.PERCENTAGE: '%'>,
   })
 # ---
 # name: test_entity[sensor.livingroom_battery-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'battery',
-      'friendly_name': 'Livingroom Battery',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': '%',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'battery',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Livingroom Battery',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PERCENTAGE: '%'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.livingroom_battery',
@@ -5183,7 +5183,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -5212,19 +5212,19 @@
     'supported_features': 0,
     'translation_key': 'co2',
     'unique_id': '12:34:56:26:65:14-co2',
-    'unit_of_measurement': 'ppm',
+    'unit_of_measurement': <UnitOfRatio.PARTS_PER_MILLION: 'ppm'>,
   })
 # ---
 # name: test_entity[sensor.livingroom_carbon_dioxide-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'carbon_dioxide',
-      'friendly_name': 'Livingroom Carbon dioxide',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': 'ppm',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'carbon_dioxide',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Livingroom Carbon dioxide',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PARTS_PER_MILLION: 'ppm'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.livingroom_carbon_dioxide',
@@ -5241,7 +5241,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'options': list([
+      <SensorEntityCapabilityAttribute.OPTIONS: 'options'>: list([
         'healthy',
         'fine',
         'fair',
@@ -5282,12 +5282,12 @@
 # name: test_entity[sensor.livingroom_health_index-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'enum',
-      'friendly_name': 'Livingroom Health index',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
-      'options': list([
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'enum',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Livingroom Health index',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
+      <SensorEntityCapabilityAttribute.OPTIONS: 'options'>: list([
         'healthy',
         'fine',
         'fair',
@@ -5310,7 +5310,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -5339,19 +5339,19 @@
     'supported_features': 0,
     'translation_key': 'humidity',
     'unique_id': '12:34:56:26:65:14-humidity',
-    'unit_of_measurement': '%',
+    'unit_of_measurement': <UnitOfRatio.PERCENTAGE: '%'>,
   })
 # ---
 # name: test_entity[sensor.livingroom_humidity-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'humidity',
-      'friendly_name': 'Livingroom Humidity',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': '%',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'humidity',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Livingroom Humidity',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PERCENTAGE: '%'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.livingroom_humidity',
@@ -5368,7 +5368,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -5406,13 +5406,13 @@
 # name: test_entity[sensor.livingroom_noise-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'sound_pressure',
-      'friendly_name': 'Livingroom Noise',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfSoundPressure.DECIBEL: 'dB'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'sound_pressure',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Livingroom Noise',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfSoundPressure.DECIBEL: 'dB'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.livingroom_noise',
@@ -5462,10 +5462,10 @@
 # name: test_entity[sensor.livingroom_pressure_trend-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Livingroom Pressure trend',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Livingroom Pressure trend',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.livingroom_pressure_trend',
@@ -5515,10 +5515,10 @@
 # name: test_entity[sensor.livingroom_reachability-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Livingroom Reachability',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Livingroom Reachability',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.livingroom_reachability',
@@ -5535,7 +5535,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -5573,13 +5573,13 @@
 # name: test_entity[sensor.livingroom_temperature-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'temperature',
-      'friendly_name': 'Livingroom Temperature',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'temperature',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Livingroom Temperature',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfTemperature.CELSIUS: '°C'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.livingroom_temperature',
@@ -5629,10 +5629,10 @@
 # name: test_entity[sensor.livingroom_temperature_trend-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Livingroom Temperature trend',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Livingroom Temperature trend',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.livingroom_temperature_trend',
@@ -5682,10 +5682,10 @@
 # name: test_entity[sensor.livingroom_wi_fi_strength-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Livingroom Wi-Fi strength',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Livingroom Wi-Fi strength',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.livingroom_wi_fi_strength',
@@ -5702,7 +5702,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -5743,13 +5743,13 @@
 # name: test_entity[sensor.parents_bedroom_atmospheric_pressure-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'atmospheric_pressure',
-      'friendly_name': 'Parents Bedroom Atmospheric pressure',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfPressure.HPA: 'hPa'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'atmospheric_pressure',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Parents Bedroom Atmospheric pressure',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfPressure.HPA: 'hPa'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.parents_bedroom_atmospheric_pressure',
@@ -5766,7 +5766,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -5795,19 +5795,19 @@
     'supported_features': 0,
     'translation_key': 'co2',
     'unique_id': '12:34:56:3e:c5:46-co2',
-    'unit_of_measurement': 'ppm',
+    'unit_of_measurement': <UnitOfRatio.PARTS_PER_MILLION: 'ppm'>,
   })
 # ---
 # name: test_entity[sensor.parents_bedroom_carbon_dioxide-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'carbon_dioxide',
-      'friendly_name': 'Parents Bedroom Carbon dioxide',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': 'ppm',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'carbon_dioxide',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Parents Bedroom Carbon dioxide',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PARTS_PER_MILLION: 'ppm'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.parents_bedroom_carbon_dioxide',
@@ -5824,7 +5824,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'options': list([
+      <SensorEntityCapabilityAttribute.OPTIONS: 'options'>: list([
         'healthy',
         'fine',
         'fair',
@@ -5865,12 +5865,12 @@
 # name: test_entity[sensor.parents_bedroom_health_index-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'enum',
-      'friendly_name': 'Parents Bedroom Health index',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
-      'options': list([
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'enum',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Parents Bedroom Health index',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
+      <SensorEntityCapabilityAttribute.OPTIONS: 'options'>: list([
         'healthy',
         'fine',
         'fair',
@@ -5893,7 +5893,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -5922,19 +5922,19 @@
     'supported_features': 0,
     'translation_key': 'humidity',
     'unique_id': '12:34:56:3e:c5:46-humidity',
-    'unit_of_measurement': '%',
+    'unit_of_measurement': <UnitOfRatio.PERCENTAGE: '%'>,
   })
 # ---
 # name: test_entity[sensor.parents_bedroom_humidity-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'humidity',
-      'friendly_name': 'Parents Bedroom Humidity',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': '%',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'humidity',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Parents Bedroom Humidity',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PERCENTAGE: '%'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.parents_bedroom_humidity',
@@ -5951,7 +5951,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -5989,13 +5989,13 @@
 # name: test_entity[sensor.parents_bedroom_noise-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'sound_pressure',
-      'friendly_name': 'Parents Bedroom Noise',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfSoundPressure.DECIBEL: 'dB'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'sound_pressure',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Parents Bedroom Noise',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfSoundPressure.DECIBEL: 'dB'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.parents_bedroom_noise',
@@ -6045,10 +6045,10 @@
 # name: test_entity[sensor.parents_bedroom_pressure_trend-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Parents Bedroom Pressure trend',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Parents Bedroom Pressure trend',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.parents_bedroom_pressure_trend',
@@ -6098,10 +6098,10 @@
 # name: test_entity[sensor.parents_bedroom_reachability-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Parents Bedroom Reachability',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Parents Bedroom Reachability',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.parents_bedroom_reachability',
@@ -6118,7 +6118,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -6156,13 +6156,13 @@
 # name: test_entity[sensor.parents_bedroom_temperature-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'temperature',
-      'friendly_name': 'Parents Bedroom Temperature',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'temperature',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Parents Bedroom Temperature',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfTemperature.CELSIUS: '°C'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.parents_bedroom_temperature',
@@ -6212,10 +6212,10 @@
 # name: test_entity[sensor.parents_bedroom_temperature_trend-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Parents Bedroom Temperature trend',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Parents Bedroom Temperature trend',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.parents_bedroom_temperature_trend',
@@ -6265,10 +6265,10 @@
 # name: test_entity[sensor.parents_bedroom_wi_fi_strength-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Parents Bedroom Wi-Fi strength',
-      'latitude': 13.377726,
-      'longitude': 52.516263,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Parents Bedroom Wi-Fi strength',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 13.377726,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 52.516263,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.parents_bedroom_wi_fi_strength',
@@ -6318,8 +6318,8 @@
 # name: test_entity[sensor.prise-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Prise',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Prise',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.prise',
@@ -6336,7 +6336,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -6374,11 +6374,11 @@
 # name: test_entity[sensor.prise_energy-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'energy',
-      'friendly_name': 'Prise Energy',
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfEnergy.WATT_HOUR: 'Wh'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'energy',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Prise Energy',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfEnergy.WATT_HOUR: 'Wh'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.prise_energy',
@@ -6395,7 +6395,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -6433,11 +6433,11 @@
 # name: test_entity[sensor.prise_power-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'power',
-      'friendly_name': 'Prise Power',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfPower.WATT: 'W'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'power',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Prise Power',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfPower.WATT: 'W'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.prise_power',
@@ -6487,8 +6487,8 @@
 # name: test_entity[sensor.total-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Total',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Total',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.total',
@@ -6505,7 +6505,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -6543,11 +6543,11 @@
 # name: test_entity[sensor.total_energy-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'energy',
-      'friendly_name': 'Total Energy',
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfEnergy.WATT_HOUR: 'Wh'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'energy',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Total Energy',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfEnergy.WATT_HOUR: 'Wh'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.total_energy',
@@ -6597,8 +6597,8 @@
 # name: test_entity[sensor.unknown_00_11_22_33_00_11_45_fe-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Unknown 00:11:22:33:00:11:45:fe',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Unknown 00:11:22:33:00:11:45:fe',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.unknown_00_11_22_33_00_11_45_fe',
@@ -6615,7 +6615,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -6653,11 +6653,11 @@
 # name: test_entity[sensor.unknown_00_11_22_33_00_11_45_fe_energy-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'energy',
-      'friendly_name': 'Unknown 00:11:22:33:00:11:45:fe Energy',
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfEnergy.WATT_HOUR: 'Wh'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'energy',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Unknown 00:11:22:33:00:11:45:fe Energy',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfEnergy.WATT_HOUR: 'Wh'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.unknown_00_11_22_33_00_11_45_fe_energy',
@@ -6674,7 +6674,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -6712,11 +6712,11 @@
 # name: test_entity[sensor.unknown_00_11_22_33_00_11_45_fe_power-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'power',
-      'friendly_name': 'Unknown 00:11:22:33:00:11:45:fe Power',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfPower.WATT: 'W'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'power',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Unknown 00:11:22:33:00:11:45:fe Power',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfPower.WATT: 'W'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.unknown_00_11_22_33_00_11_45_fe_power',
@@ -6733,7 +6733,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -6762,17 +6762,17 @@
     'supported_features': 0,
     'translation_key': None,
     'unique_id': '2833524037-12:34:56:03:a5:54-battery',
-    'unit_of_measurement': '%',
+    'unit_of_measurement': <UnitOfRatio.PERCENTAGE: '%'>,
   })
 # ---
 # name: test_entity[sensor.valve1_battery-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'battery',
-      'friendly_name': 'Valve1 Battery',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': '%',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'battery',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Valve1 Battery',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PERCENTAGE: '%'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.valve1_battery',
@@ -6789,7 +6789,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -6818,17 +6818,17 @@
     'supported_features': 0,
     'translation_key': None,
     'unique_id': '2940411577-12:34:56:03:a0:ac-battery',
-    'unit_of_measurement': '%',
+    'unit_of_measurement': <UnitOfRatio.PERCENTAGE: '%'>,
   })
 # ---
 # name: test_entity[sensor.valve2_battery-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'battery',
-      'friendly_name': 'Valve2 Battery',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': '%',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'battery',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Valve2 Battery',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PERCENTAGE: '%'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.valve2_battery',
@@ -6845,7 +6845,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -6886,13 +6886,13 @@
 # name: test_entity[sensor.villa_atmospheric_pressure-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'atmospheric_pressure',
-      'friendly_name': 'Villa Atmospheric pressure',
-      'latitude': 46.123456,
-      'longitude': 6.1234567,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfPressure.HPA: 'hPa'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'atmospheric_pressure',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Atmospheric pressure',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 46.123456,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 6.1234567,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfPressure.HPA: 'hPa'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_atmospheric_pressure',
@@ -6909,7 +6909,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -6938,17 +6938,17 @@
     'supported_features': 0,
     'translation_key': 'battery',
     'unique_id': '12:34:56:80:7e:18-battery_percent',
-    'unit_of_measurement': '%',
+    'unit_of_measurement': <UnitOfRatio.PERCENTAGE: '%'>,
   })
 # ---
 # name: test_entity[sensor.villa_bathroom_battery-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'battery',
-      'friendly_name': 'Villa Bathroom Battery',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': '%',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'battery',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Bathroom Battery',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PERCENTAGE: '%'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_bathroom_battery',
@@ -6965,7 +6965,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -6994,17 +6994,17 @@
     'supported_features': 0,
     'translation_key': 'co2',
     'unique_id': '12:34:56:80:7e:18-co2',
-    'unit_of_measurement': 'ppm',
+    'unit_of_measurement': <UnitOfRatio.PARTS_PER_MILLION: 'ppm'>,
   })
 # ---
 # name: test_entity[sensor.villa_bathroom_carbon_dioxide-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'carbon_dioxide',
-      'friendly_name': 'Villa Bathroom Carbon dioxide',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': 'ppm',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'carbon_dioxide',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Bathroom Carbon dioxide',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PARTS_PER_MILLION: 'ppm'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_bathroom_carbon_dioxide',
@@ -7021,7 +7021,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -7050,17 +7050,17 @@
     'supported_features': 0,
     'translation_key': 'humidity',
     'unique_id': '12:34:56:80:7e:18-humidity',
-    'unit_of_measurement': '%',
+    'unit_of_measurement': <UnitOfRatio.PERCENTAGE: '%'>,
   })
 # ---
 # name: test_entity[sensor.villa_bathroom_humidity-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'humidity',
-      'friendly_name': 'Villa Bathroom Humidity',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': '%',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'humidity',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Bathroom Humidity',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PERCENTAGE: '%'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_bathroom_humidity',
@@ -7110,8 +7110,8 @@
 # name: test_entity[sensor.villa_bathroom_reachability-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Villa Bathroom Reachability',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Bathroom Reachability',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_bathroom_reachability',
@@ -7161,8 +7161,8 @@
 # name: test_entity[sensor.villa_bathroom_rf_strength-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Villa Bathroom RF strength',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Bathroom RF strength',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_bathroom_rf_strength',
@@ -7179,7 +7179,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -7217,11 +7217,11 @@
 # name: test_entity[sensor.villa_bathroom_temperature-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'temperature',
-      'friendly_name': 'Villa Bathroom Temperature',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'temperature',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Bathroom Temperature',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfTemperature.CELSIUS: '°C'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_bathroom_temperature',
@@ -7271,8 +7271,8 @@
 # name: test_entity[sensor.villa_bathroom_temperature_trend-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Villa Bathroom Temperature trend',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Bathroom Temperature trend',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_bathroom_temperature_trend',
@@ -7289,7 +7289,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -7318,17 +7318,17 @@
     'supported_features': 0,
     'translation_key': 'battery',
     'unique_id': '12:34:56:80:44:92-battery_percent',
-    'unit_of_measurement': '%',
+    'unit_of_measurement': <UnitOfRatio.PERCENTAGE: '%'>,
   })
 # ---
 # name: test_entity[sensor.villa_bedroom_battery-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'battery',
-      'friendly_name': 'Villa Bedroom Battery',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': '%',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'battery',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Bedroom Battery',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PERCENTAGE: '%'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_bedroom_battery',
@@ -7345,7 +7345,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -7374,17 +7374,17 @@
     'supported_features': 0,
     'translation_key': 'co2',
     'unique_id': '12:34:56:80:44:92-co2',
-    'unit_of_measurement': 'ppm',
+    'unit_of_measurement': <UnitOfRatio.PARTS_PER_MILLION: 'ppm'>,
   })
 # ---
 # name: test_entity[sensor.villa_bedroom_carbon_dioxide-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'carbon_dioxide',
-      'friendly_name': 'Villa Bedroom Carbon dioxide',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': 'ppm',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'carbon_dioxide',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Bedroom Carbon dioxide',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PARTS_PER_MILLION: 'ppm'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_bedroom_carbon_dioxide',
@@ -7401,7 +7401,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -7430,17 +7430,17 @@
     'supported_features': 0,
     'translation_key': 'humidity',
     'unique_id': '12:34:56:80:44:92-humidity',
-    'unit_of_measurement': '%',
+    'unit_of_measurement': <UnitOfRatio.PERCENTAGE: '%'>,
   })
 # ---
 # name: test_entity[sensor.villa_bedroom_humidity-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'humidity',
-      'friendly_name': 'Villa Bedroom Humidity',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': '%',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'humidity',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Bedroom Humidity',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PERCENTAGE: '%'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_bedroom_humidity',
@@ -7490,8 +7490,8 @@
 # name: test_entity[sensor.villa_bedroom_reachability-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Villa Bedroom Reachability',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Bedroom Reachability',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_bedroom_reachability',
@@ -7541,8 +7541,8 @@
 # name: test_entity[sensor.villa_bedroom_rf_strength-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Villa Bedroom RF strength',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Bedroom RF strength',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_bedroom_rf_strength',
@@ -7559,7 +7559,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -7597,11 +7597,11 @@
 # name: test_entity[sensor.villa_bedroom_temperature-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'temperature',
-      'friendly_name': 'Villa Bedroom Temperature',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'temperature',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Bedroom Temperature',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfTemperature.CELSIUS: '°C'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_bedroom_temperature',
@@ -7651,8 +7651,8 @@
 # name: test_entity[sensor.villa_bedroom_temperature_trend-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Villa Bedroom Temperature trend',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Bedroom Temperature trend',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_bedroom_temperature_trend',
@@ -7669,7 +7669,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -7698,19 +7698,19 @@
     'supported_features': 0,
     'translation_key': 'co2',
     'unique_id': '12:34:56:80:bb:26-co2',
-    'unit_of_measurement': 'ppm',
+    'unit_of_measurement': <UnitOfRatio.PARTS_PER_MILLION: 'ppm'>,
   })
 # ---
 # name: test_entity[sensor.villa_carbon_dioxide-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'carbon_dioxide',
-      'friendly_name': 'Villa Carbon dioxide',
-      'latitude': 46.123456,
-      'longitude': 6.1234567,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': 'ppm',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'carbon_dioxide',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Carbon dioxide',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 46.123456,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 6.1234567,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PARTS_PER_MILLION: 'ppm'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_carbon_dioxide',
@@ -7727,7 +7727,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -7756,17 +7756,17 @@
     'supported_features': 0,
     'translation_key': 'battery',
     'unique_id': '12:34:56:03:1b:e4-battery_percent',
-    'unit_of_measurement': '%',
+    'unit_of_measurement': <UnitOfRatio.PERCENTAGE: '%'>,
   })
 # ---
 # name: test_entity[sensor.villa_garden_battery-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'battery',
-      'friendly_name': 'Villa Garden Battery',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': '%',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'battery',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Garden Battery',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PERCENTAGE: '%'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_garden_battery',
@@ -7783,7 +7783,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -7818,11 +7818,11 @@
 # name: test_entity[sensor.villa_garden_gust_angle-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'wind_direction',
-      'friendly_name': 'Villa Garden Gust angle',
-      'state_class': <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
-      'unit_of_measurement': '°',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'wind_direction',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Garden Gust angle',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: '°',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_garden_gust_angle',
@@ -7839,7 +7839,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'options': list([
+      <SensorEntityCapabilityAttribute.OPTIONS: 'options'>: list([
         'n',
         'ne',
         'e',
@@ -7883,10 +7883,10 @@
 # name: test_entity[sensor.villa_garden_gust_direction-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'enum',
-      'friendly_name': 'Villa Garden Gust direction',
-      'options': list([
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'enum',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Garden Gust direction',
+      <SensorEntityCapabilityAttribute.OPTIONS: 'options'>: list([
         'n',
         'ne',
         'e',
@@ -7912,7 +7912,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -7950,11 +7950,11 @@
 # name: test_entity[sensor.villa_garden_gust_strength-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'wind_speed',
-      'friendly_name': 'Villa Garden Gust strength',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'wind_speed',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Garden Gust strength',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_garden_gust_strength',
@@ -8004,8 +8004,8 @@
 # name: test_entity[sensor.villa_garden_reachability-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Villa Garden Reachability',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Garden Reachability',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_garden_reachability',
@@ -8055,8 +8055,8 @@
 # name: test_entity[sensor.villa_garden_rf_strength-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Villa Garden RF strength',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Garden RF strength',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_garden_rf_strength',
@@ -8073,7 +8073,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -8108,11 +8108,11 @@
 # name: test_entity[sensor.villa_garden_wind_angle-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'wind_direction',
-      'friendly_name': 'Villa Garden Wind angle',
-      'state_class': <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
-      'unit_of_measurement': '°',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'wind_direction',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Garden Wind angle',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT_ANGLE: 'measurement_angle'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: '°',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_garden_wind_angle',
@@ -8129,7 +8129,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'options': list([
+      <SensorEntityCapabilityAttribute.OPTIONS: 'options'>: list([
         'n',
         'ne',
         'e',
@@ -8173,10 +8173,10 @@
 # name: test_entity[sensor.villa_garden_wind_direction-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'enum',
-      'friendly_name': 'Villa Garden Wind direction',
-      'options': list([
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'enum',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Garden Wind direction',
+      <SensorEntityCapabilityAttribute.OPTIONS: 'options'>: list([
         'n',
         'ne',
         'e',
@@ -8202,7 +8202,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -8240,11 +8240,11 @@
 # name: test_entity[sensor.villa_garden_wind_speed-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'wind_speed',
-      'friendly_name': 'Villa Garden Wind speed',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'wind_speed',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Garden Wind speed',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfSpeed.KILOMETERS_PER_HOUR: 'km/h'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_garden_wind_speed',
@@ -8261,7 +8261,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -8290,19 +8290,19 @@
     'supported_features': 0,
     'translation_key': 'humidity',
     'unique_id': '12:34:56:80:bb:26-humidity',
-    'unit_of_measurement': '%',
+    'unit_of_measurement': <UnitOfRatio.PERCENTAGE: '%'>,
   })
 # ---
 # name: test_entity[sensor.villa_humidity-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'humidity',
-      'friendly_name': 'Villa Humidity',
-      'latitude': 46.123456,
-      'longitude': 6.1234567,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': '%',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'humidity',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Humidity',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 46.123456,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 6.1234567,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PERCENTAGE: '%'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_humidity',
@@ -8319,7 +8319,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -8357,13 +8357,13 @@
 # name: test_entity[sensor.villa_noise-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'sound_pressure',
-      'friendly_name': 'Villa Noise',
-      'latitude': 46.123456,
-      'longitude': 6.1234567,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfSoundPressure.DECIBEL: 'dB'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'sound_pressure',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Noise',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 46.123456,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 6.1234567,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfSoundPressure.DECIBEL: 'dB'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_noise',
@@ -8380,7 +8380,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -8409,17 +8409,17 @@
     'supported_features': 0,
     'translation_key': 'battery',
     'unique_id': '12:34:56:80:1c:42-battery_percent',
-    'unit_of_measurement': '%',
+    'unit_of_measurement': <UnitOfRatio.PERCENTAGE: '%'>,
   })
 # ---
 # name: test_entity[sensor.villa_outdoor_battery-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'battery',
-      'friendly_name': 'Villa Outdoor Battery',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': '%',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'battery',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Outdoor Battery',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PERCENTAGE: '%'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_outdoor_battery',
@@ -8436,7 +8436,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -8465,17 +8465,17 @@
     'supported_features': 0,
     'translation_key': 'humidity',
     'unique_id': '12:34:56:80:1c:42-humidity',
-    'unit_of_measurement': '%',
+    'unit_of_measurement': <UnitOfRatio.PERCENTAGE: '%'>,
   })
 # ---
 # name: test_entity[sensor.villa_outdoor_humidity-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'humidity',
-      'friendly_name': 'Villa Outdoor Humidity',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': '%',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'humidity',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Outdoor Humidity',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PERCENTAGE: '%'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_outdoor_humidity',
@@ -8525,8 +8525,8 @@
 # name: test_entity[sensor.villa_outdoor_reachability-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Villa Outdoor Reachability',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Outdoor Reachability',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_outdoor_reachability',
@@ -8576,8 +8576,8 @@
 # name: test_entity[sensor.villa_outdoor_rf_strength-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Villa Outdoor RF strength',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Outdoor RF strength',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_outdoor_rf_strength',
@@ -8594,7 +8594,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -8632,11 +8632,11 @@
 # name: test_entity[sensor.villa_outdoor_temperature-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'temperature',
-      'friendly_name': 'Villa Outdoor Temperature',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'temperature',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Outdoor Temperature',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfTemperature.CELSIUS: '°C'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_outdoor_temperature',
@@ -8686,8 +8686,8 @@
 # name: test_entity[sensor.villa_outdoor_temperature_trend-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Villa Outdoor Temperature trend',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Outdoor Temperature trend',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_outdoor_temperature_trend',
@@ -8737,10 +8737,10 @@
 # name: test_entity[sensor.villa_pressure_trend-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Villa Pressure trend',
-      'latitude': 46.123456,
-      'longitude': 6.1234567,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Pressure trend',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 46.123456,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 6.1234567,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_pressure_trend',
@@ -8757,7 +8757,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -8786,17 +8786,17 @@
     'supported_features': 0,
     'translation_key': 'battery',
     'unique_id': '12:34:56:80:c1:ea-battery_percent',
-    'unit_of_measurement': '%',
+    'unit_of_measurement': <UnitOfRatio.PERCENTAGE: '%'>,
   })
 # ---
 # name: test_entity[sensor.villa_rain_battery-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'battery',
-      'friendly_name': 'Villa Rain Battery',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': '%',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'battery',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Rain Battery',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PERCENTAGE: '%'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_rain_battery',
@@ -8813,7 +8813,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -8851,11 +8851,11 @@
 # name: test_entity[sensor.villa_rain_precipitation-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'precipitation',
-      'friendly_name': 'Villa Rain Precipitation',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfPrecipitationDepth.MILLIMETERS: 'mm'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'precipitation',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Rain Precipitation',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfPrecipitationDepth.MILLIMETERS: 'mm'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_rain_precipitation',
@@ -8872,7 +8872,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.TOTAL: 'total'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL: 'total'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -8910,11 +8910,11 @@
 # name: test_entity[sensor.villa_rain_precipitation_last_hour-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'precipitation',
-      'friendly_name': 'Villa Rain Precipitation last hour',
-      'state_class': <SensorStateClass.TOTAL: 'total'>,
-      'unit_of_measurement': <UnitOfPrecipitationDepth.MILLIMETERS: 'mm'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'precipitation',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Rain Precipitation last hour',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL: 'total'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfPrecipitationDepth.MILLIMETERS: 'mm'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_rain_precipitation_last_hour',
@@ -8931,7 +8931,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -8969,11 +8969,11 @@
 # name: test_entity[sensor.villa_rain_precipitation_today-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'precipitation',
-      'friendly_name': 'Villa Rain Precipitation today',
-      'state_class': <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
-      'unit_of_measurement': <UnitOfPrecipitationDepth.MILLIMETERS: 'mm'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'precipitation',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Rain Precipitation today',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.TOTAL_INCREASING: 'total_increasing'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfPrecipitationDepth.MILLIMETERS: 'mm'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_rain_precipitation_today',
@@ -9023,8 +9023,8 @@
 # name: test_entity[sensor.villa_rain_reachability-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Villa Rain Reachability',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Rain Reachability',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_rain_reachability',
@@ -9074,8 +9074,8 @@
 # name: test_entity[sensor.villa_rain_rf_strength-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Villa Rain RF strength',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Rain RF strength',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_rain_rf_strength',
@@ -9125,10 +9125,10 @@
 # name: test_entity[sensor.villa_reachability-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Villa Reachability',
-      'latitude': 46.123456,
-      'longitude': 6.1234567,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Reachability',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 46.123456,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 6.1234567,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_reachability',
@@ -9145,7 +9145,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -9183,13 +9183,13 @@
 # name: test_entity[sensor.villa_temperature-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'temperature',
-      'friendly_name': 'Villa Temperature',
-      'latitude': 46.123456,
-      'longitude': 6.1234567,
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': <UnitOfTemperature.CELSIUS: '°C'>,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'temperature',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Temperature',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 46.123456,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 6.1234567,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfTemperature.CELSIUS: '°C'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_temperature',
@@ -9239,10 +9239,10 @@
 # name: test_entity[sensor.villa_temperature_trend-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Villa Temperature trend',
-      'latitude': 46.123456,
-      'longitude': 6.1234567,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Temperature trend',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 46.123456,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 6.1234567,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_temperature_trend',
@@ -9292,10 +9292,10 @@
 # name: test_entity[sensor.villa_wi_fi_strength-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Villa Wi-Fi strength',
-      'latitude': 46.123456,
-      'longitude': 6.1234567,
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Villa Wi-Fi strength',
+      <EntityStateAttribute.LATITUDE: 'latitude'>: 46.123456,
+      <EntityStateAttribute.LONGITUDE: 'longitude'>: 6.1234567,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.villa_wi_fi_strength',
@@ -9312,7 +9312,7 @@
     ]),
     'area_id': None,
     'capabilities': dict({
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
     }),
     'config_entry_id': <ANY>,
     'config_subentry_id': <ANY>,
@@ -9341,17 +9341,17 @@
     'supported_features': 0,
     'translation_key': 'battery',
     'unique_id': '12:34:56:00:86:99-battery',
-    'unit_of_measurement': '%',
+    'unit_of_measurement': <UnitOfRatio.PERCENTAGE: '%'>,
   })
 # ---
 # name: test_entity[sensor.window_hall_battery-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'device_class': 'battery',
-      'friendly_name': 'Window Hall Battery',
-      'state_class': <SensorStateClass.MEASUREMENT: 'measurement'>,
-      'unit_of_measurement': '%',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.DEVICE_CLASS: 'device_class'>: 'battery',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Window Hall Battery',
+      <SensorEntityCapabilityAttribute.STATE_CLASS: 'state_class'>: <SensorStateClass.MEASUREMENT: 'measurement'>,
+      <EntityStateAttribute.UNIT_OF_MEASUREMENT: 'unit_of_measurement'>: <UnitOfRatio.PERCENTAGE: '%'>,
     }),
     'context': <ANY>,
     'entity_id': 'sensor.window_hall_battery',
@@ -9401,8 +9401,8 @@
 # name: test_entity[sensor.window_hall_rf_strength-state]
   StateSnapshot({
     'attributes': ReadOnlyDict({
-      'attribution': 'Data provided by Netatmo',
-      'friendly_name': 'Window Hall RF strength',
+      <EntityStateAttribute.ATTRIBUTION: 'attribution'>: 'Data provided by Netatmo',
+      <EntityStateAttribute.FRIENDLY_NAME: 'friendly_name'>: 'Window Hall RF strength',
     }),
     'context': <ANY>,
     'entity_id': 'sensor.window_hall_rf_strength',

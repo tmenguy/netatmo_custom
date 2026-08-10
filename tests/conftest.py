@@ -10,7 +10,7 @@ Solves three problems so HA core test files work unmodified:
 
 2. homeassistant.components.netatmo: Tests do
    `from homeassistant.components.netatmo.const import DOMAIN` and
-   `patch("homeassistant.components.netatmo.data_handler.PLATFORMS")`.
+   `patch("homeassistant.components.netatmo.coordinator.PLATFORMS")`.
    We pre-register a lightweight stub whose __path__ points to our
    custom_components/netatmo/, replaced by the real modules in Phase 4.
 
@@ -108,6 +108,42 @@ _netatmo_stub.DOMAIN = "netatmo"
 _netatmo_stub.DATA_CAMERAS = "cameras"
 _netatmo_stub.DATA_EVENTS = "netatmo_events"
 
+
+def _load_real_cc_netatmo() -> types.ModuleType:
+    """Execute the integration's __init__.py without registering it.
+
+    Relative imports resolve through the Phase 1 stub's ``__path__``, so the
+    real submodules land in ``sys.modules`` while the stub itself is left in
+    place for the ``_alias_netatmo_modules`` fixture to replace later.
+    """
+    spec = importlib.util.spec_from_file_location(
+        "custom_components.netatmo",
+        str(_CC_NETATMO / "__init__.py"),
+        submodule_search_locations=[str(_CC_NETATMO)],
+    )
+    module = importlib.util.module_from_spec(spec)
+    module.pyatmo = sys.modules["pyatmo"]
+    spec.loader.exec_module(module)
+    return module
+
+
+def _netatmo_stub_getattr(name: str) -> object:
+    """Serve package-level attributes from the real integration on demand.
+
+    Test modules import helpers such as ``async_remove_config_entry_device``
+    at import time, long before the ``hass`` fixture (and therefore Phase 4)
+    is available. Submodules are left to the normal import machinery.
+    """
+    if name.startswith("_") or (_CC_NETATMO / f"{name}.py").exists():
+        raise AttributeError(name)
+    try:
+        return getattr(_load_real_cc_netatmo(), name)
+    except AttributeError:
+        raise AttributeError(name) from None
+
+
+_netatmo_stub.__getattr__ = _netatmo_stub_getattr
+
 sys.modules["homeassistant.components.netatmo"] = _netatmo_stub
 
 # ---------------------------------------------------------------------------
@@ -149,11 +185,11 @@ def _patch_data_handler_time():
 
     with (
         mock_patch(
-            "custom_components.netatmo.data_handler.time",
+            "custom_components.netatmo.coordinator.time",
             side_effect=lambda: _ha_dt_util.utcnow().timestamp(),
         ),
         mock_patch(
-            "custom_components.netatmo.data_handler.asyncio.sleep",
+            "custom_components.netatmo.coordinator.asyncio.sleep",
             side_effect=_fast_sleep,
         ),
     ):

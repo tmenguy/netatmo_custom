@@ -19,12 +19,21 @@ from ..const import (
     RawData,
 )
 from ..exceptions import ApiError
-from ..modules.base_class import EntityBase, NetatmoBase, Place, update_name
+from ..modules.base_class import (
+    EntityBase,
+    NetatmoBase,
+    Place,
+    bridged_module_ids,
+    update_name,
+)
 from ..modules.device_types import (
     DEVICE_CATEGORY_MAP,
     ApplianceType,
+    BoilerControl,
+    BoilerError,
     DeviceCategory,
     DeviceType,
+    DhwControl,
     DoorTagCategory,
 )
 from ..webrtc import WebRTCAnswer, WebRTCStream
@@ -60,6 +69,15 @@ ATTRIBUTE_FILTER = {
     "history_features",
     "history_features_values",
     "appliance_type",
+    "doortag_category",
+    "last_seen",
+    "setup_date",
+    "boiler_control",
+    "boiler_error",
+    "dhw_control",
+    "error_code",
+    "_reachable",
+    "rf_state",
 }
 
 
@@ -74,7 +92,7 @@ def process_battery_state(data: str) -> int:
         "low": 25,
         "very_low": 10,
     }
-    return mapping[data]
+    return mapping.get(data, 0)
 
 
 class FirmwareMixin(EntityBase):
@@ -103,6 +121,7 @@ class RfMixin(EntityBase):
         """Initialize rf mixin."""
 
         super().__init__(home, module)
+        self.rf_state: str | None = None
         self.rf_strength: int | None = None
 
 
@@ -242,6 +261,18 @@ class BoilerMixin(EntityBase):
         self.boiler_valve_comfort_boost: bool | None = None
 
 
+class OpenThermMixin(EntityBase):
+    """Mixin for OpenTherm boiler diagnostics (OTH)."""
+
+    def __init__(self, home: Home, module: ModuleT) -> None:
+        """Initialize OpenTherm mixin."""
+
+        super().__init__(home, module)
+        self.boiler_control: BoilerControl | None = None
+        self.boiler_error: BoilerError | None = None
+        self.dhw_control: DhwControl | None = None
+
+
 class CoolerMixin(EntityBase):
     """Mixin for cooler data."""
 
@@ -378,6 +409,7 @@ class OffloadMixin(EntityBase):
 
         super().__init__(home, module)
         self.offload: bool | None = None
+        self.offload_meters: list[str] | None = None
 
 
 class SwitchMixin(EntityBase):
@@ -1258,7 +1290,10 @@ class Module(NetatmoBase):
     room_id: str | None
 
     modules: list[str] | None
-    reachable: bool | None
+    _reachable: bool | None
+    last_seen: int | None
+    setup_date: int | None
+    error_code: int | None
     features: set[str]
 
     def __init__(self, home: Home, module: ModuleT) -> None:
@@ -1270,11 +1305,43 @@ class Module(NetatmoBase):
 
         self.home = home
         self.room_id = module.get("room_id")
-        self.reachable = module.get("reachable")
+        self._reachable = module.get("reachable")
+        self.last_seen = module.get("last_seen")
+        self.setup_date = module.get("setup_date")
+        self.error_code = None
         self.bridge = module.get("bridge")
-        self.modules = module.get("modules_bridged")
+        self.modules = bridged_module_ids(module)
         self.device_category = DEVICE_CATEGORY_MAP.get(self.device_type)
         self.features = set()
+
+    @property
+    def reachable(self) -> bool | None:
+        """Return reachability, falling back to the parent for sub-modules.
+
+        The API reports `reachable` only on the parent entry of a multi-gang
+        module such as the Legrand NLIS, so a `#`-suffixed sub-module resolves
+        it from the parent. Resolving on read keeps this independent of the
+        order modules appear in the /homestatus payload.
+        """
+        if self._reachable is not None or "#" not in self.entity_id:
+            return self._reachable
+        parent = self.home.modules.get(self.entity_id.split("#", 1)[0])
+        return parent.reachable if parent else None
+
+    def mark_unreachable(self) -> None:
+        """Mark this module and its bridged children unreachable.
+
+        Sub-modules are skipped on purpose: a `#`-suffixed id resolves its
+        reachability from the parent module on read, and its own payload never
+        reports the key, so stamping it here would pin it unreachable for the
+        lifetime of the process.
+        """
+        self._reachable = False
+        for module_id in self.modules or []:
+            if "#" in module_id:
+                continue
+            if (module := self.home.modules.get(module_id)) is not None:
+                module.mark_unreachable()
 
     async def update(self, raw_data: RawData) -> None:
         """Update module with the latest data."""
@@ -1295,10 +1362,10 @@ class Module(NetatmoBase):
         if self.device_type == DeviceType.NLE:
             # if there is a bridge it means it is a leaf
             if self.bridge:
-                self.reachable = True
+                self._reachable = True
             elif self.modules:
                 # this NLE is a bridge itself : make it not available
-                self.reachable = False
+                self._reachable = False
 
         if not self.reachable and self.modules:
             # Update bridged modules and associated rooms
@@ -1312,6 +1379,9 @@ class Module(NetatmoBase):
         """Update features."""
 
         self.features.update({var for var in vars(self) if var not in ATTRIBUTE_FILTER})
+        # Every module carries `_reachable`, so this feature is universal — unlike
+        # `battery` below. Consumers gate entity creation on the public name.
+        self.features.add("reachable")
         if "battery_state" in vars(self) or "battery_percent" in vars(self):
             self.features.add("battery")
         if "wind_angle" in self.features:

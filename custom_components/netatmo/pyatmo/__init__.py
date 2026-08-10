@@ -21,6 +21,7 @@ from .room import Room
 from .webrtc import WebRTCStream
 
 __all__: list[str] = [
+    "SIREN_BASE_URL",
     "AbstractAsyncAuth",
     "ApiError",
     "ApiHomeReachabilityError",
@@ -35,7 +36,6 @@ __all__: list[str] = [
     "NoDeviceError",
     "NoScheduleError",
     "Room",
-    "SIREN_BASE_URL",
     "WebRTCStream",
     "const",
     "modules",

@@ -9,11 +9,11 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import pyatmo
 import pytest
 
-from homeassistant.components.netatmo.data_handler import (
+from homeassistant.components.netatmo.coordinator import (
     CALL_PER_HOUR,
     CALL_PER_TEN_SECONDS,
-    CPH_ADJUSTEMENT_BACK_UP,
-    CPH_ADJUSTEMENT_DOWN,
+    CPH_ADJUSTMENT_BACK_UP,
+    CPH_ADJUSTMENT_DOWN,
     NETATMO_DEV_CALL_LIMITS,
     NETATMO_USER_CALL_LIMITS,
     SCAN_INTERVAL,
@@ -616,7 +616,7 @@ async def test_throttle_adjusts_rate_down(
 
     # Rate should have been reduced
     if data_handler._adjusted_hourly_rate_limit != initial_rate:
-        expected = int(initial_rate * CPH_ADJUSTEMENT_DOWN)
+        expected = int(initial_rate * CPH_ADJUSTMENT_DOWN)
         assert data_handler._adjusted_hourly_rate_limit == expected
 
 
@@ -638,7 +638,7 @@ async def test_recovery_bumps_rate_back_up(
             data_handler._initial_hourly_rate_limit
         )
 
-    reduced_rate = int(data_handler._initial_hourly_rate_limit * CPH_ADJUSTEMENT_DOWN)
+    reduced_rate = int(data_handler._initial_hourly_rate_limit * CPH_ADJUSTMENT_DOWN)
     data_handler._adjusted_hourly_rate_limit = reduced_rate
     data_handler._last_cph_change = None  # Allow rate change
     data_handler.rolling_hour = []  # Clean slate
@@ -648,7 +648,7 @@ async def test_recovery_bumps_rate_back_up(
     expected = int(
         min(
             data_handler._initial_hourly_rate_limit,
-            int(reduced_rate * CPH_ADJUSTEMENT_BACK_UP),
+            int(reduced_rate * CPH_ADJUSTMENT_BACK_UP),
         )
     )
     assert data_handler._adjusted_hourly_rate_limit == expected

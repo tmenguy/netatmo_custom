@@ -40,8 +40,9 @@ LOG: logging.Logger = logging.getLogger(__name__)
 
 MODE_MAP: dict[str, str] = {SCHEDULE: HOME}
 
-# as for now all the below is not exposed at all through the API, don't put it in the public API, so not in const.py
-NETAMO_CLIMATE_SETPOINT_MODE_TO_PILOT_WIRE: dict[str, str] = {
+# Climate setpoint mode -> pilot-wire ("fil pilote") preset.
+# Many-to-one: several modes collapse onto PILOT_WIRE_COMFORT.
+_CLIMATE_SETPOINT_MODE_TO_PILOT_WIRE: dict[str, str] = {
     MANUAL: PILOT_WIRE_COMFORT,
     MAX: PILOT_WIRE_COMFORT,
     OFF: PILOT_WIRE_FROST_GUARD,
@@ -50,8 +51,12 @@ NETAMO_CLIMATE_SETPOINT_MODE_TO_PILOT_WIRE: dict[str, str] = {
     SCHEDULE: PILOT_WIRE_COMFORT,
     AWAY: PILOT_WIRE_AWAY,
 }
-# invert of the map above:
-NETAMO_PILOT_WIRE_TO_CLIMATE_SETPOINT_MODE: dict[str, str] = {
+
+# Pilot-wire preset -> canonical NLC climate setpoint mode. Not the inverse of
+# the map above: it picks one canonical mode per preset and also covers presets
+# the forward map never emits (COMFORT_1, COMFORT_2, STAND_BY) that can arrive
+# straight from the API.
+_PILOT_WIRE_TO_CLIMATE_SETPOINT_MODE: dict[str, str] = {
     PILOT_WIRE_COMFORT: MANUAL,
     PILOT_WIRE_AWAY: MANUAL,  # AWAY is like ECO for a pilot wire heater, so put manual to force it to happen
     PILOT_WIRE_FROST_GUARD: FROSTGUARD,
@@ -59,6 +64,16 @@ NETAMO_PILOT_WIRE_TO_CLIMATE_SETPOINT_MODE: dict[str, str] = {
     PILOT_WIRE_COMFORT_1: HOME,
     PILOT_WIRE_COMFORT_2: HOME,
 }
+
+
+def climate_setpoint_mode_to_pilot_wire(mode: str) -> str:
+    """Map a climate setpoint mode to its pilot-wire preset (frost guard default)."""
+    return _CLIMATE_SETPOINT_MODE_TO_PILOT_WIRE.get(mode, PILOT_WIRE_FROST_GUARD)
+
+
+def pilot_wire_to_climate_setpoint_mode(pilot_wire: str) -> str:
+    """Map a pilot-wire preset back to the canonical NLC setpoint mode (frost guard default)."""
+    return _PILOT_WIRE_TO_CLIMATE_SETPOINT_MODE.get(pilot_wire, FROSTGUARD)
 
 
 @dataclass
@@ -71,7 +86,19 @@ class Room(NetatmoBase):
 
     climate_type: DeviceType | None = None
 
+    air_quality: int | None = None
+    algo_schedule_start: int | None = None
+    algo_status: int | None = None
+    auto_close_ts: int | None = None
+    co2: int | None = None
     humidity: int | None = None
+    lux: int | None = None
+    max_comfort_co2: int | None = None
+    max_comfort_humidity: int | None = None
+    max_comfort_temperature: int | None = None
+    min_comfort_humidity: int | None = None
+    min_comfort_temperature: int | None = None
+    temperature: int | None = None
     therm_measured_temperature: float | None = None
 
     reachable: bool | None = None
@@ -80,29 +107,6 @@ class Room(NetatmoBase):
     therm_setpoint_temperature: float | None = None
 
     therm_setpoint_mode: str | None = None
-    # therm_setpoint_mode: per the documentation: "The thermostat mode in which the room is.
-    # For a room controlled by a BNS, mode can be home, manual, max or hg/off (if heating/cooling).
-    # For a room controlled by a NLC, mode can be off, manual or hg."
-    # values can be
-    # "manual"
-    # "max"
-    # "off"
-    # "home"
-    # "hg"
-    # "schedule"
-    # "away"
-
-    # therm_setpoint_fp: used to set up pilot wire, ie "fil pilote" set point
-    # netatmo documentation:
-    # Usually used to control (Fil pilote (FP)) setpoint
-    # values:
-    # "comfort"
-    # "away"
-    # "frost_guard"
-    # "stand_by"
-    # "comfort_1" => documentation unclear and contradictory here, as it is in the json schema but no in the doc
-    # "comfort_2" => same
-    # but here:
     therm_setpoint_fp: str | None = None
     support_pilot_wire: bool = False
 
@@ -119,6 +123,9 @@ class Room(NetatmoBase):
 
     radiators_power: int | None = None
 
+    room_type: str | None = None  # API "type": kitchen, bedroom, livingroom, ...
+    therm_relay: str | None = None  # main device id of the controlling heating module
+
     def __init__(
         self,
         home: Home,
@@ -130,6 +137,8 @@ class Room(NetatmoBase):
         super().__init__(room)
         self.home = home
         self.support_pilot_wire = False
+        self.room_type = room.get("type")
+        self.therm_relay = room.get("therm_relay")
         self.modules = {
             m_id: m
             for m_id, m in all_modules.items()
@@ -143,6 +152,8 @@ class Room(NetatmoBase):
         """Update room topology."""
 
         self.name = raw_data.get("name", UNKNOWN)
+        self.room_type = raw_data.get("type", self.room_type)
+        self.therm_relay = raw_data.get("therm_relay", self.therm_relay)
         self.modules = {
             m_id: m
             for m_id, m in self.home.modules.items()
@@ -186,7 +197,19 @@ class Room(NetatmoBase):
     def update(self, raw_data: RawData) -> None:
         """Update room data."""
 
+        self.air_quality = raw_data.get("air_quality")
+        self.algo_schedule_start = raw_data.get("algo_schedule_start")
+        self.algo_status = raw_data.get("algo_status")
+        self.auto_close_ts = raw_data.get("auto_close_ts")
+        self.co2 = raw_data.get("co2")
         self.humidity = raw_data.get("humidity")
+        self.lux = raw_data.get("lux")
+        self.max_comfort_co2 = raw_data.get("max_comfort_co2")
+        self.max_comfort_humidity = raw_data.get("max_comfort_humidity")
+        self.max_comfort_temperature = raw_data.get("max_comfort_temperature")
+        self.min_comfort_humidity = raw_data.get("min_comfort_humidity")
+        self.min_comfort_temperature = raw_data.get("min_comfort_temperature")
+        self.temperature = raw_data.get("temperature")
         self.radiators_power = 0
 
         if self.climate_type == DeviceType.BNTH:
@@ -287,17 +310,11 @@ class Room(NetatmoBase):
             # in case both are None stop everything
             if mode is None:
                 mode = FROSTGUARD
-            pilot_wire = NETAMO_CLIMATE_SETPOINT_MODE_TO_PILOT_WIRE.get(
-                mode,
-                PILOT_WIRE_FROST_GUARD,
-            )
+            pilot_wire = climate_setpoint_mode_to_pilot_wire(mode)
             # force back the proper preset mode in case of pilot wire
             # to comply with netatmo model
             if self.support_pilot_wire and self.climate_type == DeviceType.NLC:
-                mode = NETAMO_PILOT_WIRE_TO_CLIMATE_SETPOINT_MODE.get(
-                    pilot_wire,
-                    FROSTGUARD,
-                )
+                mode = pilot_wire_to_climate_setpoint_mode(pilot_wire)
 
         if pilot_wire is not None and mode is None:
             mode = MANUAL
@@ -313,27 +330,21 @@ class Room(NetatmoBase):
             "therm",
         )
 
-        json_therm_set: dict[str, Any] = {
-            "rooms": [
-                {
-                    "id": self.entity_id,
-                    f"{setpoint_mode_prefix}_setpoint_mode": mode,
-                },
-            ],
+        room_payload: dict[str, Any] = {
+            "id": self.entity_id,
+            f"{setpoint_mode_prefix}_setpoint_mode": mode,
         }
 
         if temp:
-            json_therm_set["rooms"][0][
-                f"{setpoint_mode_prefix}_setpoint_temperature"
-            ] = temp
+            room_payload[f"{setpoint_mode_prefix}_setpoint_temperature"] = temp
 
         if end_time:
-            json_therm_set["rooms"][0][f"{setpoint_mode_prefix}_setpoint_end_time"] = (
-                end_time
-            )
+            room_payload[f"{setpoint_mode_prefix}_setpoint_end_time"] = end_time
 
         if self.support_pilot_wire and pilot_wire:
-            json_therm_set["rooms"][0]["therm_setpoint_fp"] = pilot_wire
+            room_payload["therm_setpoint_fp"] = pilot_wire
+
+        json_therm_set: dict[str, Any] = {"rooms": [room_payload]}
 
         return await self.home.async_set_state(json_therm_set)
 

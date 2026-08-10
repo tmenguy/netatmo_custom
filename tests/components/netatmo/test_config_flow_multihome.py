@@ -11,7 +11,7 @@ from unittest.mock import AsyncMock, patch
 from pyatmo.const import ALL_SCOPES
 import pytest
 
-from homeassistant.components.netatmo.config_flow import INTERMEDIATE_ENABLED_HOMES
+from homeassistant.components.netatmo.config_flow import CONF_ENABLED_HOMES
 from homeassistant.components.netatmo.const import (
     CONF_DISABLED_HOMES,
     CONF_WEATHER_AREAS,
@@ -64,6 +64,13 @@ async def fake_post_request_multihome(
         payload = json.loads(
             await async_load_fixture(hass, "homesdata_multihome.json", DOMAIN)
         )
+
+    elif endpoint in ("getstationsdata", "gethomecoachsdata"):
+        # The shared weather/air-care fixtures belong to a home that is not in
+        # homesdata_multihome.json. Serving them here would register that home
+        # in the account inventory (Account.update_devices sets it) and it
+        # would show up in the options flow home selector.
+        payload = {"body": {"devices": []}, "status": "ok"}
 
     else:
         payload = json.loads(await async_load_fixture(hass, f"{endpoint}.json", DOMAIN))
@@ -142,10 +149,10 @@ async def test_option_flow_shows_home_selector_multihome(
     result = await hass.config_entries.options.async_init(config_entry.entry_id)
 
     assert result["type"] is FlowResultType.FORM
-    assert result["step_id"] == "public_weather_areas_and_homes"
+    assert result["step_id"] == "public_weather_areas"
 
     schema_keys = [str(k) for k in result["data_schema"].schema]
-    assert INTERMEDIATE_ENABLED_HOMES in schema_keys
+    assert CONF_ENABLED_HOMES in schema_keys
 
 
 async def test_option_flow_hides_home_selector_single_home(
@@ -156,19 +163,19 @@ async def test_option_flow_hides_home_selector_single_home(
     """Options flow has no home selector when only a single home exists."""
     await _setup_integration(hass, config_entry)
 
-    # The default fixture has 2 homes. Override all_homes_id to simulate a
-    # single-home account so the selector branch is skipped.
-    config_entry.runtime_data.account.all_homes_id = {
+    # The default fixture has 2 homes. Override the home inventory to simulate
+    # a single-home account so the selector branch is skipped.
+    config_entry.runtime_data.account.all_home_names = {
         "91763b24c43d3e344f424e8b": "MYHOME",
     }
 
     result = await hass.config_entries.options.async_init(config_entry.entry_id)
 
     assert result["type"] is FlowResultType.FORM
-    assert result["step_id"] == "public_weather_areas_and_homes"
+    assert result["step_id"] == "public_weather_areas"
 
     schema_keys = [str(k) for k in result["data_schema"].schema]
-    assert INTERMEDIATE_ENABLED_HOMES not in schema_keys
+    assert CONF_ENABLED_HOMES not in schema_keys
 
 
 async def test_option_flow_disable_one_home(
@@ -187,7 +194,7 @@ async def test_option_flow_disable_one_home(
     result = await hass.config_entries.options.async_configure(
         result["flow_id"],
         user_input={
-            INTERMEDIATE_ENABLED_HOMES: [HOME_ID_1, HOME_ID_2],
+            CONF_ENABLED_HOMES: [HOME_ID_1, HOME_ID_2],
             CONF_WEATHER_AREAS: [],
         },
     )
@@ -218,7 +225,7 @@ async def test_option_flow_enable_all_homes(
     result = await hass.config_entries.options.async_configure(
         result["flow_id"],
         user_input={
-            INTERMEDIATE_ENABLED_HOMES: ALL_HOME_IDS,
+            CONF_ENABLED_HOMES: ALL_HOME_IDS,
             CONF_WEATHER_AREAS: [],
         },
     )
@@ -259,7 +266,7 @@ async def test_option_flow_preserves_weather_areas(
     result = await hass.config_entries.options.async_configure(
         result["flow_id"],
         user_input={
-            INTERMEDIATE_ENABLED_HOMES: [HOME_ID_1, HOME_ID_2],
+            CONF_ENABLED_HOMES: [HOME_ID_1, HOME_ID_2],
             CONF_WEATHER_AREAS: ["Home avg"],
         },
     )
@@ -287,7 +294,7 @@ async def test_disabled_homes_stored_in_options(
     result = await hass.config_entries.options.async_configure(
         result["flow_id"],
         user_input={
-            INTERMEDIATE_ENABLED_HOMES: [HOME_ID_1],
+            CONF_ENABLED_HOMES: [HOME_ID_1],
             CONF_WEATHER_AREAS: [],
         },
     )
@@ -314,11 +321,11 @@ async def test_option_flow_default_selects_all_homes(
 
     # Inspect the schema default for the home selector.
     for key in result["data_schema"].schema:
-        if str(key) == INTERMEDIATE_ENABLED_HOMES:
+        if str(key) == CONF_ENABLED_HOMES:
             assert sorted(key.default()) == sorted(ALL_HOME_IDS)
             break
     else:
-        pytest.fail(f"{INTERMEDIATE_ENABLED_HOMES} not found in form schema")
+        pytest.fail(f"{CONF_ENABLED_HOMES} not found in form schema")
 
 
 async def test_option_flow_defaults_reflect_disabled_homes(
@@ -340,11 +347,11 @@ async def test_option_flow_defaults_reflect_disabled_homes(
     assert result["type"] is FlowResultType.FORM
 
     for key in result["data_schema"].schema:
-        if str(key) == INTERMEDIATE_ENABLED_HOMES:
+        if str(key) == CONF_ENABLED_HOMES:
             defaults = key.default()
             assert HOME_ID_1 in defaults
             assert HOME_ID_3 in defaults
             assert HOME_ID_2 not in defaults
             break
     else:
-        pytest.fail(f"{INTERMEDIATE_ENABLED_HOMES} not found in form schema")
+        pytest.fail(f"{CONF_ENABLED_HOMES} not found in form schema")
